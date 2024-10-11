@@ -193,5 +193,5 @@ full-stack di alta qualità e funzionalità
 - [x] 27.4 Assegnazione di un ruolo ad un utente
 
 **Blocco 28: Mvc Identity Entity Framework**
-
-- [x] 28.1 Creazione di una web app completa
+a
+- [x] 28.1 Creazione di una web app complet
