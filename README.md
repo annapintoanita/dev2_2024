@@ -194,4 +194,4 @@ full-stack di alta qualità e funzionalità
 
 **Blocco 28: Mvc Identity Entity Framework**
 a
-- [x] 28.1 Creazione di una web app complet
+- [x] 28.1 Creazione di una web app completa
