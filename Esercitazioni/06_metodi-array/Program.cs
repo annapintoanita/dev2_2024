@@ -32,6 +32,8 @@ Console.WriteLine(string.Join(", ", array2)); // stampa array2
 // cancella gli elementi di un array
 int[] array3 = { 1, 2, 3, 4, 5 }; // dichiara e inizializza un array di interi
 Array.Clear(array3, 0, array3.Length); // cancella gli elementi di array3 da 0 a array3.Length
+// 0 significa da dove inizia a cancellare
+// array3.Length significa fino a dove cancellare
 Console.WriteLine(string.Join(", ", array3)); // stampa array3
 
 // ESEMPIO DI METODO REVERSE
