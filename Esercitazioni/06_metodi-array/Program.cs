@@ -49,4 +49,4 @@ Console.WriteLine(string.Join(", ", array5)); // stampa array5
 // ESEMPIO DI METODO INDEXOF
 // restituisce l'indice di un elemento di un array
 int[] array6 = { 1, 2, 3, 4, 5 }; // dichiara e inizializza un array di interi
-Console.WriteLine(Array.IndexOf(array6, 3)); // stampa l'indice di 3 in array6
+Console.WriteLine(Array.IndexOf(array6, 3)); // stampa l'indice di 3 in array6 (2) se non c'e restituisce -1
