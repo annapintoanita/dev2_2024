@@ -25,20 +25,14 @@ while (j <= 10) // finche j e minore o uguale a 10
     j++; // incrementa j
 }
 
-// ESEMPIO DI DO WHILE CON TRUE
-// esegue un blocco di codice almeno una volta e poi finche una condizione e vera
+// ESEMPIO DIWHILE CON TRUE
+// esegue un blocco di codice finche una condizione e vera
 int k = 0; // k e una variabile di controllo
-do
+while (true) // finche vero
 {
     Console.WriteLine(k); // stampa k
     k++; // incrementa k
-} while (k <= 10); // finche k e minore o uguale a 10
-
-while (true) // finche vero
-{
-    Console.WriteLine("inserisci un numero"); // stampa un messaggio
-    string s = Console.ReadLine(); // legge una stringa da tastiera
-    if (s == "exit") // se la stringa e uguale a "exit"
+    if (k > 10) // se k e maggiore di 10
     {
         break; // esce dal ciclo
     }
