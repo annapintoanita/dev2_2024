@@ -25,7 +25,7 @@ while (j <= 10) // finche j e minore o uguale a 10
     j++; // incrementa j
 }
 
-// ESEMPIO DIWHILE CON TRUE
+// ESEMPIO DI WHILE CON TRUE
 // esegue un blocco di codice finche una condizione e vera
 int k = 0; // k e una variabile di controllo
 while (true) // finche vero
