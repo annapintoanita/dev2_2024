@@ -12,7 +12,7 @@ numeroInserito = 0; // Inizializzo a 0 per entrare nel ciclo while
 while (numeroInserito != numeroDaIndovinare)
 {
     numeroInserito = Convert.ToInt32(Console.ReadLine());
-    
+
     if (numeroInserito < numeroDaIndovinare)
     {
         Console.WriteLine("Il numero da indovinare e' maggiore");
@@ -26,4 +26,4 @@ while (numeroInserito != numeroDaIndovinare)
     
 }
 
-Console.WriteLine("Hai indovinato! Il numero da indovinare era: " + numeroDaIndovinare);
+Console.WriteLine($"Hai indovinato! Il numero da indovinare era {numeroDaIndovinare}");

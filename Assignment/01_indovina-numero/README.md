@@ -37,7 +37,13 @@ else
     Console.WriteLine($"Il numero da indovinare era: {numeroDaIndovinare}");
 }
 ```
+### Comandi versionamento
 
+```bash
+git add --all
+git commit -m "Indovina Numero: Versione 1"
+git push -u origin main
+```
 ## Versione 2
 
 **Obiettivo:**  
@@ -83,4 +89,12 @@ while (numeroInserito != numeroDaIndovinare)
 }
 
 Console.WriteLine("Hai indovinato! Il numero da indovinare era: " + numeroDaIndovinare);
+```
+
+### Comandi versionamento
+
+```bash
+git add --all
+git commit -m "Indovina Numero: Versione 2"
+git push -u origin main
 ```
