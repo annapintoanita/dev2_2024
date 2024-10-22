@@ -298,3 +298,11 @@ while (!haIndovinato && tentativi > 0)
     }
 }
 ```
+
+### Comandi versionamento
+
+```bash
+git add --all
+git commit -m "Indovina Numero: Versione 5"
+git push -u origin main
+```
