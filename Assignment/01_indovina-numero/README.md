@@ -98,3 +98,60 @@ git add --all
 git commit -m "Indovina Numero: Versione 2"
 git push -u origin main
 ```
+
+## Versione 3
+
+**Obiettivo:**  
+Imposta un numero massimo di tentativi (ad esempio, 5). Se l'utente non indovina entro questi tentativi, il gioco termina.
+
+**Istruzioni:**
+
+* Imposta una variabile booleana per tenere traccia se l'utente ha indovinato.
+* Mantieni un contatore di tentativi all'interno del ciclo while.  
+* Dopo ogni tentativo, decrementa il numero di tentativi rimasti e informane l'utente.  
+* Se i tentativi esauriscono senza che l'utente abbia indovinato, stampa un messaggio di sconfitta e rivela il numero.
+
+**Esempio di codice:**
+
+```csharp
+Random random = new Random(); // Random e la classe che genera numeri casuali
+int numeroDaIndovinare = random.Next(1, 101); // Next e il metodo che genera un numero casuale tra 1 e 100
+int numeroInserito;
+int tentativiMassimi = 5;  
+int tentativiEffettuati = 0;  
+bool haIndovinato = false;
+int numeroUtente = 0;
+
+Console.Clear();
+
+Console.WriteLine("Indovina il numero (tra 1 e 100). Hai 5 tentativi.");
+
+while (tentativiEffettuati < tentativiMassimi && !haIndovinato)  
+{  
+    Console.Write("Tentativo {0}: ", tentativiEffettuati + 1);  
+    
+    // numeroUtente = int.Parse(Console.ReadLine());  
+    numeroUtente = int.Parse(Console.ReadLine());
+    
+    tentativiEffettuati++;
+
+    if (numeroUtente < numeroDaIndovinare)  
+    {  
+        Console.WriteLine("Il numero da indovinare è maggiore.");  
+    }  
+    else if (numeroUtente > numeroDaIndovinare)  
+    {  
+        Console.WriteLine("Il numero da indovinare è minore.");  
+    }  
+    else  
+    {  
+        Console.WriteLine("Complimenti! Hai indovinato il numero.");  
+        haIndovinato = true;  
+    }
+
+    if (!haIndovinato && tentativiEffettuati == tentativiMassimi)  
+    {  
+        Console.WriteLine("Hai esaurito i tentativi. Il numero era " + numeroDaIndovinare + ".");  
+    }  
+}
+```
