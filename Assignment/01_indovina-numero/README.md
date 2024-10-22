@@ -117,7 +117,7 @@ Imposta un numero massimo di tentativi (ad esempio, 5). Se l'utente non indovina
 Random random = new Random(); // Random e la classe che genera numeri casuali
 int numeroDaIndovinare = random.Next(1, 101); // Next e il metodo che genera un numero casuale tra 1 e 100
 int numeroInserito;
-int tentativiMassimi = 5;  
+int tentativi = 5;  
 int tentativiEffettuati = 0;  
 bool haIndovinato = false;
 int numeroUtente = 0;
@@ -126,7 +126,7 @@ Console.Clear();
 
 Console.WriteLine("Indovina il numero (tra 1 e 100). Hai 5 tentativi.");
 
-while (tentativiEffettuati < tentativiMassimi && !haIndovinato)  
+while (tentativiEffettuati < tentativi && !haIndovinato)  
 {  
     Console.Write("Tentativo {0}: ", tentativiEffettuati + 1);  
     
@@ -149,7 +149,7 @@ while (tentativiEffettuati < tentativiMassimi && !haIndovinato)
         haIndovinato = true;  
     }
 
-    if (!haIndovinato && tentativiEffettuati == tentativiMassimi)  
+    if (!haIndovinato && tentativiEffettuati == tentativi)  
     {  
         Console.WriteLine("Hai esaurito i tentativi. Il numero era " + numeroDaIndovinare + ".");  
     }  
@@ -209,5 +209,92 @@ while (!haIndovinato && punteggio > 0)
     {  
         Console.WriteLine("Hai esaurito i tentativi. Il numero era " + numeroDaIndovinare + ".");  
     }  
+}
+```
+
+### Comandi versionamento
+
+```bash
+git add --all
+git commit -m "Indovina Numero: Versione 4"
+ 
+```
+
+# Versione 5
+
+**Obiettivo:**
+
+* **Livelli di Difficoltà:** Permetti all'utente di scegliere tra diversi livelli di difficoltà che modificano il munero di punti sottratti o l'intervallo dei numeri o il numero di tentativi disponibili.  
+
+**Istruzioni:**
+
+1. **Livelli di Difficoltà:**  
+   * **Facile:** Numeri da 1 a 50, 10 tentativi.  
+   * **Medio:** Numeri da 1 a 100, 7 tentativi.  
+   * **Difficile:** Numeri da 1 a 200, 5 tentativi. 
+
+```csharp
+Random random = new Random();
+int numeroDaIndovinare = 0;
+int punteggio = 0;
+bool haIndovinato = false;
+int tentativi = 0;
+int numeroUtente = 0;
+
+Console.WriteLine("Scegli il livello di difficolta':");
+Console.WriteLine("1. Facile (1-50, 10 tentativi)");
+Console.WriteLine("2. Medio (1-100, 7 tentativi)");
+Console.WriteLine("3. Difficile (1-200, 5 tentativi)");
+
+int scelta = int.Parse(Console.ReadLine());
+
+switch (scelta)
+{
+    case 1:
+        numeroDaIndovinare = random.Next(1, 51);
+        punteggio = 100;
+        tentativi = 10;
+        break;
+    case 2:
+        numeroDaIndovinare = random.Next(1, 101);
+        punteggio = 100;
+        tentativi = 7;
+        break;
+    case 3:
+        numeroDaIndovinare = random.Next(1, 201);
+        punteggio = 100;
+        tentativi = 5;
+        break;
+    default:
+        Console.WriteLine("Scelta non valida.");
+        break;
+}
+
+Console.WriteLine("Indovina il numero. Punteggio massimo: 100 punti.");
+
+while (!haIndovinato && tentativi > 0)
+{
+    Console.Write("Tentativo: ");
+    numeroUtente = int.Parse(Console.ReadLine());
+    tentativi--;
+
+    if (numeroUtente < numeroDaIndovinare)
+    {
+        Console.WriteLine("Il numero da indovinare e' maggiore.");
+    }
+    else if (numeroUtente > numeroDaIndovinare)
+    {
+        Console.WriteLine("Il numero da indovinare e' minore.");
+    }
+    else
+    {
+        Console.WriteLine("Hai indovinato! Punteggio: " + punteggio);
+        haIndovinato = true;
+    }
+
+    if (!haIndovinato && tentativi == 0)
+    {
+        Console.WriteLine("Hai esaurito i tentativi. Il numero era " + numeroDaIndovinare + ".");
+    }
 }
 ```
