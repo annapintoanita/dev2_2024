@@ -5,6 +5,8 @@ bool haIndovinato = false;
 int tentativi = 0;
 int numeroUtente = 0;
 
+List<int> tentativiUtente = new List<int>(); // creo una lista per memorizzare i tentativi
+
 Console.WriteLine("Scegli il livello di difficolta':");
 Console.WriteLine("1. Facile (1-50, 10 tentativi)");
 Console.WriteLine("2. Medio (1-100, 7 tentativi)");
@@ -40,6 +42,7 @@ while (!haIndovinato && tentativi > 0)
 {
     Console.Write("Tentativo: ");
     numeroUtente = int.Parse(Console.ReadLine());
+    tentativiUtente.Add(numeroUtente); // aggiungo il tentativo alla lista
     tentativi--;
 
     if (numeroUtente < numeroDaIndovinare)
@@ -52,12 +55,21 @@ while (!haIndovinato && tentativi > 0)
     }
     else
     {
-        Console.WriteLine("Hai indovinato! Punteggio: " + punteggio);
+        Console.WriteLine($"Hai indovinato! Punteggio: {punteggio}");
         haIndovinato = true;
     }
 
     if (!haIndovinato && tentativi == 0)
     {
-        Console.WriteLine("Hai esaurito i tentativi. Il numero era " + numeroDaIndovinare + ".");
+        Console.WriteLine($"Hai esaurito i tentativi. Il numero era {numeroDaIndovinare}.");
     }
+}
+
+Console.WriteLine("Tentativi effettuati: ");
+
+// creo un foreach per stampare i tentativi effettuati usando la lista tentativiUtente
+foreach (int tentativo in tentativiUtente)
+{
+    // Console.Write(tentativo);
+    Console.Write($"{tentativo} ");  // stampo i tentativi effettuati
 }
