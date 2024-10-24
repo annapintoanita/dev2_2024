@@ -786,3 +786,17 @@ git add --all
 git commit -m "Indovina Numero: Versione 9"
 git push -u origin main
 ```
+
+## Versione 10
+
+**Obiettivo:**
+
+**Pulizia console** Usa `Console.Clear()` per pulire la console tra un gioco e l'altro e tra un tentativo e l altro per rendere il gioco più pulito.
+
+**Istruzioni:**
+
+- Aggiungi `Console.Clear()` all inizio del gioco per pulire la console prima di iniziare.
+- Aggiungi `Console.Clear()` alla fine del ciclo di gioco per pulire la console tra un gioco e l'altro.
+- Aggiungi `Console.Clear()` dopo ogni tentativo per pulire la console tra un tentativo e l'altro.
+
+```csharp

@@ -1,7 +1,7 @@
 ﻿// possiamo evitare la confusione tra lettere maiuscole e minuscole (S s , N n) convertendo la risposta dell'utente in minuscolo o in maiuscolo cosi
 // risposta = Console.ReadLine().ToLower(); // converto la risposta in minuscolo
 // risposta = Console.ReadLine().ToUpper(); // converto la risposta in maiuscolo
-
+Console.Clear();
 Random random = new Random();
 int numeroDaIndovinare = 0;
 int punteggio = 0;
@@ -25,7 +25,8 @@ do
         Console.WriteLine("3. Difficile (1-200, 5 tentativi)");
 
         bool successoLivelloDifficolta = int.TryParse(Console.ReadLine(), out scelta);
-
+        // pulisco la console
+        Console.Clear();
         if (!successoLivelloDifficolta || scelta < 1 || scelta > 3)
         {
             Console.WriteLine("Scelta non valida.");
@@ -60,6 +61,8 @@ do
     {
         Console.Write("Tentativo: ");
         bool successo = int.TryParse(Console.ReadLine(), out numeroUtente);
+        // pulisco la console
+        Console.Clear();
 
         if (!successo)
         {
@@ -99,13 +102,15 @@ do
 
     Console.WriteLine("Vuoi giocare di nuovo? (s/n)");
     risposta = Console.ReadLine();
-
+    // pulisco la console
+        Console.Clear();
     while (risposta != "s" && risposta != "S" && risposta != "n" && risposta != "N")
     {
         Console.WriteLine("Risposta non valida. Vuoi giocare di nuovo? (s/n)");
         risposta = Console.ReadLine();
+        // pulisco la console
+        Console.Clear();
     }
-
     haIndovinato = false; // resetto la variabile haIndovinato
     tentativiUtente.Clear(); // cancello i tentativi effettuati
 
