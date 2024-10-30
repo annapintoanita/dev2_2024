@@ -926,3 +926,74 @@ git add --all
 git commit -m "Indovina Numero: Versione 10"
 git push -u origin main
 ```
+
+## VERSIONE11 
+**Obiettivo**
+
+
+**Implementazione dizionario** 
+
+Usa un dizionario per memorizzare i punteggi degli utenti insieme al numero del tentativo
+
+**Istruzioni**
+
+-Crea un dizionario per memorizzare i punteggi degli utenti insieme al numero del tentativo in cui hanno indovinato il numero.
+
+-Aggiungi il punteggio e il numero del tentativo dizionario.
+
+-Cancello i punteggi degli utenti alla fine di ogni partita.
+
+
+   ```
+   csharp```
+    {
+        // stampa il punteggio dell utente
+        Console.WriteLine($"Punteggio: {punteggio}");
+    }
+
+    Console.WriteLine("Tentativi effettuati: ");
+
+    foreach (var punteggioUtente in punteggiUtenti)
+    {
+        Console.WriteLine($"{punteggioUtente.Key}: {punteggioUtente.Value}"); // stampo i punteggi degli utenti
+    }
+     
+
+    Console.WriteLine("Vuoi giocare di nuovo? (s/n)");
+
+    risposta = Console.ReadLine();
+
+    Console.Clear();
+
+    while (risposta != "s" && risposta != "S" && risposta != "n" && risposta != "N")
+    {
+        Console.WriteLine("Risposta non valida. Vuoi giocare di nuovo? (s/n)");
+        risposta = Console.ReadLine();
+        Console.Clear();
+    }
+
+    haIndovinato = false;
+
+    punteggiUtenti.Clear(); // cancello i punteggi degli utenti
+
+} while (risposta == "s" || risposta == "S");
+
+```
+
+```
+ ##VERSIONE12
+
+ **Obiettivo:**
+
+
+ **Implementazione di un dizionario che abbia come chiave il nome dell'utente e come valore una lista di tentativi inseriti dall'utente**
+
+
+**Istruzioni:**
+
+
+-Crea un dizionario che abbia come chiave il nome dell'utente e come valore una lista dei tentativi inseriti dall'utente.
+-Chiedi all'utente di inserire il proprio nome all'inizio del gioco.
+-Aggiungi il nome dell'utente e i tentativi inseriti nella lista.
+alla fine del gioco, stampa i nomi degli utenti insieme ai tentativi inseriti.
+```

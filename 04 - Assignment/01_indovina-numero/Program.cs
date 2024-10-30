@@ -1,6 +1,4 @@
-﻿// possiamo evitare la confusione tra lettere maiuscole e minuscole (S s , N n) convertendo la risposta dell'utente in minuscolo o in maiuscolo cosi
-// risposta = Console.ReadLine().ToLower(); // converto la risposta in minuscolo
-// risposta = Console.ReadLine().ToUpper(); // converto la risposta in maiuscolo
+﻿
 Console.Clear();
 Random random = new Random();
 int numeroDaIndovinare = 0;
@@ -9,9 +7,9 @@ bool haIndovinato = false;
 int tentativi = 0;
 int numeroUtente = 0;
 
-List<int> tentativiUtente = new List<int>(); // creo una lista per memorizzare i tentativi
+Dictionary<string, List<int>> tentativiUtenti = new Dictionary<string, List<int>>(); // creo un dizionario per memorizzare i tentativi degli utenti
 
-string risposta = "s"; // inizializzo la risposta a "s" per far partire il gioco
+string risposta = "s";
 
 do
 {
@@ -42,18 +40,21 @@ do
             break;
         case 2:
             numeroDaIndovinare = random.Next(1, 101);
-            punteggio = 100;
+            punteggio = 200;
             tentativi = 7;
             break;
         case 3:
             numeroDaIndovinare = random.Next(1, 201);
-            punteggio = 100;
+            punteggio = 300;
             tentativi = 5;
             break;
         default:
             Console.WriteLine("Scelta non valida.");
             break;
     }
+
+    Console.WriteLine("Inserisci il tuo nome:");
+    string nomeUtente = Console.ReadLine();
 
     Console.WriteLine("Indovina il numero. Punteggio massimo: 100 punti.");
 
@@ -70,8 +71,14 @@ do
             continue;
         }
 
-        tentativiUtente.Add(numeroUtente);
         tentativi--;
+        // aggiungo il tentativo alla lista del nomeUtente
+        if (!tentativiUtenti.ContainsKey(nomeUtente))
+        {
+            tentativiUtenti.Add(nomeUtente, new List<int>());
+        }
+
+        tentativiUtenti[nomeUtente].Add(numeroUtente); // aggiungo il tentativo alla lista del nomeUtente uso [nomeUtente] per accedere alla lista del nomeUtente
 
         if (numeroUtente < numeroDaIndovinare)
         {
@@ -91,27 +98,37 @@ do
         {
             Console.WriteLine($"Hai esaurito i tentativi. Il numero era {numeroDaIndovinare}.");
         }
+
+    }
+
+    if (haIndovinato)
+    {
+        // stampa il punteggio dell utente
+        Console.WriteLine($"Punteggio: {punteggio}");
     }
 
     Console.WriteLine("Tentativi effettuati: ");
 
-    foreach (int tentativo in tentativiUtente)
+    foreach (var tentativoUtente in tentativiUtenti)
     {
-        Console.Write($"{tentativo} ");
+        Console.WriteLine($"{tentativoUtente.Key}: {string.Join(", ", tentativoUtente.Value)}"); // stampo i tentativi degli utenti
     }
 
     Console.WriteLine("Vuoi giocare di nuovo? (s/n)");
+
     risposta = Console.ReadLine();
-    // pulisco la console
-        Console.Clear();
+
+    Console.Clear();
+
     while (risposta != "s" && risposta != "S" && risposta != "n" && risposta != "N")
     {
         Console.WriteLine("Risposta non valida. Vuoi giocare di nuovo? (s/n)");
         risposta = Console.ReadLine();
-        // pulisco la console
         Console.Clear();
     }
-    haIndovinato = false; // resetto la variabile haIndovinato
-    tentativiUtente.Clear(); // cancello i tentativi effettuati
+
+    haIndovinato = false;
+
+    // tentativiUtenti.Clear(); // cancello i tentativi degli utenti
 
 } while (risposta == "s" || risposta == "S");
