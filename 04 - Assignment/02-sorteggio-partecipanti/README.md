@@ -95,17 +95,12 @@ do
     }
 }
 while (risposta =="s");
-<<<<<<< HEAD
-=======
-
->>>>>>> 0d55515000d2d4eff9a2df8a3bebb15ac5e400a7
 
 ```
 
 ## Comandi di versionamento
 
 ```bash
-<<<<<<< HEAD
 
 git add --all
 git commit -m "versione 2"
@@ -123,23 +118,6 @@ git push -u origin main
 
 - Se il numero dei partecipanti non è divisibile per il numero di squadre , i partecipanti rimanenti vengono assegnati ad un gruppo in modo casuale.
 
-```csharp
-
-=======
-git add --all
-git commit -m "versione 2"
-git push -u origin main
->>>>>>> 0d55515000d2d4eff9a2df8a3bebb15ac5e400a7
-
-```
-
-## Versione 3
-
-## Obiettivo:
-
-- Scrivere un programma che permetta di sorteggiare i partecipanti del corso da una lista di nomi dividendoli in gruppi.
-- Il programma deve chiedere all'utente il numero di squadre e il numero di partecipanti per squadra.
-- Se il numero dei partecipanti non è divisibile per il numero di squadre, i partecipanti rimanenti vengono assegnati ad un gruppo in modo casuale.
 
 ```csharp
 
@@ -151,8 +129,6 @@ string risposta;
 int numeroSquadre;//dichiaro una variabile di tipo int che conterrà il numero di squadre che l'utente desidera formare 
 int pPSquadra;//dichiaro una variabile di tipo int che rappresenta il numero di partecipanti per ciascuna squadra
 int partecipantiRimanenti;// variabile usata per calcolare quanti partecipanti rimangono se il numero di partecipanti non è divisibile per il numero di squadre
-
-
 
 
 do // creo il ciclo do while per far si che l'utente possa ripetere l'operazione 
@@ -252,7 +228,7 @@ git push -u origin main
 
 ```
 
-<<<<<<< HEAD
+
 ## Versione 3.1
 
 ```csharp
@@ -338,7 +314,9 @@ git push -u origin main
 - Scrivere un programma che permetta di sorteggiare i partecipanti del corso da una lista di nomi dividendo i partecipanti in gruppi.
 - Il programma deve usare un dizionario che ha come chiavi i numeri delle squadre e come valori le liste dei partecipanti di ogni squadra.
 
+
 ```csharp
+
 // creo la lista dei partecipanti
 List<string> partecipanti = new List<string> { "P1", "P2", "P3", "P4", "P5", "P6", "P7", "P8", "P9", "P10" };
 
@@ -401,13 +379,132 @@ for (int i = 0; i < numeroSquadre; i++)
     Console.WriteLine();
 }
 
+```
+
 ## Comandi di versionamento
 
 
 ```bash
-
 git add --all
 git commit -m "versione 4"
+git push -u origin main
+
+```
+
+## Versione 5
+
+## Obiettivo
+
+- Scrivere un programma che permetta di sorteggiare i partecipanti del corso da una lista di nomi dividendo i partecipanti in gruppi.
+- Il programma deve stampare la lista dei partecipanti
+- Il programma deve chiedere all utente di inserire o eliminare un partecipante presente nella lista iniziale o fare il sorteggio
+
+```csharp
+// creo la lista dei partecipanti
+List<string> partecipanti = new List<string> { "Partecipante 1", "Partecipante 2", "Partecipante 3", "Partecipante 4", "Partecipante 5", "Partecipante 6", "Partecipante 7", "Partecipante 8", "Partecipante 9", "Partecipante 10" };
+
+// creo un oggetto Random per generare numeri casuali
+Random random = new Random();
+
+// pulisco la console
+Console.Clear();
+
+// stampo la lista dei partecipanti
+Console.WriteLine("Partecipanti:");
+foreach (string partecipante in partecipanti)
+{
+    Console.WriteLine(partecipante);
+}
+
+// chiedo all utente se vuole inserire o eliminare un partecipante o sorteggiare i partecipanti
+while (true)
+{
+    Console.WriteLine("Vuoi inserire un partecipante, eliminare un partecipante o sorteggiare i partecipanti? (i/e/s)");
+    string risposta = Console.ReadLine();
+    // pulisco la console
+    Console.Clear();
+    if (risposta == "i")
+    {
+        Console.WriteLine("Inserisci il nome del partecipante:");
+        string partecipante = Console.ReadLine();
+        partecipanti.Add(partecipante);
+    }
+    else if (risposta == "e")
+    {
+        Console.WriteLine("Inserisci il nome del partecipante:");
+        string partecipante = Console.ReadLine();
+        partecipanti.Remove(partecipante);
+    }
+    else if (risposta == "s")
+    {
+        // chiedo all'utente il numero di squadre
+        Console.WriteLine("Inserisci il numero di squadre:");
+        int numeroSquadre = int.Parse(Console.ReadLine());
+
+        // creo una lista per ogni squadra
+        List<string>[] squadre = new List<string>[numeroSquadre];
+        for (int i = 0; i < numeroSquadre; i++)
+        {
+            squadre[i] = new List<string>();
+        }
+
+        // calcolo quanti partecipanti ci sono in ogni squadra
+        int partecipantiPerSquadra = partecipanti.Count / numeroSquadre;
+
+        // se il numero di partecipanti non è divisibile per il numero di squadre, aggiungo un partecipante in più ad una squadra
+        int partecipantiInPiù = partecipanti.Count % numeroSquadre;
+
+        // per ogni squadra
+        for (int i = 0; i < numeroSquadre; i++)
+        {
+            // aggiungo i partecipanti
+            for (int j = 0; j < partecipantiPerSquadra; j++)
+            {
+                // genero un numero casuale tra 0 e il numero di partecipanti rimasti
+                int index = random.Next(partecipanti.Count);
+                // aggiungo il partecipante alla squadra
+                squadre[i].Add(partecipanti[index]);
+                // rimuovo il partecipante dalla lista dei partecipanti
+                partecipanti.RemoveAt(index);
+            }
+
+            // se ci sono partecipanti in più, aggiungo un partecipante in più alla squadra corrente
+            if (partecipantiInPiù > 0)
+            {
+                // genero un numero casuale tra 0 e il numero di partecipanti rimasti
+                int index = random.Next(partecipanti.Count);
+                // aggiungo il partecipante alla squadra
+                squadre[i].Add(partecipanti[index]);
+                // rimuovo il partecipante dalla lista dei partecipanti
+                partecipanti.RemoveAt(index);
+                // decremento il numero di partecipanti in più
+                partecipantiInPiù--;
+            }
+
+            // stampo i partecipanti della squadra
+            Console.WriteLine($"Squadra {i + 1}:");
+            foreach (string partecipante in squadre[i])
+            {
+                Console.WriteLine(partecipante);
+            }
+            Console.WriteLine();
+        }
+        break;
+    }
+    // stampo la lista dei partecipanti
+    Console.WriteLine("Partecipanti:");
+    foreach (string partecipante in partecipanti)
+    {
+        Console.WriteLine(partecipante);
+    }
+}
+```
+
+## Comandi di versionamento
+
+```bash
+git add --all
+git commit -m "Sorteggia Partecipanti Versione 5"
 git push -u origin main
 
 ```
