@@ -119,16 +119,16 @@ DateTime end = new DateTime(2024, 12, 31); // inserisci la data di fine
 TimeSpan difference = end.Subtract(start);//calcola la differenza tra le due date
 Console.WriteLine($"La differenza fra le due date è di: {difference.Days} giorni");
 
-//calcolare tra le due date usando TimeSpan
+// calcolare la differenza tra due date usando TimeSpan
 DateTime startDate = DateTime.Today;
-DateTime endDate = new DateTime(2024, 12, 31); //scegli una data significativo
-TimeSpan dateDifference = endDate - startDate;
-Console.WriteLine($"Differenza in giorni:  {dateDifference.Days}");
-Console.WriteLine($"Differenza in ore:  {dateDifference.TotalHours}");
-Console.WriteLine($"Differenza in minuti:   {dateDifference.Minutes}");
+DateTime endDate = new DateTime(2024, 12, 31);
+TimeSpan differenceDate = endDate - startDate;
+Console.WriteLine($"La differenza tra le due date e di {differenceDate.Days} giorni");
+Console.WriteLine($"La differenza tra le due date e di {differenceDate.TotalDays} giorni");
+Console.WriteLine($"La differenza tra le due date e di {differenceDate.TotalHours} ore");
 
-//manipolazione di date usando TimeSpan
-TimeSpan timeSpan = new TimeSpan(3 ,5 , 10, 0);// 3 giorni, 5 ore, 10 minuti e 0 secondi
-DateTime Datetoday = DateTime.Today;//oggi
-DateTime resultDate = today.Add(timeSpan); //aggiungi l'intervallo di tempo a oggi
-Console.WriteLine($"Data e ora risultante:  {resultDate}");
+// manipalzione di date usando il metodo Add
+TimeSpan timeSpan = new TimeSpan(5, 3, 5, 10, 0, 0); // 5 giorni, 3 ore, 5 minuti, 10 secondi e 0 millisecondi 0 microsecondi
+DateTime todayDate = DateTime.Today; // Oggi
+DateTime resultDate = todayDate.Add(timeSpan); // Aggiungi l'intervallo di tempo a oggi
+Console.WriteLine($"La data risultante e: {resultDate}");
