@@ -73,12 +73,12 @@
             {
                 Console.WriteLine($"Errore: {ex.Message}");
             }
-            catch (InvalidOperationException ex)
+            catch (InvalidOperationException e)
             {
-                Console.WriteLine($"Errore: {ex.Message}");
+                Console.WriteLine($"Errore: {e.Message}");
             }
-            catch (Exception ex)
+            catch (Exception e)
             {
-                Console.WriteLine($"Errore imprevisto: {ex.Message}");
+                Console.WriteLine($"Errore imprevisto: {e.Message}");
             }
 
