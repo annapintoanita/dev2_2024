@@ -27,6 +27,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "calcolatrice", "04 - Assign
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "_calcolatrice-con-funzioni", "04 - Assignment\_calcolatrice-con-funzioni\_calcolatrice-con-funzioni.csproj", "{BF1B25B4-5EFE-4576-8505-1CEA5FB64770}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "_Sorteggio-partecipanti-con-funzioni", "04 - Assignment\_Sorteggio-partecipanti-con-funzioni\_Sorteggio-partecipanti-con-funzioni.csproj", "{F73A1D32-E623-4E94-831B-649327C7EFED}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -72,6 +74,10 @@ Global
 		{BF1B25B4-5EFE-4576-8505-1CEA5FB64770}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BF1B25B4-5EFE-4576-8505-1CEA5FB64770}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BF1B25B4-5EFE-4576-8505-1CEA5FB64770}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F73A1D32-E623-4E94-831B-649327C7EFED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F73A1D32-E623-4E94-831B-649327C7EFED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F73A1D32-E623-4E94-831B-649327C7EFED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F73A1D32-E623-4E94-831B-649327C7EFED}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{1DC41327-AB17-4D6E-8E48-B902C663AAF5} = {A6E49C14-6254-4D59-BAE2-25C36A31B992}
@@ -82,5 +88,6 @@ Global
 		{D255033C-6875-4480-8A89-082CF05B19DF} = {22465E63-431C-46C0-AA8B-24DE76DE64E8}
 		{A52F977A-171A-4130-A45F-3FBB23E70056} = {FE28457B-F715-4D30-860B-CE04C5E5F7ED}
 		{BF1B25B4-5EFE-4576-8505-1CEA5FB64770} = {FE28457B-F715-4D30-860B-CE04C5E5F7ED}
+		{F73A1D32-E623-4E94-831B-649327C7EFED} = {FE28457B-F715-4D30-860B-CE04C5E5F7ED}
 	EndGlobalSection
 EndGlobal
