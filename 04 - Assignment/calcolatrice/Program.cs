@@ -26,6 +26,7 @@ while (!inputValido)
     }
     catch (FormatException)
     {
+    
         Console.WriteLine("Inserisci un numero valido.");
     }
 }
