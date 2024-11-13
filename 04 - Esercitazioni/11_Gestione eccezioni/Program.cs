@@ -61,7 +61,7 @@ catch (Exception e)
     Console.WriteLine($"Errore: {e.Message}");
 }
 
-// esempio cometo di gestione delle eccezioni con try-catch throw e finally
+// esempio completo di gestione delle eccezioni con try-catch throw e finally
 try
 {
     int number5 = int.Parse("abc");
