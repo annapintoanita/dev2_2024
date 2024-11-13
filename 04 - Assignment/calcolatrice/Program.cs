@@ -1,32 +1,79 @@
-﻿//chiedo all'utente di inserire due numeri
-
-Console.WriteLine("Inserisci un numero");
-double numero1 = Convert.ToDouble(Console.ReadLine());
-
-Console.WriteLine("inserisci il secondo numero");
-double numero2 = Convert.ToDouble(Console.ReadLine());
-
-//chiedo all'utente di inserire un operatore matematico
-Console.WriteLine("Inserisci un operatore:");
-Console.WriteLine("+, -, /, * ");
-
-string operatore = Console.ReadLine();
-double risultato = 0;
-
-switch (operatore)
+// Chiedi all'utente di inserire due numeri
+double num1 = 0;
+double num2 = 0;
+bool inputValido = false;
+while (!inputValido)
 {
-    case "+":
-        risultato = numero1 + numero2;
-        break;
-    case "-":
-        risultato = numero1 - numero2;
-        break;
-    case "/":
-        risultato = numero1 / numero2;
-        break;
-    case "*":
-        risultato = numero1 * numero2;
-        break;
+    try
+    {
+        Console.Write("Inserisci il primo numero: ");
+        num1 = Convert.ToDouble(Console.ReadLine());
+        inputValido = true;
+    }
+    catch (FormatException)
+    {
+        Console.WriteLine("Inserisci un numero valido.");
+    }
 }
-//stampa il risultato
-Console.WriteLine($"Il risultato dell'operazione {numero1} {operatore} {numero2} è: {risultato}");
+inputValido = false;
+while (!inputValido)
+{
+    try
+    {
+        Console.Write("Inserisci il secondo numero: ");
+        num2 = Convert.ToDouble(Console.ReadLine());
+        inputValido = true;
+    }
+    catch (FormatException)
+    {
+    
+        Console.WriteLine("Inserisci un numero valido.");
+    }
+}
+// Chiedi all'utente di selezionare un operatore matematico
+char operatore = ' ';
+inputValido = false;
+while (!inputValido)
+{
+    Console.Write("Seleziona un operatore (+, -, *, /): ");
+    operatore = Console.ReadKey().KeyChar;
+    Console.WriteLine();
+    if (operatore == '+' || operatore == '-' || operatore == '*' || operatore == '/')
+    {
+        inputValido = true;
+    }
+    else
+    {
+        Console.WriteLine("Operatore non valido.");
+    }
+}
+// Esegui l'operazione selezionata
+double risultato = 0;
+try
+{
+    switch (operatore)
+    {
+        case '+':
+            risultato = num1 + num2;
+            break;
+        case '-':
+            risultato = num1 - num2;
+            break;
+        case '*':
+            risultato = num1 * num2;
+            break;
+        case '/':
+            if (num2 == 0)
+            {
+                throw new DivideByZeroException();
+            }
+            risultato = num1 / num2;
+            break;
+    }
+    // Stampa il risultato
+    Console.WriteLine($"Il risultato dell'operazione è: {risultato}");
+}
+catch (DivideByZeroException)
+{
+    Console.WriteLine("Impossibile dividere per zero.");
+}
