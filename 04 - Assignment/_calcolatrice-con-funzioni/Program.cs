@@ -1,75 +1,61 @@
-﻿// chiedi all utente di inserire due numeri
-double num1 = ChiediNumero();
-double num2 = ChiediNumero();
+﻿
+double numero1 = ChiediNumero();
+string operazione = ChiediOperazione();
+double numero2 = ChiediNumero();
+double risultato = 0;
+double StampaRisultato;
 
-// chiedi all utente di selezionare un operatore matematico
-char operatore = ChiediOperatore();
-
-// esegui l operazione selezionata
-double risultato = EseguiOperazione(num1, num2, operatore);
-
-// visualizza il risultato
-Console.WriteLine($"Il risultato è: {risultato}");
-
-double ChiediNumero()
+risultato = StampaRisultato();
+if (numero2 == 0 && operazione == "/")
 {
-    double num = 0;
-    bool inputValido = false;
-    while (!inputValido)
-    {
-        try
-        {
-            Console.Write("Inserisci un numero: ");
-            num = Convert.ToDouble(Console.ReadLine());
-            inputValido = true;
-        }
-        catch (FormatException)
-        {
-            Console.WriteLine("Inserisci un numero valido.");
-        }
-    }
-    return num;
+    Console.WriteLine("Mi dispiace, non puoi dividere per 0");
+
+}
+Console.WriteLine("Ciao, scegli un numero: ");
+double numero1 = 0;
+numero1 = Convert.ToDouble(Console.ReadLine());
+
+Console.WriteLine("ora scegli un' operazione: +, -, *, /");
+string operazione = Console.ReadLine();
+
+Console.WriteLine("Infine, scegli un altro numero: ");
+double numero2 = 0;
+numero2 = Convert.ToDouble(Console.ReadLine());
+
+
+risultato = Convert.ToDouble(Console.ReadLine());
+switch (operazione)
+{
+    case "+":
+        risultato = numero1 + numero2;
+        break;
+
+    case "-":
+        risultato = numero2 - numero1;
+        break;
+
+    case "*":
+        risultato = numero1 * numero2;
+        break;
+
+    case "/":
+        risultato = numero1 / numero2;
+        break;
+
+}
+Console.WriteLine($"il risultato è : {numero1} {operazione} {numero2} = {risultato}");
+
+double ChiediNumero();
+{
+    Console.WriteLine("Ciao, scegli un numero: ");
+    return Convert.ToDouble(Console.ReadLine());
 }
 
-char ChiediOperatore()
+string ChiediOperazione();
 {
-    char operatore = ' ';
-    bool inputValido = false;
-    while (!inputValido)
-    {
-        Console.Write("Seleziona un operatore (+, -, *, /): ");
-        operatore = Console.ReadKey().KeyChar;
-        Console.WriteLine();
-        if (operatore == '+' || operatore == '-' || operatore == '*' || operatore == '/')
-        {
-            inputValido = true;
-        }
-        else
-        {
-            Console.WriteLine("Operatore non valido.");
-        }
-    }
-    return operatore;
+    Console.WriteLine("Ora scegli un'operazione: ");
+    return Console.ReadLine();
 }
 
-double EseguiOperazione(double num1, double num2, char operatore)
-{
-    double risultato = 0;
-    switch (operatore)
-    {
-        case '+':
-            risultato = num1 + num2;
-            break;
-        case '-':
-            risultato = num1 - num2;
-            break;
-        case '*':
-            risultato = num1 * num2;
-            break;
-        case '/':
-            risultato = num1 / num2;
-            break;
-    }
-    return risultato;
-}
-// output atteso
+void StampaRisultato();
+
