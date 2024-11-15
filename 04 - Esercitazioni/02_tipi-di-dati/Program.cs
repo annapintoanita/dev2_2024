@@ -18,6 +18,19 @@ string nome = "Mario"; // dichiarazione e inizializzazione di una variabile di t
 // variabili di tipo booleano
 bool maggiorenne = true; // dichiarazione e inizializzazione di una variabile di tipo booleano
 
+//variabile var
+//var è una parola chiave che permette di dichiarare una variabile senza specificarne il tipo
+//il tipo viene dedotto dal valore assegnato
+//var però necessita di essere inizializzato al momento della dichiarazione
+var cognome = "Rossi";
+
+//variabili di tipo dynamic
+//dynamic è una parola chiave che permette di dichiarare una variabile il cui tipo viene determinato a runtime
+//il tipo di una variabile dynamic puo cambiare durante l'esecuzione del programma
+dynamic altezza2 = 1.72; // dichiarazione e inizializzazione di una variabile di tipo dynamic
+
+//quindi la differenza tra var e dynamic è che
+//var determina il tipo a compile time (la variabile non puo cambiare tipo e deve essere inizializzata al momento *da continuare*)
 // variabili di tipo data
 DateTime dataNascita = new DateTime(2000, 1, 1); // dichiarazione e inizializzazione di una variabile di tipo data
 
