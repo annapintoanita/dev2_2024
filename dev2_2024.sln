@@ -39,6 +39,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "06_indovina-numero-con-funz
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "06_indovina-numeri-con-funzioni", "04 - Assignment\06_indovina-numero-con-funzioni\06_indovina-numeri-con-funzioni\06_indovina-numeri-con-funzioni.csproj", "{9E2A0DC3-E169-4B95-8E49-2A5414E1DBCC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "08_supermercato", "04 - Assignment\08_supermercato\08_supermercato.csproj", "{4E73B964-0BE3-448F-8B08-EF316C973D37}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -104,6 +106,10 @@ Global
 		{9E2A0DC3-E169-4B95-8E49-2A5414E1DBCC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9E2A0DC3-E169-4B95-8E49-2A5414E1DBCC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9E2A0DC3-E169-4B95-8E49-2A5414E1DBCC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4E73B964-0BE3-448F-8B08-EF316C973D37}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E73B964-0BE3-448F-8B08-EF316C973D37}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E73B964-0BE3-448F-8B08-EF316C973D37}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E73B964-0BE3-448F-8B08-EF316C973D37}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{1DC41327-AB17-4D6E-8E48-B902C663AAF5} = {A6E49C14-6254-4D59-BAE2-25C36A31B992}
@@ -120,5 +126,6 @@ Global
 		{22036271-18E0-457F-AF4A-498966D29EB4} = {FE28457B-F715-4D30-860B-CE04C5E5F7ED}
 		{0272CDA7-84AE-469D-91BE-71AA53CDF1B7} = {FE28457B-F715-4D30-860B-CE04C5E5F7ED}
 		{9E2A0DC3-E169-4B95-8E49-2A5414E1DBCC} = {0272CDA7-84AE-469D-91BE-71AA53CDF1B7}
+		{4E73B964-0BE3-448F-8B08-EF316C973D37} = {FE28457B-F715-4D30-860B-CE04C5E5F7ED}
 	EndGlobalSection
 EndGlobal
