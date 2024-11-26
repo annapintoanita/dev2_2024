@@ -57,6 +57,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "14_Persistenza-txt", "04 - 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "15_Metodi-files", "04 - Esercitazioni\15_Metodi-files\15_Metodi-files.csproj", "{E498F3F8-3712-489A-8975-9B014A4290BD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "14_Sorteggio-Partecipanti-txt", "04 - Assignment\14_Sorteggio-Partecipanti-txt\14_Sorteggio-Partecipanti-txt.csproj", "{3C739D06-E6FE-423E-A394-00F3317017D6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -158,6 +160,10 @@ Global
 		{E498F3F8-3712-489A-8975-9B014A4290BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E498F3F8-3712-489A-8975-9B014A4290BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E498F3F8-3712-489A-8975-9B014A4290BD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3C739D06-E6FE-423E-A394-00F3317017D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C739D06-E6FE-423E-A394-00F3317017D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3C739D06-E6FE-423E-A394-00F3317017D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3C739D06-E6FE-423E-A394-00F3317017D6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{1DC41327-AB17-4D6E-8E48-B902C663AAF5} = {A6E49C14-6254-4D59-BAE2-25C36A31B992}
@@ -183,5 +189,6 @@ Global
 		{76B24201-66E1-4EB0-9067-B950DAFD66FD} = {FE28457B-F715-4D30-860B-CE04C5E5F7ED}
 		{AA572FAE-F9A3-4FB9-8968-A00BC27C2DC8} = {22465E63-431C-46C0-AA8B-24DE76DE64E8}
 		{E498F3F8-3712-489A-8975-9B014A4290BD} = {22465E63-431C-46C0-AA8B-24DE76DE64E8}
+		{3C739D06-E6FE-423E-A394-00F3317017D6} = {FE28457B-F715-4D30-860B-CE04C5E5F7ED}
 	EndGlobalSection
 EndGlobal
