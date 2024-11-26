@@ -51,6 +51,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "11_Metodo-verificaInput-gen
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "12_landing-page-html-css", "04 - Assignment\12_landing-page-html-css\12_landing-page-html-css.csproj", "{C81D2B90-C016-480C-A31F-54F447BE88D6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "13_verifica-competenze1", "04 - Assignment\13_verifica-competenze1\13_verifica-competenze1.csproj", "{76B24201-66E1-4EB0-9067-B950DAFD66FD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -140,6 +142,10 @@ Global
 		{C81D2B90-C016-480C-A31F-54F447BE88D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C81D2B90-C016-480C-A31F-54F447BE88D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C81D2B90-C016-480C-A31F-54F447BE88D6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{76B24201-66E1-4EB0-9067-B950DAFD66FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{76B24201-66E1-4EB0-9067-B950DAFD66FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{76B24201-66E1-4EB0-9067-B950DAFD66FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{76B24201-66E1-4EB0-9067-B950DAFD66FD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{1DC41327-AB17-4D6E-8E48-B902C663AAF5} = {A6E49C14-6254-4D59-BAE2-25C36A31B992}
@@ -162,5 +168,6 @@ Global
 		{2C8ECDC8-B910-4C50-82EB-8FB72646E709} = {FE28457B-F715-4D30-860B-CE04C5E5F7ED}
 		{262AE268-BFB3-4ED9-B31C-72D668A83488} = {FE28457B-F715-4D30-860B-CE04C5E5F7ED}
 		{C81D2B90-C016-480C-A31F-54F447BE88D6} = {FE28457B-F715-4D30-860B-CE04C5E5F7ED}
+		{76B24201-66E1-4EB0-9067-B950DAFD66FD} = {FE28457B-F715-4D30-860B-CE04C5E5F7ED}
 	EndGlobalSection
 EndGlobal
