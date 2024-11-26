@@ -13,7 +13,7 @@ while (true)
         break;
     }
     // estraggo un indice casuale
-    int index = random.Next(partecipanti.Count);
+    index = random.Next(partecipanti.Count);
 
     // estraggo il partecipante
     string partecipante = partecipanti[index];
