@@ -61,9 +61,9 @@ if (errore) // se il booleano è vero allora stampa il messaggio che ho inserito
 
 //AGGIUNGERE UNA RIGA DI TESTO IN UNA POSIZIONE SPECIFICA
 //stampo la lunghezza dell'array
-Console.WriteLine(lines.Lenght);
+Console.WriteLine(lines.Length);
 
-lines[lines.Lenght -2] += "Indirizzo"; // aggiunge indirizzo alla penultima riga
+lines[lines.Length -2] += "Indirizzo"; // aggiunge indirizzo alla penultima riga
 File.WriteAllLines (path2, lines);// scrive tutte le righe nel file
 
 //AGGIUNGERE UNA RIGA DI TESTO IN UNA POSIZIONE SPECIFICA USANDO L'ACCENTO CIRCONFLESSO
@@ -71,6 +71,6 @@ lines[^2] += "numero di telefono2";
 File.WriteAllLines(path2, lines);
 
 //SOVRASCRIVERE UNA RIGA DI TESTO IN UNA POSIZIONE SPECIFICA
-lines[lines.Lenght -2] = "NUMERO DI TELEFONO"; // aggiunge indirizzo alla penultima riga
+lines[lines.Length -2] = "NUMERO DI TELEFONO"; // aggiunge indirizzo alla penultima riga
 File.WriteAllLines (path2, lines);//scrive tutte le righe nel file
 
