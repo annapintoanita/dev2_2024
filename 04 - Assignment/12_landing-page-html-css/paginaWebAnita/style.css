@@ -19,19 +19,26 @@ header {
 
 nav ul {
     list-style-type: disc; /* Mantieni i puntini accanto agli elementi */
-    padding-left: 20px; /* Distanza tra i punti e il bordo della lista */
-    margin: 0; /* Rimuove il margine di default dalla lista */
-    display: flex; /* Disporre gli elementi in orizzontale */
-    justify-content: center; /* Allineare gli elementi al centro */
-    gap: 20px; /* Aggiungi uno spazio tra gli elementi */
+    padding-left: 0px; /* Distanza tra i punti e il bordo della lista */
+    margin: 20px; /* Rimuove il margine di default dalla lista */
+    flex-direction: flex-start;
+    justify-content: flex-start; /* Allineare gli elementi al centro */
+    width: 5%;
+   
 }
 
+
 nav a {
-    color: #000000;
+ 
+    color: #e2dfdf;
     text-decoration: none;
     padding: 8px;
     font-size: 18px;
     font-weight: bold;
+    justify-content: center;
+   
+
+
 }
 
 main {
@@ -41,8 +48,11 @@ main {
     align-items: center;
     margin: 0 auto;
     width: 85%;
+   
     
 }
+
+
 
 section {
     margin: 2rem 0;
@@ -70,4 +80,34 @@ footer a {
     color: #fff;
     text-decoration: none;
     margin: 0 0.5rem;
+}
+
+@media screen and (max-width: 576px) {
+    body {
+        background-color: rgb(80, 68, 61);
+    }
+}
+
+@media screen and (min-width: 577px) and (max-width: 768px) {
+    body {
+        background-color: rgb(166, 167, 127);
+    }
+}
+
+@media screen and (min-width: 769px) and (max-width: 992px) {
+    body {
+        background-color: rgb(235, 191, 225);
+    }
+}
+
+@media screen and (min-width: 993px) and (max-width: 1400px) {
+    body {
+        background-color: lightcoral;
+    }
+}
+
+@media screen and (min-width: 1401px) {
+    body {
+        background-color: rgb(5, 5, 5);
+    }
 }
