@@ -63,14 +63,29 @@ if (errore) // se il booleano è vero allora stampa il messaggio che ho inserito
 //stampo la lunghezza dell'array
 Console.WriteLine(lines.Length);
 
-lines[lines.Length -2] += "Indirizzo"; // aggiunge indirizzo alla penultima riga
-File.WriteAllLines (path2, lines);// scrive tutte le righe nel file
+lines[lines.Length - 2] += "Indirizzo"; // aggiunge indirizzo alla penultima riga
+File.WriteAllLines(path2, lines);// scrive tutte le righe nel file
 
 //AGGIUNGERE UNA RIGA DI TESTO IN UNA POSIZIONE SPECIFICA USANDO L'ACCENTO CIRCONFLESSO
 lines[^2] += "numero di telefono2";
 File.WriteAllLines(path2, lines);
 
 //SOVRASCRIVERE UNA RIGA DI TESTO IN UNA POSIZIONE SPECIFICA
-lines[lines.Length -2] = "NUMERO DI TELEFONO"; // aggiunge indirizzo alla penultima riga
-File.WriteAllLines (path2, lines);//scrive tutte le righe nel file
+lines[lines.Length - 2] = "NUMERO DI TELEFONO"; // aggiunge indirizzo alla penultima riga
+File.WriteAllLines(path2, lines);//scrive tutte le righe nel file
 
+//StreamWriter
+//esempio
+void ScriviTentativiSuFile(Dictionary<string, List<int> tentativiUtenti, string nomeUtente)
+{
+    using (StreamWriter sw = new StreamWriter($"{nomeUtente}.txt"))
+    {
+        foreach (var tentativoUtente in tentativiUtenti)
+        {
+            if (tentativoUtente.Key == nomeUtente)
+            {
+                sw.WriteLine($"{tentativoUtente.Key}: {string.Join(",", tentativoUtente.Value)}");
+            }
+        }
+    }
+}
