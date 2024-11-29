@@ -60,3 +60,21 @@ int numeroDaIndovinare = random.Next(1, 11);
 
     File.AppendAllText(nomeFile, $"Hai indovinato! Il numero da indovinare era: {numeroDaIndovinare}. Tentativi: {tentativi}\n");
     ```
+    
+    ```
+    //StreamWriter
+    //esempio
+void ScriviTentativiSuFile(Dictionary<string, List<int> tentativiUtenti, string nomeUtente)
+{
+    using (StreamWriter sw = new StreamWriter($"{nomeUtente}.txt"))
+    {
+        foreach (var tentativoUtente in tentativiUtenti)
+        {
+            if (tentativoUtente.Key == nomeUtente)
+            {
+                sw.WriteLine($"{tentativoUtente.Key}: {string.Join(",", tentativoUtente.Value)}");
+            }
+        }
+    }
+}
+```
