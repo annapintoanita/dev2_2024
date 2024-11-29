@@ -3,6 +3,7 @@
 - Implementare la persistenza dei dati.
 - Implementare una funzione che scriva l'elenco dei tentativi fatti dall'utente su un file di testo.
 - Il programma chiede all'utente di inserire il proprio nome ed usa l'input dell'utente per creare un file di testo col nome dell'utente.
+
 ```csharp
 
 Random random = new Random();
@@ -59,9 +60,10 @@ int numeroDaIndovinare = random.Next(1, 11);
 
 
     File.AppendAllText(nomeFile, $"Hai indovinato! Il numero da indovinare era: {numeroDaIndovinare}. Tentativi: {tentativi}\n");
-    ```
     
     ```
+
+    ```csharp
     //StreamWriter
     //esempio
 void ScriviTentativiSuFile(Dictionary<string, List<int> tentativiUtenti, string nomeUtente)
@@ -77,4 +79,5 @@ void ScriviTentativiSuFile(Dictionary<string, List<int> tentativiUtenti, string 
         }
     }
 }
+
 ```
