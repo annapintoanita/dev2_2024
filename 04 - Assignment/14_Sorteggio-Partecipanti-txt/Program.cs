@@ -1,8 +1,14 @@
-﻿List <string>partecipanti = List <string>() ; //creo un array di stringhe con i nomi dei partecipanti
-string path = @"Partecipanti.txt" ;
+﻿List <string> partecipanti = List<string>() ; //creo un array di stringhe con i nomi dei partecipanti
+
+List<T> List<T>()
+{
+    throw new NotImplementedException();
+}
+
+string partecipante = @"Partecipanti.txt" ;
 Random random = new Random(); //creo un oggetto Random per generare numeri casuali
-int index = random.Next(partecipanti.Length); //genero un indice casuale
-string partecipante = partecipanti[index]; //estraggo il partecipante
+int index = random.Next(partecipanti.Count); //genero un indice casuale
+partecipante = partecipanti[index]; //estraggo il partecipante
 Console.WriteLine(partecipante); //stampo il partecipante
 while (true)
 {
@@ -16,7 +22,7 @@ while (true)
     index = random.Next(partecipanti.Count);
 
     // estraggo il partecipante
-    string partecipante = partecipanti[index];
+    partecipante = partecipanti[index];
 
     // stampo il partecipante
     Console.WriteLine(partecipante);
