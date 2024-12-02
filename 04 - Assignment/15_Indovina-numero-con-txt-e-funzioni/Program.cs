@@ -110,6 +110,6 @@ Console.WriteLine($"Hai fatto {tentativi} tentativi.");
 File.AppendAllText(nomeFile, $"Hai indovinato! Il numero era: {numeroDaIndovinare}. Tentativi: {tentativi}\n");
 
 //Leggere da un file
-string content = File.ReadAllText(ennesimoTentativo.txt);
+// string content = File.ReadAllText(ennesimoTentativo.txt);
 //stampo il contenuto del file
-Console.WriteLine(content);
+Console.WriteLine();
