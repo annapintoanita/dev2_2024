@@ -70,7 +70,8 @@ File.AppendAllText(datiUtente,$"{nome}, {cognome}, {età}\n" );
  List<string> salvateModifica= new List<string>();
  //File.Create(datiUtenteE).Close();
  datoDaEliminare.RemoveAt[2];
- foreach(string linea in linea1)
+ for (int i=0; i<linea1.Length;i++);
+ //foreach(string linea in linea1)
  {
     if (!linea.Contains(datoDaEliminare))
     {
