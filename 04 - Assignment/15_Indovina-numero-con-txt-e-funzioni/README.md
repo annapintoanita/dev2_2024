@@ -63,7 +63,7 @@ int numeroDaIndovinare = random.Next(1, 11);
     
     ```
 
-    ```csharp
+  
     //StreamWriter
     //esempio
 void ScriviTentativiSuFile(Dictionary<string, List<int> tentativiUtenti, string nomeUtente)
