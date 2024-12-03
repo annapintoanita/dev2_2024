@@ -69,6 +69,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "19_Persistenza-json", "04 -
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "16_indovina-numero-CSV", "04 - Assignment\16_indovina-numero-CSV\16_indovina-numero-CSV.csproj", "{D93191ED-E20B-4998-A850-15CEBEE0B5F1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "17_SupermercatoCompletoDiFileETutto", "04 - Assignment\17_SupermercatoCompletoDiFileETutto\17_SupermercatoCompletoDiFileETutto.csproj", "{7C7F667D-2B69-4B88-AA35-635E8F52801B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -194,6 +196,10 @@ Global
 		{D93191ED-E20B-4998-A850-15CEBEE0B5F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D93191ED-E20B-4998-A850-15CEBEE0B5F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D93191ED-E20B-4998-A850-15CEBEE0B5F1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7C7F667D-2B69-4B88-AA35-635E8F52801B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7C7F667D-2B69-4B88-AA35-635E8F52801B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7C7F667D-2B69-4B88-AA35-635E8F52801B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7C7F667D-2B69-4B88-AA35-635E8F52801B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{1DC41327-AB17-4D6E-8E48-B902C663AAF5} = {A6E49C14-6254-4D59-BAE2-25C36A31B992}
@@ -224,5 +230,6 @@ Global
 		{E9228131-58EB-4464-905D-0D51FC2EDC2E} = {22465E63-431C-46C0-AA8B-24DE76DE64E8}
 		{E09FDD81-ECDE-4054-B520-B99F38257EEE} = {22465E63-431C-46C0-AA8B-24DE76DE64E8}
 		{D93191ED-E20B-4998-A850-15CEBEE0B5F1} = {FE28457B-F715-4D30-860B-CE04C5E5F7ED}
+		{7C7F667D-2B69-4B88-AA35-635E8F52801B} = {FE28457B-F715-4D30-860B-CE04C5E5F7ED}
 	EndGlobalSection
 EndGlobal
