@@ -1,83 +1,105 @@
-﻿//GESTIONE FILE CSV
+﻿// GESTIONE FILES CSV
 
-//ESEMPIO FILE CSV
+// ESEMPIO DI FILE CSV
 
-//prodotto,quantità,prezzo --- nome,cognome,età (mario.csv) e nel file Rossi,35
-//Macchina ,11,30 --- Mario,Rossi,30
-//Mouse,10,25 --- Luigi.Bianchi,25
+// prodotto,quantita,prezzo
+// Macchina,11,30
+// Mouse,10,25
 
-//LEGGERE UN CONTENUTO DA UN FILE CSV
+// LEGGERE UN CONTENUTO DA UN FILE CSV
 
-/*string path = "@test.csv"; // in questo caso il file è nella stessa cartella del programma
-string[] lines = File.ReadAllLines(path);
+string path = @"test.csv"; // in questo caso il file è nella stessa cartella del programma
+string[] lines = File.ReadAllLines(path); // legge tutte le righe del file e le mette in un array di stringhe
 
 foreach (string line in lines)
 {
-    Console.WriteLine(line);   //stampa la riga
+    Console.WriteLine(line); // stampa la riga
 }
+
 // creare una lista di stringhe partendo dal file CSV
- List<string> list = new List<string>();
- foreach (string line in lines)
- {
-    list.Add(line);
- }
 
- */
-
-// creare una lista di array di stringhe partendo dal file CSV
-
-//creare un file CSV con il nome del file che corrisponde al nome della prima colonna 
-//ed il contenuto del file che corrisponde al contenuto delle altre colonne disponibili
-
-
-/*string[][] data =new string[lines.Length][];
-for (int i =0; i<lines.Length; i ++)
-{
-    
-}
-string fileCsv1 = @"file.csv";
-string [0] lines = File.ReadAllLines(fileCsv1);
+List<string> list = new List<string>();
 
 foreach (string line in lines)
 {
-    Console.WriteLine(line);
+    list.Add(line);
 }
-*/ //ESERCIZIO DA VEDERE IN TOTO
 
-//CREA UN PROGRAMMA CHE CHIEDE DI INSERIRE UN nome, cognome,età'SCRIVERLO SUL FILE CSV
+// creare un file CSV con il nome del file che corrisponde al nome della prima colonna
+// ed il contenuto del file che corrisponde al contenuto delle altre colonne disponibili
 
-string datiUtente =@"dati.csv";
-File.Create(datiUtente).Close();
+string[][] data = new string[lines.Length][];
+for (int i = 0; i < lines.Length; i++)
+{
+    data[i] = lines[i].Split(','); // divide la riga in base alla virgola e mette i pezzi in un array di stringhe
+}
 
-Console.WriteLine("Inserisci il tuo nome");
-string nome = Console.ReadLine();
+for (int i = 1; i < data.Length; i++)
+{
+    string path2 = $"{data[i][0]}.csv"; // il nome del file è il nome del prodotto
+    File.Create(path2).Close(); // crea il file e lo chiude subito
 
-Console.WriteLine("Inserisci il tuo cognome");
-string cognome = Console.ReadLine();
-
-Console.WriteLine("Inserisci la tua età");
-int età= int.Parse(Console.ReadLine());
-
-File.AppendAllText(datiUtente,$"{nome}, {cognome}, {età}\n" );
- string visualizzaTutto=File.ReadAllText(datiUtente);
- Console.WriteLine(visualizzaTutto);
- // eliminare un elemento specifico da un file csv
- //File.Delete(datiUtente);
-
- Console.WriteLine("Inserisci il dato da eliminare:");
- string datoDaEliminare= Console.ReadLine();
- string [] linea1 = File.ReadAllLines(datiUtente);
- List<string> salvateModifica= new List<string>();
- //File.Create(datiUtenteE).Close();
- datoDaEliminare.RemoveAt[2];
- for (int i=0; i<linea1.Length;i++);
- //foreach(string linea in linea1)
- {
-    if (!linea.Contains(datoDaEliminare))
+    for (int j = 1; j < data[i].Length; j++)
     {
-        salvateModifica.Add(linea);
+        File.AppendAllText(path2, data[i][j] + "\n"); // scrive il contenuto del file [i] è il nome del prodotto e [j] è il contenuto delle altre colonne
     }
-    File.WriteAllLines(datiUtente,salvateModifica);
- }
- //File.WriteAllText(datiUtente + line1);
-Console.WriteLine(File.ReadAllText(datiUtente));
+}
+
+// salvare in un file CSV gli input inseriti dall utente (prodotto, quantita, prezzo)
+
+while (true)
+{
+    Console.WriteLine("inserisci nome");
+    string prodotto = Console.ReadLine();
+    Console.WriteLine("inserisci quantita");
+    string quantita = Console.ReadLine();
+    Console.WriteLine("inserisci prezzo");
+    string prezzo = Console.ReadLine();
+    File.AppendAllText(path,$"\n{prodotto},{quantita},{prezzo}");
+    Console.WriteLine("vuoi inserire un altro prodotto? (s/n)");
+    string risposta = Console.ReadLine();
+    if (risposta == "n")
+    {
+        break;
+    }
+}
+
+// eliminare un elemento specifico da un file csv (prodotto, quantita, prezzo)
+
+Console.WriteLine("inserisci il nome del prodotto da eliminare");
+string prodottoDaEliminare = Console.ReadLine();
+string[] lines2 = File.ReadAllLines(path);
+File.Create(path).Close(); // bisogna creare il file perche altrimenti non si cancella il contenuto
+
+foreach (string line in lines2)
+{
+    string[] data2 = line.Split(',');
+    if (data2[0] != prodottoDaEliminare)
+    {
+        File.AppendAllText(path, line + "\n");
+    }
+}
+
+// modificare un elemento specifico da un file csv (prodotto, quantita, prezzo)
+
+Console.WriteLine("inserisci il nome del prodotto da modificare");
+string prodottoDaModificare = Console.ReadLine();
+string[] lines3 = File.ReadAllLines(path);
+File.Create(path).Close(); // bisogna creare il file perche altrimenti non si cancella il contenuto
+
+foreach (string line in lines3)
+{
+    string[] data3 = line.Split(',');
+    if (data3[0] == prodottoDaModificare)
+    {
+        Console.WriteLine("inserisci la nuova quantita");
+        string nuovaQuantita = Console.ReadLine();
+        Console.WriteLine("inserisci il nuovo prezzo");
+        string nuovoPrezzo = Console.ReadLine();
+        File.AppendAllText(path, $"{prodottoDaModificare},{nuovaQuantita},{nuovoPrezzo}\n");
+    }
+    else
+    {
+        File.AppendAllText(path, line + "\n");
+    }
+}
