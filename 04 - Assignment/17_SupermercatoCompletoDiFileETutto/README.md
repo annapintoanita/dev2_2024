@@ -153,7 +153,7 @@ static List<Dictionary<string, object>> CaricaDaJson(string filePath)
     string json = File.ReadAllText(filePath);
     return JsonConvert.DeserializeObject<List<Dictionary<string, object>>>(json);
 }
-//la funzione MostraCatalogo permette di cisualizzare il catalogo dei prodotti
+//la funzione MostraCatalogo permette di visualizzare il catalogo dei prodotti
 //accetta come parametro la lista di dizionari del catalogo
 //la funzione non restituisce nulla cioè non restituisce nessun valore da essere usato fuori dalla funzione
 static void MostraCatalogo(List<Dictionary<string, object>> catalogo)
@@ -180,7 +180,7 @@ static void AggiungiAlCarrello(List<Dictionary<string, object>> catalogo, List<D
         return;//esco datta funzione se il catalogo è vuoto
     }
     Console.WriteLine("Inserisci il nome del prodotto da acquistare:");
-    string nome = Console.ReadLine();7
+    string nome = Console.ReadLine();
     
 
     Dictionary<string, object> prodotto = null; //inizializzo il prodotto a null in modo da poter controllare se è stato trovato
@@ -205,7 +205,7 @@ static void AggiungiAlCarrello(List<Dictionary<string, object>> catalogo, List<D
     Console.Write("Inserisci la quantità da acquistare:");
     int quantità = int.Parse(Console.ReadLine());
 
-    if (quantità > int.Parse(prodotto["Quantità"].ToString())) ;// controllo se la quantità richiesta è dispoibile nel catalogo
+    if (quantità > int.Parse(prodotto["Quantità"].ToString())) // controllo se la quantità richiesta è dispoibile nel catalogo
     {
         Console.WriteLine("Quantità non disponibile");
         return;// esco dalla funzione se la quantità non è disponibile

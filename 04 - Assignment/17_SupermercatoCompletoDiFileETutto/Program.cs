@@ -1,6 +1,8 @@
-﻿using Newtonsoft.Json; //libreria per gestire il file JSON
+﻿/*using Newtonsoft.Json; //libreria per gestire il file JSON
 
 string filePath = "catalogo.json"; //percorso del file JSON
+string scontriniFilePath = "scontrini.json";
+int prossimoIdProdotto = 1;
 
 //creo due liste di dizionari per il catalogo e il carrello
 //i dizionari contengono le informazioni dei prodotti
@@ -11,37 +13,294 @@ var catalogo = new List<Dictionary<string, object>>(); //lista di  dizionari per
 var carrello = new List<Dictionary<string, object>>(); //lista di dizionari per il carrello
 
 Console.WriteLine("Benvenuto al supermercato JSON");
+string indentificazione = SelezioneIdentificazione();
+
+
+
+if (indentificazione == "o")
+{
+    MenuOperatore(catalogo, filePath);
+}
+else if (indentificazione == "c")
+{
+    MenuCliente(catalogo, carrello, scontriniFilePath);
+}
+
+
+ static string SelezioneIdentificazione()
+{
+
+
+    Console.WriteLine("\nSei un operatore o un cliente? o/c:");
+    string scelta = Console.ReadLine();
+
+    if (scelta == "o")
+    {
+        return "o";
+
+    }
+    else
+    {
+        return "c";
+
+    }
+
+
+}
+
+static void MenuOperatore(List<Dictionary<string, object>> catalogo, string filePath)
+{
+    while (true)
+    {
+        Console.WriteLine("\n--- Menu Operatore ---");
+        Console.WriteLine("1. Aggiungi un prodotto al catalogo");
+        Console.WriteLine("2. Salva il catalogo in JSON");
+        Console.WriteLine("3. Carica il catalogo da JSON");
+        Console.WriteLine("4. Mostra il catalogo");
+        Console.WriteLine("5. Esci");
+
+        string scelta = Console.ReadLine();
+
+        switch (scelta)
+        {
+            case "1":
+                catalogo.Add(CreaProdotto());
+                Console.WriteLine("Prodotto aggiunto con successo!");
+                break;
+            case "2":
+                SalvaInJson(catalogo, filePath);
+                Console.WriteLine("Catalogo salvato con successo!");
+                break;
+            case "3":
+                catalogo = CaricaDaJson(filePath);
+                Console.WriteLine("Catalogo caricato con successo!");
+                break;
+            case "4":
+                MostraCatalogo(catalogo);
+                break;
+            case "5":
+                Console.WriteLine("Uscita dal menu addetto.");
+                return;
+            default:
+                Console.WriteLine("Opzione non valida, riprova.");
+                break;
+        }
+    }
+}
+
+static void MenuCliente(List<Dictionary<string, object>> catalogo, List<Dictionary<string, object>> carrello, string scontriniFilePath)
+{
+    while (true)
+    {
+        Console.WriteLine("\n--- Menu Cliente ---");
+        Console.WriteLine("1. Mostra il catalogo");
+        Console.WriteLine("2. Aggiungi prodotti al carrello tramite ID");
+        Console.WriteLine("3. Rimuovi prodotti dal carrello tramite ID");
+        Console.WriteLine("4. Visualizza carrello");
+        Console.WriteLine("5. Stampa scontrino");
+        Console.WriteLine("6. Esci");
+
+        string scelta = Console.ReadLine();
+
+        switch (scelta)
+        {
+            case "1":
+                MostraCatalogo(catalogo);
+                break;
+            case "2":
+                AggiungiAlCarrelloConID(catalogo, carrello);
+                break;
+            case "3":
+                RimuoviDalCarrelloConID(carrello);
+                break;
+            case "4":
+                VisualizzaCarrello(carrello);
+                break;
+            case "5":
+                VisualizzaCarrello(carrello);
+                SalvaScontrino(carrello, scontriniFilePath);
+                carrello.Clear(); // Svuota il carrello dopo la stampa
+                break;
+            case "6":
+                Console.WriteLine("Uscita dal menu cliente.");
+                return;
+            default:
+                Console.WriteLine("Opzione non valida, riprova.");
+                break;
+        }
+    }
+}
+
+static Dictionary<string, object> CreaProdotto(int prossimoIdProdotto)
+{
+    var prodotto = new Dictionary<string, object>();
+    prodotto["ID"] = prossimoIdProdotto++;
+    Console.Write("Inserisci il nome del prodotto: ");
+    prodotto["Nome"] = Console.ReadLine();
+
+    Console.Write("Inserisci il prezzo del prodotto: ");
+    prodotto["Prezzo"] = decimal.Parse(Console.ReadLine());
+
+    Console.Write("Inserisci la quantità disponibile: ");
+    prodotto["Quantità"] = int.Parse(Console.ReadLine());
+
+    return prodotto;
+}
+
+static void SalvaInJson(List<Dictionary<string, object>> catalogo, string filePath)
+{
+    string json = JsonConvert.SerializeObject(catalogo, Formatting.Indented);
+    File.WriteAllText(filePath, json);
+}
+
+static List<Dictionary<string, object>> CaricaDaJson(string filePath)
+{
+    if (!File.Exists(filePath))
+    {
+        Console.WriteLine("Nessun file JSON trovato.");
+        return new List<Dictionary<string, object>>();
+    }
+    string json = File.ReadAllText(filePath);
+    return JsonConvert.DeserializeObject<List<Dictionary<string, object>>>(json);
+}
+
+static void MostraCatalogo(List<Dictionary<string, object>> catalogo)
+{
+    if (catalogo.Count == 0)
+    {
+        Console.WriteLine("Il catalogo è vuoto.");
+        return;
+    }
+    Console.WriteLine("\n--- Catalogo Prodotti ---");
+    foreach (var prodotto in catalogo)
+    {
+        Console.WriteLine($"ID: {prodotto["ID"]} - {prodotto["Nome"]} - Prezzo: €{prodotto["Prezzo"]} - Quantità: {prodotto["Quantità"]}");
+    }
+}
+
+static void AggiungiAlCarrelloConID(List<Dictionary<string, object>> catalogo, List<Dictionary<string, object>> carrello)
+{
+    Console.Write("Inserisci l'ID del prodotto da acquistare: ");
+    int id = int.Parse(Console.ReadLine());
+
+    Dictionary<string, object> prodotto = catalogo.FirstOrDefault(p => (int)p["ID"] == id);
+
+    if (prodotto == null)
+    {
+        Console.WriteLine("Prodotto non trovato.");
+        return;
+    }
+
+    Console.Write("Inserisci la quantità da acquistare: ");
+    int quantità = int.Parse(Console.ReadLine());
+
+    if (quantità > Convert.ToInt32(prodotto["Quantità"]))
+    {
+        Console.WriteLine("Quantità non disponibile.");
+        return;
+    }
+
+    prodotto["Quantità"] = Convert.ToInt32(prodotto["Quantità"]) - quantità;
+    carrello.Add(new Dictionary<string, object>
+        {
+            { "ID", prodotto["ID"] },
+            { "Nome", prodotto["Nome"] },
+            { "Prezzo", prodotto["Prezzo"] },
+            { "Quantità", quantità }
+        });
+
+    Console.WriteLine($"{quantità} x {prodotto["Nome"]} aggiunti al carrello.");
+}
+
+static void RimuoviDalCarrelloConID(List<Dictionary<string, object>> carrello)
+{
+    Console.Write("Inserisci l'ID del prodotto da rimuovere: ");
+    int id = int.Parse(Console.ReadLine());
+
+    var prodottoDaRimuovere = carrello.FirstOrDefault(p => (int)p["ID"] == id);
+
+    if (prodottoDaRimuovere == null)
+    {
+        Console.WriteLine("Prodotto non trovato nel carrello.");
+        return;
+    }
+
+    carrello.Remove(prodottoDaRimuovere);
+    Console.WriteLine("Prodotto rimosso dal carrello.");
+}
+
+static void VisualizzaCarrello(List<Dictionary<string, object>> carrello)
+{
+    if (carrello.Count == 0)
+    {
+        Console.WriteLine("Il carrello è vuoto.");
+        return;
+    }
+
+    Console.WriteLine("\n--- Carrello ---");
+    decimal totale = 0;
+    foreach (var prodotto in carrello)
+    {
+        decimal costo = decimal.Parse(prodotto["Prezzo"].ToString()) * int.Parse(prodotto["Quantità"].ToString());
+        Console.WriteLine($"{prodotto["Quantità"]} x {prodotto["Nome"]} - €{costo}");
+        totale += costo;
+    }
+    Console.WriteLine($"\nTotale: €{totale}");
+}
+
+static void SalvaScontrino(List<Dictionary<string, object>> carrello, string filePath)
+{
+    var scontrino = new
+    {
+        Data = DateTime.Now,
+        Prodotti = carrello,
+        Totale = carrello.Sum(p => decimal.Parse(p["Prezzo"].ToString()) * int.Parse(p["Quantità"].ToString()))
+    };
+
+    string json = JsonConvert.SerializeObject(scontrino, Formatting.Indented);
+    File.WriteAllText(filePath, json);
+    Console.WriteLine("Scontrino salvato con successo.");
+}
+
 
 while (true)
 {
-    Console.WriteLine("\nScegli un'operazione:");
-    Console.WriteLine("1. Aggiungi un prodotto al catalogo");
-    Console.WriteLine("2. Salva il catalogo in JSON");
-    Console.WriteLine("3. Carica il catalogo d JSON");
-    Console.WriteLine("4. Mostra il catalogo");
-    Console.WriteLine("5. Aggiungi prodotti al carrello");
-    Console.WriteLine("6. Visualizza carrello e stampa scontrino");
-    Console.WriteLine("7. Esci");
-
+    Console.WriteLine("Sei un cliente o un operatore? c/o");
+     indentificazione = Console.ReadLine();
+    if (indentificazione == "o")
+    {
+        Console.WriteLine("\nScegli un'operazione:");
+        Console.WriteLine("0. Aggiungi un prodotto al catalogo");
+        Console.WriteLine("1. Salva il catalogo in JSON");
+        Console.WriteLine("2. Carica il catalogo d JSON");
+        Console.WriteLine("3. Mostra il catalogo");
+        Console.WriteLine("4. Inserisci Id del prodotto:");
+        Console.WriteLine("5. Aggiungi prodotti al carrello");
+        Console.WriteLine("6. Visualizza carrello e stampa scontrino");
+        Console.WriteLine("7. Esci");
+    }
     string scelta = Console.ReadLine(); //legge l'input dell'utente
 
     switch (scelta)
     {
-        case "1":
-            var prodotto = CreaProdotto(); //crea un nuovo prodotto
+        case "0":
+            var prodotto = CreaProdotto(prossimoIdProdotto); //crea un nuovo prodotto
             catalogo.Add(prodotto); //aggiunge il prodotto al catalogo, lo faccio direttamente senza salvarlo in una variabile perchè non serve
             Console.WriteLine($"Prodotto {prodotto["Nome"]} aggiunto al catalogo"); //conferma l'aggiunta
             break;
 
-        case "2":
+        case "1":
             SalvaInJson(catalogo, filePath);//salva il catalogo in JSON
             Console.WriteLine("Catalogo salvato in Json");//conferma il salvataggio
             break;
 
-        case "3":
+        case "2":
             catalogo = CaricaDaJson(filePath); // carica il catalogo da JSON
             Console.WriteLine("Catalogo caricato da Json");//conferma il caricamento
             break;
+
+        case "3":
+            inserimentoId = InserisciId()
 
         case "4":
             MostraCatalogo(catalogo); //mostra il catalogo
@@ -138,8 +397,8 @@ static void AggiungiAlCarrello(List<Dictionary<string, object>> catalogo, List<D
         return;//esco datta funzione se il catalogo è vuoto
     }
     Console.WriteLine("Inserisci il nome del prodotto da acquistare:");
-    string nome = Console.ReadLine();7
-    
+    string nome = Console.ReadLine();
+
 
     Dictionary<string, object> prodotto = null; //inizializzo il prodotto a null in modo da poter controllare se è stato trovato
     foreach (var p in catalogo)
@@ -163,7 +422,7 @@ static void AggiungiAlCarrello(List<Dictionary<string, object>> catalogo, List<D
     Console.Write("Inserisci la quantità da acquistare:");
     int quantità = int.Parse(Console.ReadLine());
 
-    if (quantità > int.Parse(prodotto["Quantità"].ToString())) ;// controllo se la quantità richiesta è dispoibile nel catalogo
+    if (quantità > int.Parse(prodotto["Quantità"].ToString())) // controllo se la quantità richiesta è dispoibile nel catalogo
     {
         Console.WriteLine("Quantità non disponibile");
         return;// esco dalla funzione se la quantità non è disponibile
@@ -193,13 +452,348 @@ static void VisualizzaCarrello(List<Dictionary<string, object>> carrello)
     Console.WriteLine("\n--- Carrello ---");
 
     decimal totale = 0; //inizializzo il totale a 0 per calcolare il costo totale del carrello, 
-    //                   se non lo inizializzo il valore di default è 0 quindi posso anche non scriverlo
-   foreach (var prodotto in carrello)
-   {
-    decimal costo = decimal.Parse(prodotto["Prezzo"].ToString()) * int.Parse(prodotto["Quantità"].ToString()); // calcolo il costo del prodotto
-    Console.WriteLine($"{prodotto["Quantità"]} x {prodotto["Nome"]} - €{costo}");
-    totale += costo; //aggiorno il totale con il costo del prodotto acquistato
-   }
+                        //                   se non lo inizializzo il valore di default è 0 quindi posso anche non scriverlo
+    foreach (var prodotto in carrello)
+    {
+        decimal costo = decimal.Parse(prodotto["Prezzo"].ToString()) * int.Parse(prodotto["Quantità"].ToString()); // calcolo il costo del prodotto
+        Console.WriteLine($"{prodotto["Quantità"]} x {prodotto["Nome"]} - €{costo}");
+        totale += costo; //aggiorno il totale con il costo del prodotto acquistato
+    }
     Console.WriteLine($"\ntotale: €{totale}");
+}*/
+
+using Newtonsoft.Json;
+string filePath = "catalogo.json";
+string fileScontrinoPath = "scontrino.json";
+// Ho definito qui lo scontrino perchè mi dava problemi nalla funzione salvascontrinosufile del menu lavoratore, in questo modo entrambi i menu riescano a vedere la variabile
+List<Dictionary<string, object>> scontrino = new List<Dictionary<string, object>>();
+
+List<Dictionary<string, object>> catalogo = new List<Dictionary<string, object>>();
+List<Dictionary<string, object>> carrello = new List<Dictionary<string, object>>();
+Console.WriteLine("--- Benvenuto al Supermercato Json ---");
+
+Console.WriteLine("Digita '1' se sei un nostro dipendente, '2' se sei un cliente ");
+string selezione = Console.ReadLine();
+while (true)
+{
+    if (selezione == "1")
+    {
+        Console.WriteLine("Seleziona un'operazione da effettuare:");
+        Console.WriteLine("1. Visualizza il catalogo");
+        Console.WriteLine("2. Aggiungi un prodotto al catalogo tramite ID");
+        Console.WriteLine("3. Modifica il prezzo di un prodotto");
+        Console.WriteLine("4. Rimuovi un prodotto dal catalogo");
+        Console.WriteLine("5. Salva il catalogo sul file");
+        Console.WriteLine("6. Carica il catalogo dal file");
+        Console.WriteLine("7. Salva lo scontrino sul file");
+        Console.WriteLine("8. Visualizza gli scontrini");
+        Console.WriteLine("9. ESCI");
+        string sceltaOperazione = Console.ReadLine();
+
+        switch (sceltaOperazione)
+        {
+            case "1":
+                VisualizzaCatalogo(catalogo);
+                break;
+
+            case "2":
+                AggiungiAlCatalogo(catalogo);
+                break;
+
+            case "3":
+                ModificaPrezzo();
+                break;
+
+            case "4":
+                RimuoviDalCatalogo();
+                break;
+
+            case "5":
+                SalvaCatalogoSuFile(catalogo, filePath);
+
+                break;
+
+            case "6":
+                CaricaCatalogoSuFile(filePath);
+                break;
+
+            case "7":
+                SalvaScontrinoSuFile(fileScontrinoPath);
+                break;
+
+            case "8":
+                VisualizzaScontrini();
+                break;
+
+            case "9":
+                Console.WriteLine("Grazie per il tuo lavoro!");
+                break;
+        }
+    }
+    else
+    {
+        Console.WriteLine("Scegli un'operazione:");
+        Console.WriteLine("1. Visualizza il catalogo");
+        Console.WriteLine("2. Aggiungi prodotto al carrello");
+        Console.WriteLine("3. Elimina un prodotto dal carrello");
+        Console.WriteLine("4. Visualizza il carrello");
+        Console.WriteLine("5. Vai al pagamento ");
+        Console.WriteLine("0 ESCI");
+        string sceltaCliente = Console.ReadLine();
+        switch (sceltaCliente)
+        {
+            case "1":
+                VisualizzaCatalogo(catalogo);
+                break;
+
+            case "2":
+                AggiungiAlCarrello(catalogo, carrello);
+                break;
+
+            case "3":
+                EliminaProdotto();
+                break;
+
+            case "4":
+                VisualizzaCarrello(carrello);
+                break;
+
+            case "5":
+                VaiAlPagamento(carrello,fileScontrinoPath, scontrino);
+                break;
+
+            case "0":
+                Console.WriteLine("Grazie, a presto!");
+                break;
+
+            default:
+                Console.WriteLine("Inserisci una scelta valida");
+                break;
+
+        }
+    }
 }
 
+
+
+#region Lavoratore
+static void VisualizzaCatalogo(List<Dictionary<string, object>> catalogo)
+{
+    if (catalogo.Count == 0)
+    {
+        Console.WriteLine("Il catalogo è vuoto.");
+        return;
+    }
+
+    foreach (var prodotto in catalogo)
+        Console.WriteLine($"ID: {prodotto["ID"]}, Nome: {prodotto["Nome"]}, Prezzo: €{prodotto["Prezzo"]}, Quantita: x{prodotto["Quantita"]}");
+}
+static void AggiungiAlCatalogo(List<Dictionary<string, object>> catalogo)
+{
+    Console.WriteLine("Inserisci il codice ID:");
+    int id = int.Parse(Console.ReadLine());
+    Console.WriteLine("Inserisci il nome del prodotto:");
+    string nomeProdotto = Console.ReadLine();
+    Console.WriteLine("Inserisci il prezzo del prodotto:");
+    decimal prezzoProdotto = decimal.Parse(Console.ReadLine());
+    Console.WriteLine("Inserisci la quantita da aggiungere del prodotto:");
+    int quantita = int.Parse(Console.ReadLine());
+
+    var prodotto = new Dictionary<string, object>
+   {
+        {"ID" , id},
+        {"Nome", nomeProdotto},
+        {"Prezzo",prezzoProdotto},
+        {"Quantita", quantita},
+        {"QuantitaDisponibile",quantita}
+   };
+    catalogo.Add(prodotto);
+    Console.WriteLine("Il prodotto è stato aggiunto al catalogo.");
+}
+static void ModificaPrezzo()
+{
+    decimal prezzo = decimal.Parse(Console.ReadLine());
+}
+void RimuoviDalCatalogo()
+{
+    int idProdottoDaEliminare = int.Parse(Console.ReadLine());
+    Console.WriteLine("Inserisci l'ID del prodotto da rimuovere:");
+    bool trovato = false;
+    foreach (var prodotto in catalogo)
+    {
+        // Recupero l'ID del prodotto dal dizionario
+        int id = (int)prodotto["ID"];
+
+        if (id == idProdottoDaEliminare)
+        {
+            catalogo.Remove(prodotto);  // Rimuoviamo il prodotto dalla lista
+            Console.WriteLine("Prodotto rimosso con successo!");
+            trovato = true;
+            break;  // Uscita dal ciclo una volta trovato e rimosso il prodotto
+        }
+    }
+
+    if (!trovato)
+    {
+        Console.WriteLine("Prodotto non trovato!");
+    }
+}
+static void SalvaCatalogoSuFile(List<Dictionary<string, object>> catalogo, string filePath)
+{
+    string json = JsonConvert.SerializeObject(catalogo, Formatting.Indented);
+    File.WriteAllText(filePath, json);
+    Console.WriteLine("Catalogo salvato sul file");
+}
+static List<Dictionary<string, object>> CaricaCatalogoSuFile(string filePath)
+{
+    if (!File.Exists(filePath)) // se il file non esiste
+    {
+        Console.WriteLine("Nessun file Json trovato");
+        return new List<Dictionary<string, object>>(); //crea una lista vuota e la restituisce
+    }
+    string json = File.ReadAllText(filePath);
+    Console.WriteLine("Catalogo caricatu sul file");
+    return JsonConvert.DeserializeObject<List<Dictionary<string, object>>>(json);
+}
+static void SalvaScontrinoSuFile(string fileScontrinoPath, string scontrino)
+{
+    if (scontrino == null || scontrino.Length == 0)
+    {
+        Console.WriteLine("Scontrino vuoto. Aggiungi prodotti prima di salvarlo.");
+        return;
+    }
+    string json = JsonConvert.SerializeObject(scontrino, Formatting.Indented);
+    File.WriteAllText(fileScontrinoPath, json);
+    Console.WriteLine("Scontrino salvato sul file.");
+}
+
+static void VisualizzaScontrini()
+{
+
+}
+#endregion
+
+#region Cliente
+static void AggiungiAlCarrello(List<Dictionary<string, object>> catalogo, List<Dictionary<string, object>> carrello)
+{
+    if (catalogo.Count == 0)
+    {
+        Console.WriteLine("Il catalogo è vuoto, carica prima i prodotti");
+        return;//esco datta funzione se il catalogo è vuoto
+    }
+    Console.WriteLine("Inserisci il nome del prodotto da acquistare:");
+    string nome = Console.ReadLine();
+
+
+    Dictionary<string, object> prodotto = null; //inizializzo il prodotto a null in modo da poter controllare se è stato trovato
+    foreach (var p in catalogo)
+    {
+        if (p["Nome"].ToString().Equals(nome, StringComparison.OrdinalIgnoreCase))
+
+        {
+            prodotto = p; // assegno il prodotto trovato alla variabile prodotto in modo da poterlo usare fuori dal ciclo
+            break; //esco dal ciclo dato che ho trovato il prodotto
+        }
+    }
+
+    if (prodotto == null)
+    {
+        Console.WriteLine("Prodotto non trovato");
+        return; //esco dalla funzione se il prodotto non è stato trovato
+    }
+    Console.Write("Inserisci la quantità da acquistare:");
+    int quantità = int.Parse(Console.ReadLine());
+
+    if (quantità > int.Parse(prodotto["Quantità"].ToString())) // controllo se la quantità richiesta è dispoibile nel catalogo
+    {
+        Console.WriteLine("Quantità non disponibile");
+        return;// esco dalla funzione se la quantità non è disponibile
+    }
+    prodotto["Quantità"] = int.Parse(prodotto["Quantità"].ToString()) - quantità; // aggiorno la quantità disponibile nel catalogo
+
+    carrello.Add(new Dictionary<string, object> // aggiungo la quantità al carrello con la quantità scelta
+    {
+        {"Nome", prodotto["Nome"]},
+        {"Prezzo", prodotto["Prezzo"]},
+        {"Quantità", quantità} // aggiungo lla quantità al carrello, non metto ["Quantità"] perchè la quantità nel carrello è quella che l'utente ha scelto
+    });
+
+    Console.WriteLine($"{quantità} x {prodotto["Nome"]} aggiunti al carrello");
+}
+static void EliminaProdotto()
+{
+
+
+
+}
+static void VisualizzaCarrello(List<Dictionary<string, object>> carrello)
+{
+    if (carrello.Count == 0)
+    {
+        Console.WriteLine("Il carrello è vuoto");
+        return;
+    }
+
+    Console.WriteLine("\n--- Carrello ---");
+
+    decimal totale = 0; //inizializzo il totale a 0 per calcolare il costo totale del carrello, 
+                        //                   se non lo inizializzo il valore di default è 0 quindi posso anche non scriverlo
+    foreach (var prodotto in carrello)
+    {
+        decimal costo = decimal.Parse(prodotto["Prezzo"].ToString()) * int.Parse(prodotto["Quantità"].ToString()); // calcolo il costo del prodotto
+        Console.WriteLine($"{prodotto["Quantità"]} x {prodotto["Nome"]} - €{costo}");
+        totale += costo; //aggiorno il totale con il costo del prodotto acquistato
+    }
+    Console.WriteLine($"\ntotale: €{totale}");
+}
+static void VaiAlPagamento(List<Dictionary<string, object>> carrello, string fileScontrinoPath,string scontrino)
+{
+    if (carrello.Count == 0)
+    {
+        Console.WriteLine("Il carrello è vuoto. Aggiungi prodotti prima di procedere al pagamento.");
+        return;
+    }
+
+    decimal totale = 0;
+    foreach (var prodotto in carrello)
+    {
+        totale += (decimal)prodotto["Prezzo"] * (int)prodotto["Quantita"]; // Calcolo totale
+    }
+
+    // Mostra il totale e la data dello scontrino
+    Console.WriteLine("Totale da pagare: €" + totale);
+    Console.WriteLine("Premi INVIO per confermare il pagamento...");
+    Console.ReadLine();
+}
+
+    // Creo lo scontrino con data e carrello
+    
+    /*scontrino.Add(new Dictionary<string, object>
+    {
+        { "Data", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") },
+        { "Prodotti", carrello },
+        { "Totale", totale }
+    });
+
+    // Serializza lo scontrino e lo salva sul file
+    string json = JsonConvert.SerializeObject(scontrino, Formatting.Indented);
+    File.WriteAllText(fileScontrinoPath, json);
+    Console.WriteLine("Pagamento effettuato con successo! Scontrino salvato.");
+
+    // Svuota il carrello dopo il pagamento
+    carrello.Clear();
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+#endregion*/
