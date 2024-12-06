@@ -462,6 +462,8 @@ static void VisualizzaCarrello(List<Dictionary<string, object>> carrello)
     Console.WriteLine($"\ntotale: €{totale}");
 }*/
 
+//COMMENTO TUTTI I PASSAGGI 
+
 using Newtonsoft.Json;
 string filePath = "catalogo.json";
 string fileScontrinoPath = "scontrino.json";
@@ -518,7 +520,7 @@ while (true)
                 break;
 
             case "7":
-                SalvaScontrinoSuFile(fileScontrinoPath);
+                SalvaScontrinoSuFile(scontrino, fileScontrinoPath);
                 break;
 
             case "8":
@@ -614,15 +616,16 @@ static void ModificaPrezzo()
 {
     decimal prezzo = decimal.Parse(Console.ReadLine());
 }
-void RimuoviDalCatalogo()
+void RimuoviDalCatalogo() // inserisci funzione visualizzacatalogo
 {
+    VisualizzaCatalogo();
     int idProdottoDaEliminare = int.Parse(Console.ReadLine());
     Console.WriteLine("Inserisci l'ID del prodotto da rimuovere:");
     bool trovato = false;
     foreach (var prodotto in catalogo)
     {
         // Recupero l'ID del prodotto dal dizionario
-        int id = (int)prodotto["ID"];
+        int id = (int)prodotto["ID"];   //potevo convertire in to.int32
 
         if (id == idProdottoDaEliminare)
         {
@@ -657,7 +660,7 @@ static List<Dictionary<string, object>> CaricaCatalogoSuFile(string filePath)
 }
 static void SalvaScontrinoSuFile(string fileScontrinoPath, string scontrino)
 {
-    if (scontrino == null || scontrino.Length == 0)
+    if (scontrino == null || scontrino.Length == 0) //chiesto a chat gpt
     {
         Console.WriteLine("Scontrino vuoto. Aggiungi prodotti prima di salvarlo.");
         return;
@@ -666,11 +669,20 @@ static void SalvaScontrinoSuFile(string fileScontrinoPath, string scontrino)
     File.WriteAllText(fileScontrinoPath, json);
     Console.WriteLine("Scontrino salvato sul file.");
 }
-
+/*        //modificare entità da catalogo a scontrino
 static void VisualizzaScontrini()
-{
 
+{
+    if (catalogo.Count == 0)
+    {
+        Console.WriteLine("Il catalogo è vuoto.");
+        return;
+    }
+
+    foreach (var prodotto in )
+        Console.WriteLine($"ID: {prodotto["ID"]}, Nome: {prodotto["Nome"]}, Prezzo: €{prodotto["Prezzo"]}, Quantita: x{prodotto["Quantita"]}");
 }
+*/
 #endregion
 
 #region Cliente
