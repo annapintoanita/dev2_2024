@@ -4,3 +4,30 @@
     --bs-verdechiaro: green !important;
   
 }
+
+.head{
+
+}
+.img{
+    width: 1250px;
+}
+.body, html{
+    width: 90px;
+ height: auto;
+
+}
+
+.container{
+    width: 100%;
+    max-width: 1100px;
+    margin-left: auto;
+    margin-right: auto;
+    
+}
+.box{
+    height: 120px;
+    background-color: lightgreen;
+}
+.custom-class{
+    display:none;
+}
