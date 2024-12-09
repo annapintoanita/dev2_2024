@@ -4,6 +4,10 @@
     --bs-verdechiaro: green !important;
   
 }
+.h1 {
+    color: crimson;
+    background-color: deeppink;
+}
 .bd-example>:last-child,.bd-example>nav:last-child .breadcrumb {
     margin-bottom: 0;
 }

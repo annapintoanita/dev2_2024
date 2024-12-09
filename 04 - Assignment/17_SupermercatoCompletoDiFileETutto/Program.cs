@@ -466,10 +466,10 @@ static void VisualizzaCarrello(List<Dictionary<string, object>> carrello)
 
 using Newtonsoft.Json;
 string filePath = "catalogo.json";
-string fileScontrinoPath = "scontrino.json";
+//string fileScontrinoPath = "scontrino.json";
 bool continua = true;
 // Ho definito qui lo scontrino perchè mi dava problemi nalla funzione salvascontrinosufile del menu lavoratore, in questo modo entrambi i menu riescano a vedere la variabile
-List<Dictionary<string, object>> scontrino = new List<Dictionary<string, object>>();
+//List<Dictionary<string, object>> scontrino = new List<Dictionary<string, object>>();
 List<Dictionary<string, object>> catalogo = new List<Dictionary<string, object>>();
 List<Dictionary<string, object>> carrello = new List<Dictionary<string, object>>();
 Console.WriteLine("--- Benvenuto al Supermercato Json ---");
@@ -490,9 +490,9 @@ while (continua)
         Console.WriteLine("4. Rimuovi un prodotto dal catalogo");
         Console.WriteLine("5. Salva il catalogo sul file");
         Console.WriteLine("6. Carica il catalogo dal file");
-        Console.WriteLine("7. Salva lo scontrino sul file");
-        Console.WriteLine("8. Visualizza gli scontrini");
-        Console.WriteLine("9. ESCI");
+        //Console.WriteLine("7. Salva lo scontrino sul file");
+        //Console.WriteLine("8. Visualizza gli scontrini");
+        Console.WriteLine("0. ESCI");
         string sceltaOperazione = Console.ReadLine();
 
         switch (sceltaOperazione)
@@ -521,18 +521,18 @@ while (continua)
             case "6":
                 catalogo = CaricaCatalogoDalFile(filePath); //  la funzione restituisce una lista di dizionari. Non funzionava perchè il dato del return non aveva una destinazione. In questo modo quindi gli abbiamo assegnato una variabile (o "destinazione")
                 break;
-
+/*
             case "7":
-                SalvaScontrinoSuFile(scontrino, fileScontrinoPath);
+                //SalvaScontrinoSuFile(scontrino, fileScontrinoPath);
                 break;
 
             case "8":
-                VisualizzaScontrini();
+                //VisualizzaScontrini();
                 break;
-
-            case "9":
+*/
+            case "0":
                 Console.WriteLine("Grazie per il tuo lavoro!");
-                continua = false; //abbiamo aggiunto un bool perchè non uscova mai dalle scelte
+                continua = false; //abbiamo aggiunto un bool perchè non usciva mai dalle scelte
                 break;
         }
     }
@@ -543,7 +543,7 @@ while (continua)
         Console.WriteLine("2. Aggiungi prodotto al carrello");
         Console.WriteLine("3. Elimina un prodotto dal carrello");
         Console.WriteLine("4. Visualizza il carrello");
-        Console.WriteLine("5. Vai al pagamento ");
+        //Console.WriteLine("5. Vai al pagamento ");
         Console.WriteLine("0 ESCI");
         string sceltaCliente = Console.ReadLine();
         switch (sceltaCliente)
@@ -557,16 +557,16 @@ while (continua)
                 break;
 
             case "3":
-                EliminaProdotto();
+                RimuoviProdottoDaCarrello();
                 break;
 
             case "4":
                 VisualizzaCarrello(carrello);
                 break;
 
-            case "5":
+            /*case "5":
                 VaiAlPagamento(carrello, fileScontrinoPath, scontrino);
-                break; 
+                break; */
 
             case "0":
                 Console.WriteLine("Grazie, a presto!");
@@ -689,7 +689,7 @@ static List<Dictionary<string, object>> CaricaCatalogoDalFile(string filePath)
 //deserializzazione= sto dando i pezzetti di codice a c# per farglieli comprendere
 //serializzazione= sto dando l'indicazione di COME vanno scritti sul json
 
-static void SalvaScontrinoSuFile(List<Dictionary<string, object>> scontrino, string fileScontrinoPath)
+/*static void SalvaScontrinoSuFile(List<Dictionary<string, object>> scontrino, string fileScontrinoPath)
 {
     if (scontrino == null || scontrino.Count == 0) //chiesto a chat gpt
     {
@@ -699,7 +699,7 @@ static void SalvaScontrinoSuFile(List<Dictionary<string, object>> scontrino, str
     string json = JsonConvert.SerializeObject(scontrino, Formatting.Indented);
     File.WriteAllText(fileScontrinoPath, json);
     Console.WriteLine("Scontrino salvato sul file.");
-}
+}*/
 /*        //modificare entità da catalogo a scontrino
 static void VisualizzaScontrini()
 
@@ -747,26 +747,51 @@ static void AggiungiAlCarrello(List<Dictionary<string, object>> catalogo, List<D
     Console.Write("Inserisci la quantità da acquistare:");
     int quantità = int.Parse(Console.ReadLine());
 
-    if (quantità > int.Parse(prodotto["Quantità"].ToString())) // controllo se la quantità richiesta è dispoibile nel catalogo
+    if (quantità > int.Parse(prodotto["Quantita"].ToString())) // controllo se la quantità richiesta è dispoibile nel catalogo
     {
         Console.WriteLine("Quantità non disponibile");
         return;// esco dalla funzione se la quantità non è disponibile
     }
-    prodotto["Quantità"] = int.Parse(prodotto["Quantità"].ToString()) - quantità; // aggiorno la quantità disponibile nel catalogo
+    prodotto["Quantita"] = int.Parse(prodotto["Quantita"].ToString()) - quantità; // aggiorno la quantità disponibile nel catalogo
 
     carrello.Add(new Dictionary<string, object> // aggiungo la quantità al carrello con la quantità scelta
     {
         {"Nome", prodotto["Nome"]},
         {"Prezzo", prodotto["Prezzo"]},
-        {"Quantità", quantità} // aggiungo lla quantità al carrello, non metto ["Quantità"] perchè la quantità nel carrello è quella che l'utente ha scelto
+        {"Quantita", quantità}, // aggiungo lla quantità al carrello, non metto ["Quantità"] perchè la quantità nel carrello è quella che l'utente ha scelto
+        {"ID", prodotto["ID"]} 
     });
 
     Console.WriteLine($"{quantità} x {prodotto["Nome"]} aggiunti al carrello");
 }
-static void EliminaProdotto()
+void RimuoviProdottoDaCarrello()
 {
+  
+VisualizzaCarrello(carrello);
+   Console.WriteLine("Inserisci l'ID del prodotto da rimuovere:");
+    // int idProdottoDaEliminare = int.Parse(Console.ReadLine()); 
+    string idProdottoDaEliminare = Console.ReadLine();
+    bool trovato = false;
+    foreach (var prodotto in carrello)
+    {
+        // Recupero l'ID del prodotto dal dizionario
+        //int id = (int)prodotto["ID"];   //potevo convertire in to.int32 DA FARSELO SPIEGARE
+    string id=prodotto["ID"].ToString();
+        
 
+        if (id == idProdottoDaEliminare)
+        {
+            carrello.Remove(prodotto);  // Rimuoviamo il prodotto dalla lista
+            Console.WriteLine("Prodotto rimosso con successo!");
+            trovato = true;
+            break;  // Uscita dal ciclo una volta trovato e rimosso il prodotto
+        }
+    }
 
+    if (!trovato)
+    {
+        Console.WriteLine("Prodotto non trovato!");
+    }
 
 }
 static void VisualizzaCarrello(List<Dictionary<string, object>> carrello)
@@ -783,13 +808,13 @@ static void VisualizzaCarrello(List<Dictionary<string, object>> carrello)
                         //                   se non lo inizializzo il valore di default è 0 quindi posso anche non scriverlo
     foreach (var prodotto in carrello)
     {
-        decimal costo = decimal.Parse(prodotto["Prezzo"].ToString()) * int.Parse(prodotto["Quantità"].ToString()); // calcolo il costo del prodotto
-        Console.WriteLine($"{prodotto["Quantità"]} x {prodotto["Nome"]} - €{costo}");
+        decimal costo = decimal.Parse(prodotto["Prezzo"].ToString()) * int.Parse(prodotto["Quantita"].ToString()); // calcolo il costo del prodotto
+        Console.WriteLine($"{prodotto["ID"]} {prodotto["Quantita"]} x {prodotto["Nome"]} - €{costo}");
         totale += costo; //aggiorno il totale con il costo del prodotto acquistato
     }
     Console.WriteLine($"\ntotale: €{totale}");
 }
-static void VaiAlPagamento(List<Dictionary<string, object>> carrello, string fileScontrinoPath, List<Dictionary<string, object>> scontrino)
+/*static void VaiAlPagamento(List<Dictionary<string, object>> carrello, string fileScontrinoPath, List<Dictionary<string, object>> scontrino)
 {
     if (carrello.Count == 0)
     {
@@ -807,11 +832,27 @@ static void VaiAlPagamento(List<Dictionary<string, object>> carrello, string fil
     Console.WriteLine("Totale da pagare: €" + totale);
     Console.WriteLine("Premi INVIO per confermare il pagamento...");
     Console.ReadLine();
-}
+}*/
 
-void VisualizzaScontrini()
+/*void VisualizzaScontrini(List<Dictionary<string, object>> scontrino)
 {
+if (scontrino.Count == 0)
+    {
+        Console.WriteLine("Scontrino vuoto");
+        return;
+    }
 
+    Console.WriteLine("\n--- Scontrino---");
+
+    decimal totale = 0; //inizializzo il totale a 0 per calcolare il costo totale del carrello, 
+                        //                   se non lo inizializzo il valore di default è 0 quindi posso anche non scriverlo
+    foreach (var prodotto in scontrino)
+    {
+        decimal costo = decimal.Parse(prodotto["Prezzo"].ToString()) * int.Parse(prodotto["Quantita"].ToString()); // calcolo il costo del prodotto
+        Console.WriteLine($"{prodotto["ID"]} {prodotto["Quantita"]} x {prodotto["Nome"]} - €{costo}");
+        totale += costo; //aggiorno il totale con il costo del prodotto acquistato
+    }
+    Console.WriteLine($"\ntotale: €{totale}");
 }
     // Creo lo scontrino con data e carrello
     
@@ -830,19 +871,19 @@ void VisualizzaScontrini()
     // Svuota il carrello dopo il pagamento
     carrello.Clear();
 }
-
-
-
-
-
-
-
-
-
-
-
-
 */
+
+
+
+
+
+
+
+
+
+
+
+
 
 // int risultato = 0;
 // risultato = potenzaallaseconda(3);

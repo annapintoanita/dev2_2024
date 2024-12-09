@@ -5,5 +5,12 @@
     "Prezzo": 1.0,
     "Quantita": 100,
     "QuantitaDisponibile": 100
+  },
+  {
+    "ID": 100,
+    "Nome": "patate",
+    "Prezzo": 99.0,
+    "Quantita": 300,
+    "QuantitaDisponibile": 300
   }
 ]
