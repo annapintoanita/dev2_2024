@@ -2,154 +2,242 @@
 <html lang="en">
 
 <head>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Bootstrap demo</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+       
 </head>
-
-<div container></div>
+<img src="https://magazine.misya.info/wp-content/uploads/2018/01/cibo-scaduto-supermercati.jpg" class="img-fluid" alt="immagine testata" style="justify-content: center;">
+<img src="" alt="">
 
 <body>
+
+   
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
-    <img src="https://www.italiareportusa.com/wp-content/uploads/2023/02/shopping-g1655209be_1280.jpg" class="img"
-        alt="..." width="1250" height="400">
+         <div>
+         
+         </div>
+        
+    <!--inizio della griglia e delle colonne nel body, PRIMA RIGA-->
+    <!--Primo container solo per la navbar-->
     <div class="container-fluid text-center">
-        <div class="row">
-            <div class="col-12" style="background-color: rgb(178, 111, 111);">
-                <p style="text-decoration: deeppink;">
-                <h1> Supxmercato </h1>
-                </p>
-            </div>
-        </div>
-    </div>
-    <div class="container">
+        <!--Occupa tutta la riga-->
         <nav class="navbar bg-dark border-bottom border-body" data-bs-theme="dark">
-            <!-- Navbar content -->
-            <div class="collapse" id="navbarToggleExternalContent" data-bs-theme="dark">
-                <div class="bg-dark p-4">
-                    <h5 class="text-body-emphasis h4">Collapsed content</h5>
-                    <span class="text-body-secondary"></span>
+            <div class="container-fluid">
+                <form class="d-flex" role="search">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"
+                        style="justify-content: flex-start; ">
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                </form>
+                <!--per poter spostare il bottone a piacimento lo devo mettere al di fuori del container navbar-->
+                <div class="dropdown" style="margin-right: 5%;">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        Menu
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">Offerte</a></li>
+                        <li><a class="dropdown-item" href="#">Casa</a></li>
+                        <li><a class="dropdown-item" href="#">Frutta e verdura</a></li>
+                        <li><a class="dropdown-item" href="#">Forno</a></li>
+                        <li><a class="dropdown-item" href="#">Macelleria</a></li>
+                        <li><a class="dropdown-item" href="#">Salumeria</a></li>
+                        <li><a class="dropdown-item" href="#">Frigo</a></li>
+                        <li><a class="dropdown-item" href="#">Surgelati</a></li>
+                        <li><a class="dropdown-item" href="#">Dolci</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="#">Registrati</a></li>
+                    </ul>
                 </div>
+
             </div>
-            <nav class="navbar navbar-dark bg-dark">
-                <div class="container-fluid">
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
+        </nav>
+    </div>
+    </div>
+    </div>
+    <!-- Secondo container- sulla prima colonna-->
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-lg-4 col-xl-3" style="background-color: burlywood;">
+                fgcjhtfyghv ccghc Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                Accusantium dolorum non temporibus nulla iusto soluta nesciunt, inventore quam in, maiores
+                necessitatibus vero laboriosam praesentium quae fugiat corrupti est, consequatur eveniet?
+            </div>
+            
+
+
+            <div class="col-12 col-lg-8 col-xl-6" style="background-color: darksalmon;">
+                <p>Benvenuto nel tuo su-X-mercato, dove ogni mese abbiamo incredibili offerte per te</p>
+                <div id="carouselExampleCaptions" class="carousel slide d-none d-sm-block">
+                    <div class="carousel-indicators">
+                        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0"
+                            class="active" aria-current="true" aria-label="Slide 1"></button>
+                        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"
+                            aria-label="Slide 2"></button>
+                        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"
+                            aria-label="Slide 3"></button>
+                        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="3"
+                            aria-label="Slide 4"></button>
+                        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="4"
+                            aria-label="Slide 5"></button>
+                        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="5"
+                            aria-label="Slide 6"></button>
+                    </div>
+                    
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img src="https://i0.wp.com/www.tavoleromane.it/wp-content/uploads/2018/02/Dolceroma-vetrina-best.jpg?fit=1200%2C799&ssl=1"
+                                class="d-block w-100" alt=".dolciVetrina">
+                            <div class="carousel-caption d-none d-md-block">
+                                <h5>First slide label</h5>
+                                <p>Some representative placeholder content for the first slide.</p>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <img src="https://images.wunderweib.de/diese-beliebte-schokolade-fliegt-aus-dem-supermarktregal,id=74cb93ce,b=wunderweib,w=1200,ca=0,0,100.00,100.00,rm=sk.jpeg"
+                                class="d-block w-100" alt="orsetto-lindt">
+                            <div class="carousel-caption d-none d-md-block">
+                                <h5>Second slide label</h5>
+                                <p>Some representative placeholder content for the second slide.</p>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <img src="https://www.chenews.it/wp-content/uploads/2022/06/Frutta-al-supermercato.jpg"
+                                class="d-block w-100" alt="frutta e verdura" width="1200" height="408">
+                            <div class="carousel-caption d-none d-md-block">
+                                <h5>Third slide label</h5>
+                                <p>Some representative placeholder content for the third slide.</p>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <img src="https://www.greenme.it/wp-content/uploads/2021/09/pesce_surgelato.jpg"
+                                class="d-block w-100" alt="orsetto-lindt">
+                            <div class="carousel-caption d-none d-md-block">
+                                <h5>Second slide label</h5>
+                                <p>Some representative placeholder content for the second slide.</p>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <img src="https://www.martinellisupermercati.it/data/files/cms/71/gastronomia_large.jpg"
+                                class="d-block w-100" alt="orsetto-lindt" width="1200" height="408">
+                            <div class="carousel-caption d-none d-md-block">
+                                <h5>Second slide label</h5>
+                                <p>Some representative placeholder content for the second slide.</p>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <img src="https://www.minformo.com/wp-content/uploads/2019/01/MG_3541_r21.jpg"
+                                class="d-block w-100" alt="macelleria">
+                            <div class="carousel-caption d-none d-md-block">
+                                <h5>Third slide label</h5>
+                                <p>Some representative placeholder content for the third slide.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"
+                        data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions"
+                        data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
                     </button>
                 </div>
-            </nav>
-        </nav>
-        <div class="row gx-5 gy-5">
-            <div class="col-2" style="background-color: rgb(68, 34, 34);">
-                <p style="color: cornflowerblue;">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit velit perspiciatis ducimus! Deleniti
-                    aperiam similique incidunt quaerat eligendi accusantium saepe temporibus inventore? Illum minus eos
-                    recusandae obcaecati officia nobis cum?
-                </p>
+                
             </div>
-            <div class="col-10" style="background-color: black;">
+            <div class="col-sm-4 col-xs-12 col-md-3" style="background-color:burlywood;">
+                3 of 3
+            </div>
+        </div> 
+    </div>
+    <!--inserisco un'altra riga così divido la pagina in più parti-->
+    <div class="container-fluid" style="background-color: cadetblue;">
+        <div class="row">
+            
+            <!-- qui inserisco le cards per le offerte-->
+            seconda riga prima colonna
+            <div class="card-group grid gap-2 w-50 mb-2">
+                <div class="card">
+                    <img src="https://le-gioie.it/cdn/shop/files/1485852620_on_mil-1_7d7e8213-01c5-489d-9349-3201ed5b58d7.jpg?v=1702211005&width=320"
+                        class="card-img-top" alt="piatti natalizi">
+                    <div class="card-body">
+                        <h5 class="card-title">Piatti a tema Natale</h5>
+                        <p class="card-text">Rendi natalizi i tuoi pranzi e le tue cene, da solo o in compagnia.</p>
+                        <a href="#" class="btn btn-primary">Vai all'offerta</a>
 
-                <p style="color: aqua;">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit velit perspiciatis ducimus! Deleniti
-                    aperiam similique incidunt quaerat eligendi accusantium saepe temporibus inventore? Illum minus eos
-                    recusandae obcaecati officia nobis cum?
-                </p>
-                <div>
-                    <div id="carouselExampleCaptions" class="carousel slide">
-                        <div class="carousel-indicators">
-                            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0"
-                                class="active" aria-current="true" aria-label="Slide 1"></button>
-                            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"
-                                aria-label="Slide 2"></button>
-                            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"
-                                aria-label="Slide 3"></button>
-                        </div>
-                        <div class="carousel-inner">
-                            <div class="carousel-item active">
-                                <img src="https://risparmiare.mammafelice.it/wp-content/uploads/2018/01/come-capire-se-la-frutta-%C3%A8-buona-e-la-verdura-fresca-e1573202570745.jpg"
-                                    class="d-block w-90" alt="frutta-verdura">
-                                <div class="carousel-caption d-none d-md-block">
-                                    <h5>Reparto frutta e verdura</h5>
-                                    <p>Frutta e verdura da noi sono sempre fresche, collaboriamo con i migliori
-                                        agricoltori italiani.</p>
-                                </div>
-                            </div>
-                            <div class="carousel-item">
-                                <img src="https://smartfood.ieo.it/media/1360/carne-rossa_sa.jpg?center=0.61940298507462688,0.38166666666666665&mode=crop&width=1200&height=630&rnd=132058462615300000"
-                                    class="d-block w-100" alt="carne">
-                                <div class="carousel-caption d-none d-md-block">
-                                    <h5>Reparto macelleria</h5>
-                                    <p>La carne fresca direttamente dai migliori allevatori.</p>
-                                </div>
-                            </div>
-                            <div class="carousel-item">
-                                <img src="https://www.mark-up.it/wp-content/uploads/sites/3/2023/03/Pasticceria_Iper-Rozzano-2-1024x616.jpg"
-                                    class="d-block w-100" alt="...">
-                                <div class="carousel-caption d-none d-md-block">
-                                    <h5>Reparto Forno</h5>
-                                    <p>Oltre a pane e focaccia appena sfornati, il reparto forno ha un vasto
-                                        assortimento di golosi dolci</p>
-                                </div>
-                            </div>
-                            <div class="carousel-item">
-                                <img src="https://img.freepik.com/foto-premium/pane-vari-in-scaffali-per-la-vendita-in-negozio_1048944-7840331.jpg"
-                                    class="d-block w-100" alt="...">
-                                <div class="carousel-caption d-none d-md-block">
-                                    <h5>Reparto Forno</h5>
-                                    <p>Oltre a pane e focaccia appena sfornati, il reparto forno ha un vasto
-                                        assortimento di golosi dolci</p>
-                                </div>
-                            </div>
-                        </div>
-                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"
-                            data-bs-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Previous</span>
-                        </button>
-                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions"
-                            data-bs-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Next</span>
-                        </button>
                     </div>
-                    <justify-content: flex-start>
-                    <div class="card" style="width: 18rem;">
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTunTZwjs4vxLZB1PG-TXIyjOtkV_0zsLLFtw&s" class="card-img-top" alt="...">
-                        <div class="card-body">
-                          <h5 class="card-title">Dolci offerte</h5>
-                          <p class="card-text">Non lasciarti sfuggire le grandiosi offerte natalizie su tutti i prodotti Lindt!</p>
-                          <a href="#" class="btn btn-primary stretched-link">Clicca, cosa aspetti?</a>
-                        </div>
-                    </justify-content>
-                      </div>
-                      <justify-content: flex-start>
-                      <div class="card" style="width: 18rem;">
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSxegaMFe8UsjHLJv5KLpGn-T1mDCQybazi3Q&s" class="card-img-top" alt="card-casa-natale">
-                        <div class="card-body">
-                          <h5 class="card-title">Natale in casa</h5>
-                          <p class="card-text">Rendi le tue cene e i tuoi pranzi natalizi</p>
-                          <a href="#" class="btn btn-primary stretched-link">Clicca, cosa aspetti?</a>
-                        </div>
-                    </justify-content>
-                      </div>
+                </div>
+                <div class="card">
+                    <img src="https://m.media-amazon.com/images/I/71ZIPaRCNlL._AC_UF350,350_QL80_.jpg"
+                        class="card-img-top" alt="stufetta-elettrica">
+                    <div class="card-body">
+                        <h5 class="card-title">Stufetta elettrica</h5>
+                        <p class="card-text">Lasciati abbracciare dal calore della stufetta elettrica.</p>
+                        <a href="#" class="btn btn-primary">Vai all'offerta</a>
+
+                    </div>
                     
                 </div>
+                <div class="card">
+                    <img src="https://m.media-amazon.com/images/I/91p73yBZiQL._AC_UF350,350_QL80_.jpg"
+                        class="card-img-top" alt="kinder-natale">
+                    <div class="card-body">
+                        <h5 class="card-title">Kinder dolcezza</h5>
+                        <p class="card-text">Cedi alla dolcezza del cioccolato Kinder per rendere il Natale ancora più
+                            dolce.</p>
+                        <a href="#" class="btn btn-primary">Vai all'offerta</a>
+
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid" style="background-color: cadetblue;">
+                <div class="row">
+                    
+                    <!-- qui inserisco le cards per le offerte-->
+                    seconda riga prima colonna
+                    <div class="card-group grid gap-2 w-50 mb-2">
+                        <div class="card">
+                            <img src="https://le-gioie.it/cdn/shop/files/1485852620_on_mil-1_7d7e8213-01c5-489d-9349-3201ed5b58d7.jpg?v=1702211005&width=320"
+                                class="card-img-top" alt="piatti natalizi">
+                            <div class="card-body">
+                                <h5 class="card-title">Piatti a tema Natale</h5>
+                                <p class="card-text">Rendi natalizi i tuoi pranzi e le tue cene, da solo o in compagnia.</p>
+                                <a href="#" class="btn btn-primary">Vai all'offerta</a>
+        
+                            </div>
+                        </div>
+                        <div class="card">
+                            <img src="https://m.media-amazon.com/images/I/71ZIPaRCNlL._AC_UF350,350_QL80_.jpg"
+                                class="card-img-top" alt="stufetta-elettrica">
+                            <div class="card-body">
+                                <h5 class="card-title">Stufetta elettrica</h5>
+                                <p class="card-text">Lasciati abbracciare dal calore della stufetta elettrica.</p>
+                                <a href="#" class="btn btn-primary">Vai all'offerta</a>
+                             </div>    
+        
+                        </div>   
+                    </div>
+                </div>    
             </div>
         </div>
-    </div>
-    </div>
 
     </div>
     </div>
+    </div> <!--inserisco un'altra riga così divido la pagina in più parti-->
+
+
+
+
+
 
 </body>
 
