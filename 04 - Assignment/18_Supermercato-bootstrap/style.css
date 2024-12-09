@@ -4,3 +4,33 @@
     --bs-verdechiaro: green !important;
   
 }
+.bd-example>:last-child,.bd-example>nav:last-child .breadcrumb {
+    margin-bottom: 0;
+}
+.div,.class,.dropdown{
+    justify-content: space-around;
+    margin: 0%;
+}
+.head{
+
+}
+.img{
+    width: 1250px;
+}
+.body, html{
+    width: 90px;
+ height: auto;
+
+}
+
+.container-xs{
+    width: 100%;
+    max-width: 11px;
+    margin-left: auto;
+    margin-right: auto;
+    
+}
+
+.custom-class{
+    display:none;
+}

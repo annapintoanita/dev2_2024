@@ -1,7 +1,9 @@
 [
   {
-    "Nome": "lenticchie",
-    "Prezzo": 2.0,
-    "Quantità": 30
+    "ID": 123,
+    "Nome": "carlo",
+    "Prezzo": 1.0,
+    "Quantita": 100,
+    "QuantitaDisponibile": 100
   }
 ]
