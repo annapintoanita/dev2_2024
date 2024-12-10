@@ -1,66 +1,67 @@
-﻿using System.Buffers;
+﻿using System.Runtime.CompilerServices;
 using Newtonsoft.Json;
 
 class Program
 {
     static void Main(string[] args)
     {
-        // creare un oggetto di tipo ProdottoAdvancedManager per gestire i prodotti
-        ProdottoAdvancedManager manager = new ProdottoAdvancedManager();
-
-        // creo un oggetto per gestire il salvataggio e il caricamento dei dati su json
         ProdottoRepository repository = new ProdottoRepository();
+        List<ProdottoAdvanced> prodotti =  repository.CaricaProdotti();
+        ProdottoAdvancedManager manager = new ProdottoAdvancedManager(prodotti);
 
-        List<ProdottoAdvanced> prodotti = repository.CaricaProdotti();
+        bool continua = true;
 
-        // aggiungere i prodotti alla lista con il metodo aggiungi prodotto della classe ProdottoAdvancedManager (ovvero manager)
-        manager.AggiungiProdotto(new ProdottoAdvanced { Id = 1, NomeProdotto ="esempio" , PrezzoProdotto = 12.50m, GiacenzaProdotto = 100});
-        manager.AggiungiProdotto(new ProdottoAdvanced { Id = 2, NomeProdotto ="esempio2", PrezzoProdotto = 19.99m, GiacenzaProdotto = 150});
-       
-        //visualizzo i prodotti attraverso il metodo Ottieni prodotti
-        foreach (var prodotto in manager.OttieniProdotti())
+        while (continua)
         {
-            Console.WriteLine($"ID: {prodotto.Id}, Nome: {prodotto.NomeProdotto}, Prezzo: {prodotto.PrezzoProdotto}, Giacenza: {prodotto.GiacenzaProdotto}");
-        }
-        
-        int idProdotto = 2;
-        ProdottoAdvanced prodottoTrovato = manager.TrovaProdotto(idProdotto);
-        if (prodottoTrovato != null)
-        {
-            Console.WriteLine($"Prodotto trovato per {idProdotto}: {prodottoTrovato.NomeProdotto}");
-        }
-        else
-        {
-            Console.WriteLine($"Prodotto non trovato per ID {idProdotto}");
+            Console.WriteLine("\nMenu");
+            Console.WriteLine("1. Visualizza");
+            Console.WriteLine("2. Aggiungi");
+            Console.WriteLine("3. Trova per ID");
+            Console.WriteLine("4. Aggiorna");
+            Console.WriteLine("5. Elimina");
+            Console.WriteLine("0. Esci");
         }
 
-        // Aggiornare un prodotto con il metodo AggiornaProdotto della classe ProdottoAdvancedManager
-        int idProdottoDaAggiornare = 2;
-        ProdottoAdvanced nuovoProdotto = new ProdottoAdvanced { Id = 2, NomeProdotto ="esempio3", PrezzoProdotto = 29.99m, GiacenzaProdotto = 250};
-        manager.AggiornaProdotto(idProdottoDaAggiornare, nuovoProdotto);
+        Console.Write("> ");
+        string scelta = Console.ReadLine();
 
-        // visualizzare i prodotti aggiornati
-       foreach (var prodotto in manager.OttieniProdotti())
-       {
-            Console.WriteLine($"ID: {prodotto.Id}, Nome: {prodotto.NomeProdotto}, Prezzo: {prodotto.PrezzoProdotto}, Giacenza:  {prodotto.GiacenzaProdotto}");
-       }
-        
-        // Elimina un prodotto
-        int idDaEliminare = 1;
-        manager.EliminaProdotto(idDaEliminare);
-
-        // visualizza prodotti rimanenti
-        Console.WriteLine("");
-        foreach (var prodotto in manager.OttieniProdotti())
+        switch (scelta)
         {
-            Console.WriteLine($"ID: {prodotto.Id}, Nome: {prodotto.NomeProdotto}, Prezzo: {prodotto.PrezzoProdotto}, Giacenza {prodotto.GiacenzaProdotto}");
+            case "1":
+                Console.WriteLine("\nProdotti:");
+                foreach(var prodotto in manager.OttieniProdotti())
+                {
+                    Console.WriteLine($"ID: {prodotto.Id}, Nome: {prodotto.NomeProdotto}, Prezzo: {prodotto.PrezzoProdotto}, Giacenza: {prodotto.GiacenzaProdotto}");
+                }
+            break;
+            case "2":
+                Console.Write("ID > ");
+                int id = int.Parse(Console.ReadLine());
+                Console.Write("Nome > ");
+                string nome = Console.ReadLine();
+                Console.Write("Prezzo > ");
+                decimal prezzo = decimal.Parse(Console.ReadLine());
+                Console.Write("Giacenza > ");
+                int giacenza = int.Parse(Console.ReadLine());
+                manager.AggiungiProdotto(new ProdottoAdvanced {Id = id, NomeProdotto = nome, PrezzoProdotto = prezzo, GiacenzaProdotto = giacenza});
+            break;
+            case "3":
+                Console.Write("ID > ");
+                int idProdotto = int.Parse(Console.ReadLine());
+                ProdottoAdvanced prodottoTrovato = manager.TrovaProdotto(idProdotto);
+
+                if (prodottoTrovato != null)
+                {
+                    Console.WriteLine($"\nProdotto trovato per ID {idProdotto}: {prodottoTrovato.NomeProdotto}");
+                }
+                else
+                {
+                    Console.WriteLine($"\nProdotto non trovato per ID {idProdotto}");
+                }
+            break;
+            
+                
         }
-
-        // salvare i prodotti su file json con il metodo SalvaProdotti
-        repository.SalvaProdotti(manager.OttieniProdotti());
-        prodotti = repository.CaricaProdotti(); 
-
-        // TODO : metodi per la serializzazione e deserializzazione !!!
     }
 }
 
@@ -127,9 +128,9 @@ public class ProdottoAdvancedManager
 {
     private List<ProdottoAdvanced> prodotti; // prodotti e' private perche non voglio che venga modificato dall'esterno
 
-    public ProdottoAdvancedManager()
+    public ProdottoAdvancedManager(List<ProdottoAdvanced> prodotti)
     {
-        prodotti = new List<ProdottoAdvanced>(); // inizializzo la lista di prodotti nel costruttore pubblico in modo che sia accessibile all'esterno
+       // prodotti = new List<ProdottoAdvanced>(); // inizializzo la lista di prodotti nel costruttore pubblico in modo che sia accessibile all'esterno
     }
 
     // metodo per aggiungere
@@ -182,17 +183,6 @@ public class ProdottoAdvancedManager
 
 public class ProdottoRepository
 {
-    // la classe i occupa di gestire la persistenza dei dati in modo centralizzato
-    // i vantaggi sono:
-    // - centralizzazioni della logica
-    // - facilità di manutenzione
-    // - falicità di test
-    // - possibilità di cambiare il tipo di persistenza senza dover modificare il codice che utilizza la classe
-    // - possibilità di aggiungere una logica di caching (memorizzazione temporanea dei dati) senza dover modificare il codice che utilizza la classe
-
-    // filePath è il percorso e ha il modificatore private 
-    // perché non vogliamo venga modificato dall'esterno della classe prima di essere utilizzato
-
     private readonly string filePath = "prodotti.json"; // percorso in cui memorizzare i dati
 
     //metodo per salvare i dati su file 
@@ -202,9 +192,6 @@ public class ProdottoRepository
         File.WriteAllText(filePath, jsonData);
         Console.WriteLine($"Dati salvati in {filePath}:\n{jsonData}");
     }
-
-    // metodo per caricare i dati da file
-    // restituisce una lista di prodotti se il file esiste e contiene dati
 
     public List<ProdottoAdvanced> CaricaProdotti()
     {
