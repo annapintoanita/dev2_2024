@@ -1,10 +1,11 @@
-﻿using Newtonsoft.Json;
-﻿using Newtonsoft.Json;
+﻿
+using System.Data.Common;
+using Newtonsoft.Json;
 class Program
 {
     static void Main(string[] args)
     {
-       // Creare un oggetto di tipo ProdottoRepository per gestire il salvataggio e il caricamento dei dati
+        // Creare un oggetto di tipo ProdottoRepository per gestire il salvataggio e il caricamento dei dati
         ProdottoRepository repository = new ProdottoRepository();
 
         // Caricare i dati da file con il metodo CaricaProdotti della classe ProdottoRepository (repository)
@@ -209,35 +210,48 @@ public class ProdottoAdvancedManager
 
 public class ProdottoRepository
 {
-    private readonly string filePath = "prodotti.json"; // il percorso del file in cui memorizzare i dati
-    
-    public void SalvaProdotti(List<ProdottoAdvanced> prodotti)
+ 
+    private readonly string folderPath  = "Prodotti"; //crea per il file json
+      public void SalvaProdotti(List<ProdottoAdvanced> prodotti)
     {
-        string jsonData = JsonConvert.SerializeObject(prodotti, Formatting.Indented);
-        File.WriteAllText(filePath, jsonData);
-        Console.WriteLine($"Dati salvati in {filePath}:\n");
-        // Console.WriteLine($"Dati salvati in {filePath}:\n{jsonData}\n");
+        if (! Directory.Exists(folderPath))
+        {
+            Directory.CreateDirectory(folderPath);
+        }
+
+        foreach (var prodotto in prodotti)
+        {
+            string filePath = Path.Combine(folderPath,$"{prodotto.Id}.json"); //percorso del file JSON
+            string jsonData = JsonConvert.SerializeObject(prodotto, Formatting.Indented);
+            File.WriteAllText(filePath, jsonData);
+            Console.WriteLine($"Prodotto salvato in {filePath}: \n");
+        }
     }
 
     public List<ProdottoAdvanced> CaricaProdotti()
     {
-        if (File.Exists(filePath))
-        {
-            string readJsonData = File.ReadAllText(filePath);
-            List<ProdottoAdvanced> prodotti = JsonConvert.DeserializeObject<List<ProdottoAdvanced>>(readJsonData); // deserializzo i dati letti dal file
-            Console.WriteLine("Dati caricati da file:");
-            foreach (var prodotto in prodotti)
+        
+            List<ProdottoAdvanced> prodotti = new  List<ProdottoAdvanced> ();
+            if (Directory.Exists(folderPath))
             {
-                Console.WriteLine($"ID: {prodotto.Id}, Nome: {prodotto.NomeProdotto}, Prezzo: {prodotto.PrezzoProdotto}, Giacenza: {prodotto.GiacenzaProdotto}");
+                foreach(var file in Directory.GetFiles(folderPath,"*.json"))
+                {
+                    string readJsonData= File.ReadAllText(file);
+                    ProdottoAdvanced prodotto = JsonConvert.DeserializeObject<ProdottoAdvanced>(readJsonData) ;
+                    prodotti.Add(prodotto);
+                }
             }
-            // restituisco la lista di prodotti letti dal file in modo che possa essere utilizzata all'esterno della classe
             return prodotti;
-        }
-        else
-        {
-            Console.WriteLine("Nessun dato trovato. Inizializzare una nuova lista di prodotti.");
-            // restituisco una nuova lista di prodotti vuota se il file non esiste o è vuoto in modo che possa essere utilizzata all'esterno della classe
-            return new List<ProdottoAdvanced>();
-        }
+            
+       
+
+        
+
+        /*CREO UNA DIRECTORY
+        string dir = @"test";
+        Directory.CreateDirectory(dir);
+        */
+
+
     }
 }

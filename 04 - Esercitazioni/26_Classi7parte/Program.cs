@@ -1,17 +1,17 @@
-﻿using Newtonsoft.Json;
-﻿using Newtonsoft.Json;
+﻿
+using Newtonsoft.Json;
 class Program
 {
     static void Main(string[] args)
     {
-       // Creare un oggetto di tipo ProdottoRepository per gestire il salvataggio e il caricamento dei dati
+        // Creare un oggetto di tipo ProdottoRepository per gestire il salvataggio e il caricamento dei dati
         ProdottoRepository repository = new ProdottoRepository();
 
         // Caricare i dati da file con il metodo CaricaProdotti della classe ProdottoRepository (repository)
         List<ProdottoAdvanced> prodotti = repository.CaricaProdotti();
 
         // Creare un oggetto di tipo ProdottoAdvancedManager per gestire i prodotti
-        ProdottoAdvancedManager manager = new ProdottoAdvancedManager();
+        ProdottoAdvancedManager manager = new ProdottoAdvancedManager(prodotti);
 
         // Menu interattivo per eseguire operazioni CRUD sui prodotti
 
@@ -46,15 +46,15 @@ class Program
                     }
                     break;
                 case "2":
-                    Console.Write("ID: ");
-                    int id = int.Parse(Console.ReadLine());
+                   // Console.Write("ID: ");
+                    // int id = int.Parse(Console.ReadLine());
                     Console.Write("Nome: ");
                     string nome = Console.ReadLine();
                     Console.Write("Prezzo: ");
                     decimal prezzo = decimal.Parse(Console.ReadLine());
                     Console.Write("Giacenza: ");
                     int giacenza = int.Parse(Console.ReadLine());
-                    manager.AggiungiProdotto(new ProdottoAdvanced { Id = id, NomeProdotto = nome, PrezzoProdotto = prezzo, GiacenzaProdotto = giacenza });
+                    manager.AggiungiProdotto(new ProdottoAdvanced {NomeProdotto = nome, PrezzoProdotto = prezzo, GiacenzaProdotto = giacenza });
                     break;
                 case "3":
                     Console.Write("ID: ");
@@ -78,7 +78,7 @@ class Program
                     decimal prezzoNuovo = decimal.Parse(Console.ReadLine());
                     Console.Write("Giacenza: ");
                     int giacenzaNuova = int.Parse(Console.ReadLine());
-                    manager.AggiornaProdotto(idProdottoDaAggiornare, new ProdottoAdvanced { Id = idProdottoDaAggiornare, NomeProdotto = nomeNuovo, PrezzoProdotto = prezzoNuovo, GiacenzaProdotto = giacenzaNuova });
+                    manager.AggiornaProdotto(idProdottoDaAggiornare, new ProdottoAdvanced {NomeProdotto = nomeNuovo, PrezzoProdotto = prezzoNuovo, GiacenzaProdotto = giacenzaNuova });
                     break;
                 case "5":
                     Console.Write("ID: ");
@@ -151,18 +151,34 @@ public class ProdottoAdvanced
 }
 
 public class ProdottoAdvancedManager
-{
-    private List<ProdottoAdvanced> prodotti; // prodotti e private perche non voglio che venga modificato dall'esterno
 
-    public ProdottoAdvancedManager()
+{
+    private int prossimoId;
+     private List<ProdottoAdvanced> prodotti; 
+    private ProdottoRepository repository; // prodotti e private perche non voglio che venga modificato dall'esterno
+
+    public ProdottoAdvancedManager(List<ProdottoAdvanced> Prodotti)
     {
-        prodotti = new List<ProdottoAdvanced>(); // inizializzo la lista di prodotti nel costruttore pubblco in modo che sia accessibile all'esterno
+        prodotti = Prodotti;
+        repository = new ProdottoRepository(); // inizializzo la lista di prodotti nel costruttore pubblco in modo che sia accessibile all'esterno
+        prossimoId =1;
+        foreach (var prodotto in prodotti)
+        {
+            if (prodotto.Id >= prossimoId)
+            {
+                prossimoId = prodotto.Id + 1;
+            }
+        }
     }
 
     // metodo per aggiungere un prodotto alla lista
     public void AggiungiProdotto(ProdottoAdvanced prodotto)
-    {
+    { //assegna automaticamente un ID univoco
+        prodotto.Id = prossimoId;
+        //incrementa il prossimo ID per il prossim prodotto
+        prossimoId++;
         prodotti.Add(prodotto);
+        Console.WriteLine($"Prodotto aggiunto con ID: {prodotto.Id}");
     }
 
     // metodo per visualizzare la lista di prodotti
@@ -203,41 +219,49 @@ public class ProdottoAdvancedManager
         if (prodotto != null)
         {
             prodotti.Remove(prodotto);
+            //elimina il file json corrispondente al  prodotto
+            string filePath = Path.Combine("Prodotti", $"{id}.json");
+            File.Delete(filePath);
+            Console.WriteLine($"Prodotto eliminato: {filePath}");
         }
     }
+
 }
 
 public class ProdottoRepository
 {
-    private readonly string filePath = "prodotti.json"; // il percorso del file in cui memorizzare i dati
-    
-    public void SalvaProdotti(List<ProdottoAdvanced> prodotti)
+ 
+    private readonly string folderPath  = "Prodotti"; //crea per il file json
+      public void SalvaProdotti(List<ProdottoAdvanced> prodotti)
     {
-        string jsonData = JsonConvert.SerializeObject(prodotti, Formatting.Indented);
-        File.WriteAllText(filePath, jsonData);
-        Console.WriteLine($"Dati salvati in {filePath}:\n");
-        // Console.WriteLine($"Dati salvati in {filePath}:\n{jsonData}\n");
+        if (! Directory.Exists(folderPath))
+        {
+            Directory.CreateDirectory(folderPath);
+        }
+
+        foreach (var prodotto in prodotti)
+        {
+            string filePath = Path.Combine(folderPath,$"{prodotto.Id}.json"); //percorso del file JSON
+            string jsonData = JsonConvert.SerializeObject(prodotto, Formatting.Indented);
+            File.WriteAllText(filePath, jsonData);
+            Console.WriteLine($"Prodotto salvato in {filePath}: \n");
+        }
     }
 
     public List<ProdottoAdvanced> CaricaProdotti()
     {
-        if (File.Exists(filePath))
-        {
-            string readJsonData = File.ReadAllText(filePath);
-            List<ProdottoAdvanced> prodotti = JsonConvert.DeserializeObject<List<ProdottoAdvanced>>(readJsonData); // deserializzo i dati letti dal file
-            Console.WriteLine("Dati caricati da file:");
-            foreach (var prodotto in prodotti)
+        
+            List<ProdottoAdvanced> prodotti = new  List<ProdottoAdvanced> ();
+            if (Directory.Exists(folderPath))
             {
-                Console.WriteLine($"ID: {prodotto.Id}, Nome: {prodotto.NomeProdotto}, Prezzo: {prodotto.PrezzoProdotto}, Giacenza: {prodotto.GiacenzaProdotto}");
+                foreach(var file in Directory.GetFiles(folderPath,"*.json"))
+                {
+                    string readJsonData= File.ReadAllText(file);
+                    ProdottoAdvanced prodotto = JsonConvert.DeserializeObject<ProdottoAdvanced>(readJsonData) ;
+                    prodotti.Add(prodotto);
+                }
             }
-            // restituisco la lista di prodotti letti dal file in modo che possa essere utilizzata all'esterno della classe
             return prodotti;
-        }
-        else
-        {
-            Console.WriteLine("Nessun dato trovato. Inizializzare una nuova lista di prodotti.");
-            // restituisco una nuova lista di prodotti vuota se il file non esiste o è vuoto in modo che possa essere utilizzata all'esterno della classe
-            return new List<ProdottoAdvanced>();
-        }
+
     }
 }
