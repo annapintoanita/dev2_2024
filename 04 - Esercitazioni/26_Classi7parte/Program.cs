@@ -46,7 +46,7 @@ class Program
                     }
                     break;
                 case "2":
-                   // Console.Write("ID: ");
+                    // Console.Write("ID: ");
                     // int id = int.Parse(Console.ReadLine());
                     Console.Write("Nome: ");
                     string nome = Console.ReadLine();
@@ -265,3 +265,4 @@ public class ProdottoRepository
 
     }
 }
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
