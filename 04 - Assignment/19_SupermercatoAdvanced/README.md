@@ -44,8 +44,9 @@ Purchases è lo stato nel quale si trova l'acquisto di un cliente. Prima di esse
  | --- | --- |--- |
  | ID | int | viene generato in automatico con un progressivo |
 | cliente | cliente | |
-| prodotti | prodotto[] | |
-| data | Date | |
+| prodotti | prodotto[] | viene inserito dal cliente |
+| quantita | int | viene inserito dal cliente |
+| data | Date | viene generato in automatico con la data corrente (quando il cliente completa l'acquisto) |
 | stato | Bool | lo stato di un acquisto di default e `in corso` e può essere modificato dal cliente in `completato` o `annullato` |
 
 | Cassa | Tipo di dato | Note |
