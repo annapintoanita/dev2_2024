@@ -28,6 +28,7 @@ Implementare i metodi `getRuolo` e `setRuolo`.
 | carrello | prodotto[] | |
 | storico acquisti | purchases[] | |
 | percentuale sconto | int | viene incrementata a seconda del valore dello storico degli acquisti |
+| credito | double | viene utilizzato per fare gli acquisti |
 
 | Prodotto | Tipo di dato | Note |
 | ---  | --- | --- |
@@ -35,6 +36,8 @@ Implementare i metodi `getRuolo` e `setRuolo`.
 | nome | string | viene inserito dal magazziniere |
 | prezzo | double | viene inserito dal magazziniere |
 | quantità | int | viene inserito dal magazziniere |
+ | --- | --- |
+ | categoria | ID |
 
 Purchases è lo stato nel quale si trova l'acquisto di un cliente. Prima di essere passato in cassa.
 
@@ -54,7 +57,7 @@ Purchases è lo stato nel quale si trova l'acquisto di un cliente. Prima di esse
 | ID | int | viene generato in automatico con un progressivo |
 | dipendente | Dipendente | |
 | acquisti | purchases[] | |
-| scontrino processato | bool | di default è `false` e diventa `true` quando la cassa ha processato lo scontrino |
+| scontrino processato | bool | di default è `false` e diventa `true` quando la cassa ha processato lo scontrino|
 
 
 - Ruoli:
@@ -62,9 +65,40 @@ Purchases è lo stato nel quale si trova l'acquisto di un cliente. Prima di esse
 
 | **Cassiere** | **Magazziniere** | **Amministratore** | **Cliente** |
 | --- | --- | --- | --- |
-| Può registrare i prodotti acquistati da un cliente che ha degli acquisti in stato completato e calcolare il totale da pagare generando lo scontrino | Può visualizzare, aggiungere o rimuovere prodotti dal magazzino.|  Può impostare il ruolo dei dipendenti. | Può aggiungere o rimuovere prodotti e cambiare lo stato dell'ordine.
+| Può registrare i prodotti acquistati da un cliente che ha degli acquisti in stato completato e calcolare il totale da pagare generando lo scontrino | Può visualizzare, aggiungere o rimuovere prodotti dal magazzino, può gestire le categorie |  Può impostare il ruolo dei dipendenti. | Può aggiungere o rimuovere prodotti e cambiare lo stato dell'ordine.
 
+# Diagramma prodotto
+- Dall'inserimento del prodotto in magazzino, alla fine dell' acquisto.
 
+```mermaid
+flowchart TD
+    A[Inizio] --> B[Visualizzare Prodotti]
+    B --> C{Gestire Prodotti?}
+    C -->|Sì| D[Aggiungere o Rimuovere Prodotto]
+    C -->|No| B
 
+    D -->|Aggiungere| E[Aggiungere Prodotto]
+    D -->|Rimuovere| F[Rimuovere Prodotto]
+
+    E --> G[Inserire Nome, Prezzo, Quantità, Categoria]
+    G --> H[Genera ID Prodotto]
+    H --> B
+
+    F --> I[Selezionare Prodotto da Rimuovere]
+    I --> J[Eliminare Prodotto]
+    J --> B
+
+    B --> K{Gestire Categorie?}
+    K -->|Sì| L[Gestire Categoria]
+    K -->|No| B
+
+    L --> M[Aggiungere o Rimuovere Categoria]
+    M --> N[Aggiungere o Rimuovere Categoria]
+    
+    B --> O[Scontrino]
+    O --> P[Calcolare Totale]
+    P --> Q[Generare Scontrino]
+    Q --> R[Fine]
+```
 
 
