@@ -1,5 +1,4 @@
-﻿using System.Data.SqlTypes;
-using System.Runtime.CompilerServices;
+﻿
 using Newtonsoft.Json;
 class Program
 {
@@ -53,11 +52,11 @@ class Program
                 case "2":
                     // Console.Write("ID: ");
                     // int id = int.Parse(Console.ReadLine());
-                    Console.Write("Nome: ");
+                    //Console.Write("Nome: ");
                     //string nome = Console.ReadLine();
                     //acquisisco il nome mediante il metodo LeggiStringa della classe InputManager
                     string nome = InputManager.LeggiStringa("\nNome: ");
-                    Console.Write("Prezzo: ");
+                    //Console.Write("Prezzo: ");
                     //decimal prezzo = decimal.Parse(Console.ReadLine());
                     //acquisisco il prezzo mediante il metodo LeggiDecimale della classe InputManager
                     decimal prezzo = InputManager.LeggiDecimale("\nPrezzo: ");
@@ -69,7 +68,7 @@ class Program
                     break;
                 case "3":
                     Console.Write("ID: ");
-                    int idProdotto = InputManager.LeggiIntero("\n");
+                    int idProdotto = InputManager.LeggiIntero("\nID");
                     ProdottoAdvanced prodottoTrovato = manager.TrovaProdotto(idProdotto);
                     if (prodottoTrovato != null)
                     {
@@ -88,7 +87,7 @@ class Program
                     Console.Write("Prezzo: ");
                     decimal prezzoNuovo = InputManager.LeggiDecimale("\nPrezzo: ");
                     Console.Write("Giacenza: ");
-                    int giacenzaNuova = int.Parse(Console.ReadLine());
+                    int giacenzaNuova = InputManager.LeggiIntero("\nGiacenza:");
                     manager.AggiornaProdotto(idProdottoDaAggiornare, new ProdottoAdvanced { NomeProdotto = nomeNuovo, PrezzoProdotto = prezzoNuovo, GiacenzaProdotto = giacenzaNuova });
                     break;
                 case "5":
@@ -105,6 +104,7 @@ class Program
                 default:
                     Console.WriteLine("Scelta non valida. Riprovare.");
                     break;
+                
             }
         }
     }
@@ -166,10 +166,11 @@ public class ProdottoAdvanced
 public class ProdottoAdvancedManager
 
 {
-    private int prossimoId;
-    //lista di prodotti di tipo ProddottoAdvanced per 
+
+    //lista di prodotti di tipo ProddottoAdvanced per memorizzare i prodotti
     private List<ProdottoAdvanced> prodotti;
     private ProdottoRepository repository; // prodotti e private perche non voglio che venga modificato dall'esterno
+    private int prossimoId;
 
     public ProdottoAdvancedManager(List<ProdottoAdvanced> Prodotti)
     {
@@ -211,17 +212,17 @@ public class ProdottoAdvancedManager
     {
 
 
-        //intestazioni con largezza fissa
+        // Intestazioni con larghezza fissa
         Console.WriteLine(
-            $"{ID", -5} {"Nome", -20} {"Prezzo",-10} {"Giacenza", -10}"
+            $"{"ID",-5} {"Nome",-20} {"Prezzo",-10} {"Giacenza",-10}"
         );
-        Console.WriteLine(new string ('-', 50)); // Linea separatrice
+        Console.WriteLine(new string('-', 50)); // Linea separatrice
 
-        //stampa ogni prodotto con larghezza fissa
-        foreach (var prootto in prodotti)
+        // Stampa ogni prodotto con larghezza fissa
+        foreach (var prodotto in prodotti)
         {
             Console.WriteLine(
-                $"{prodotto.Id, -5} {prodotto.NomeProdotto, -20} {prodotto.PrezzoProdotto, -10:0.00} {prodotto.GiacenzaProdotto,-10}"
+                $"{prodotto.Id,-5} {prodotto.NomeProdotto,-20} {prodotto.PrezzoProdotto,-10:0.00} {prodotto.GiacenzaProdotto,-10}"
             );
         }
     }
@@ -233,7 +234,7 @@ public class ProdottoAdvancedManager
         {
             if (prodotto.Id == id)
             {
-                return prodotto; 
+                return prodotto;
             }
         }
         return null;
@@ -264,8 +265,13 @@ public class ProdottoAdvancedManager
             Console.WriteLine($"Prodotto eliminato: {filePath}");
         }
     }
-
+    public void SalvaProdotti()
+    {
+        repository.SalvaProdotti(prodotti);
+    }
 }
+
+
 
 public class ProdottoRepository
 {
@@ -325,7 +331,11 @@ public static class InputManager
                 return valore; // restituire il valore intero se è valido
             }
             else
+            {
                 Console.WriteLine($"Inserire un valore intero compreso tra {min} e {max}"); // messaggio di errore
+            }
+
+
         }
     }
 
