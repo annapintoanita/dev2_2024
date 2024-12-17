@@ -1,3 +1,4 @@
+namespace MyApp.Models;
 public class DipendenteManager 
 {
     private int Id;
@@ -7,16 +8,16 @@ public class DipendenteManager
     private DipendenteRepository repository ;
 
 
-   public DipendenteManager(List <Dipendente> dipendenti)
+   public DipendenteManager(List<Dipendente> Dipendenti)
     {
          
-       dipendente = Dipendente ;
+       dipendenti = Dipendenti ;
        repository = new DipendenteRepository();
-       dipendentiId = 1;
+       Id = 1;
 
     foreach (var dipendente in dipendenti)
         {
-            if (dipendenti.Id >= Id)
+            if (dipendente.Id >= Id)
             {
                 Id = dipendente.Id + 1;
             }
@@ -24,24 +25,24 @@ public class DipendenteManager
 
     }
 
-    public void AggiungiDipendente(Dipendente dipendenti)
+    public void AggiungiDipendente(Dipendente dipendente)
     { //assegna automaticamente un ID univoco
-        dipendenti.Id = Id;
+        dipendente.Id = Id;
         //incrementa il prossimo ID per il prossimo cliente
         Id++;
-        dipendenti.Add(dipendenti);
-        Console.WriteLine($"Cliente aggiunto con ID: {dipendenti.Id}");
+        dipendenti.Add(dipendente);
+        Console.WriteLine($"Cliente aggiunto con ID: {dipendente.Id}");
     }
-     public List<Cliente> OttieniDipendente()
+     public List<Dipendente> OttieniDipendente()
     {
-        return clienti;
+        return dipendenti;
     }
 
     public void StampaDipendentiIncolonnati()
     {
         // Intestazioni con larghezza fissa
         Console.WriteLine(
-            $"{"ID",-5} {"Cognome",-20} {"Ruolo", -10}"
+            $"{"ID",-5} {"UserName",-20} {"Ruolo", -10}"
         );
         Console.WriteLine(new string('-', 50)); // Linea separatrice
 
@@ -49,7 +50,7 @@ public class DipendenteManager
         foreach (var dipendente in dipendenti)
         {
             Console.WriteLine(
-                $"{dipendente.Id,-5} {dipendente.Cognome,-20} {dipendente.Ruolo,-10}"
+                $"{dipendente.Id,-5} {dipendente.UserName,-20} {dipendente.Ruolo,-10}"
             );
         }
     }
@@ -71,7 +72,7 @@ public class DipendenteManager
         if (dipendente != null)
         {
             dipendente.Id = nuovoDipendente.Id;
-            dipendente.Cognome = nuovoDipendente.Cognome;
+            dipendente.UserName = nuovoDipendente.UserName;
             dipendente.Ruolo = nuovoDipendente.Ruolo;
            
         }
@@ -81,7 +82,7 @@ public class DipendenteManager
         var dipendente = TrovaDipendente(id);
         if (dipendente != null)
         {
-            dipendente.Remove(dipendente);
+            dipendenti.Remove(dipendente);
             //elimina il file json corrispondente al  prodotto
             string filePath = Path.Combine("Dipendenti", $"{id}.json");
             File.Delete(filePath);

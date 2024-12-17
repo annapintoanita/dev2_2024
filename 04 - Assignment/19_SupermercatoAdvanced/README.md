@@ -72,33 +72,16 @@ Purchases è lo stato nel quale si trova l'acquisto di un cliente. Prima di esse
 
 ```mermaid
 flowchart TD
-    A[Inizio] --> B[Visualizzare Prodotti]
-    B --> C{Gestire Prodotti?}
-    C -->|Sì| D[Aggiungere o Rimuovere Prodotto]
-    C -->|No| B
-
-    D -->|Aggiungere| E[Aggiungere Prodotto]
-    D -->|Rimuovere| F[Rimuovere Prodotto]
-
-    E --> G[Inserire Nome, Prezzo, Quantità, Categoria]
-    G --> H[Genera ID Prodotto]
-    H --> B
-
-    F --> I[Selezionare Prodotto da Rimuovere]
-    I --> J[Eliminare Prodotto]
-    J --> B
-
-    B --> K{Gestire Categorie?}
-    K -->|Sì| L[Gestire Categoria]
-    K -->|No| B
-
-    L --> M[Aggiungere o Rimuovere Categoria]
-    M --> N[Aggiungere o Rimuovere Categoria]
-    
-    B --> O[Scontrino]
-    O --> P[Calcolare Totale]
-    P --> Q[Generare Scontrino]
-    Q --> R[Fine]
+   A[SCELTA RUOLO] --> B(Magazziniere) --> |creazione prodotto|C
+    C{ID
+    NOME
+    PREZZO
+    GIACENZA
+    CATEGORIE
+    }-->D
+    D[CLIENTE] --> |aggiunge prodotto al carrello|E
+    E(CASSA) --> F[Cassiere]-->|scontrino|G{Cambio stato purchase e aggiornamento giacenza in magazzino}
+   
 ```
 
 

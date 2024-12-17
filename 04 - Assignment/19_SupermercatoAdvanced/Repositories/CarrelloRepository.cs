@@ -1,39 +1,40 @@
+namespace MyApp.Models;
 using Newtonsoft.Json;
 
 public class CarrelloRepository
 {
 
     private readonly string folderPath = "Data/Carrello"; //crea per il file json
-    public void SalvaCarrello(List<Carrello> carrello)
+    public void SalvaCarrello(List<Prodotto> carrello)
     {
         if (!Directory.Exists(folderPath))
         {
             Directory.CreateDirectory(folderPath);
         }
 
-        foreach (var carrello2 in carrello)
+        foreach (var prodotto in carrello)
         {
-            string filePath = Path.Combine(folderPath, $"{carrello.Id}.json"); //percorso del file JSON
-            string jsonData = JsonConvert.SerializeObject(carrello, Formatting.Indented);
+            string filePath = Path.Combine(folderPath, $"{prodotto.Id}.json"); //percorso del file JSON
+            string jsonData = JsonConvert.SerializeObject(prodotto, Formatting.Indented);
             File.WriteAllText(filePath, jsonData);
-            Console.WriteLine($"Carrello salvato in {filePath}: \n");
+            Console.WriteLine($"Prodotto salvato in {filePath}: \n");
         }
     }
 
-    public List<Carrello> CaricaCarrello()
+    public List<Prodotto> CaricaCarrello()
     {
 
-        List<Carrello> carrello = new List<Carrello>();
+        List<Prodotto> prodotti = new List<Prodotto>();
         if (Directory.Exists(folderPath))
         {
             foreach (var file in Directory.GetFiles(folderPath, "*.json"))
             {
                 string readJsonData = File.ReadAllText(file);
-                Carrello carrello = JsonConvert.DeserializeObject<Carrello>(readJsonData);
-                carrello.Add(carrello);
+                Prodotto prodotto = JsonConvert.DeserializeObject<Prodotto>(readJsonData);
+                prodotti.Add(prodotto);
             }
         }
-        return carrello;
+        return prodotti;
 
     }
   

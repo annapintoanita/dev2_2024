@@ -1,8 +1,9 @@
+namespace MyApp.Models;
 public class Dipendente
 {
 
     public int Id { get; set; }
-    public string Cognome { get; set; }
+    public string UserName { get; set; }
     
     public string Ruolo { get; set; }
 

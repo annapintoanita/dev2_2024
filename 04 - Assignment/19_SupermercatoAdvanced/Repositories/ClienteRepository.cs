@@ -1,3 +1,4 @@
+namespace MyApp.Models;
 using Newtonsoft.Json;
 
 public class ClienteRepository

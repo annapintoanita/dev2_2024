@@ -1,3 +1,5 @@
+
+namespace MyApp.Models;
 public static class InputManager
 {
     //minvalue e maxvalue sono i metodi di int che rappresentano il valore minimo ed il valore massimo di un intero
@@ -28,7 +30,7 @@ public static class InputManager
             string input = Console.ReadLine();
 
             //sostituisco la virgola con il punto per gestire i decimali
-            if (input.Contains(",")) //se l'input contiene la virgola e non contiene il punto
+            if (input.Contains(".")) //se l'input contiene la virgola e non contiene il punto
             {
                 input = input.Replace(",", ","); //sostituire la virgola con il punto
             }
@@ -38,12 +40,18 @@ public static class InputManager
             {
                 return valore;
             }
-            Console.WriteLine($"errore: inserire un numero decimale comprso tra {min} e {max}");
+            else
+            {
+                Console.WriteLine($"errore: inserire un numero decimale comprso tra {min} e {max}");
+
+            }
+
         }
     }
 
     public static string LeggiStringa(string messaggio, bool obbligatorio = true)
     {
+        string valore;
         while (true)
         {
             Console.Write($"{messaggio}"); // messaggio e la variabile di input che devo passare al metodo
@@ -66,11 +74,42 @@ public static class InputManager
             {
                 return true;
             }
-            if (input == "n" || input == "no")
+            else if (input == "n" || input == "no")
             {
                 return false;
             }
-            Console.WriteLine("errore: rispondere con 's' o 'n' ");
+            else
+            {
+                Console.WriteLine("errore: rispondere con 's' o 'n' ");
+            }
+
+        }
+    }
+    public static double LeggiDouble(string messaggio, double min = double.MinValue, double max = double.MaxValue)
+    {
+        double valore; //variabile per memorizzare il valore decimale acquisito
+        while (true)
+        {
+            Console.Write($"{messaggio}");
+            string input = Console.ReadLine();
+
+
+            if (input.Contains(","))
+            {
+                input = input.Replace(",", ",");
+
+                // try parse per convertire la stringa in un decimale e controllare se l'input è valido
+                if (double.TryParse(input, out valore) && valore >= min && valore <= max)
+                {
+                    return valore;
+                }
+                else
+                {
+                    Console.WriteLine($"errore: inserire un numero double compreso tra {min} e {max}");
+
+                }
+
+            }
         }
     }
 }

@@ -1,6 +1,5 @@
-﻿using System.Data.Common;
-using System.Data.SqlTypes;
-using System.Runtime.CompilerServices;
+﻿//ho usato un nuovo namespace perchè il compilatore entrava in confusione e trovava ambiguità poichè ho usato più definizioni della classe Prodotto
+namespace MyApp.Models;
 using Newtonsoft.Json;
 class Program
 {
@@ -110,14 +109,14 @@ class Program
         }
     }
 }
-public class Prodotto
+/*public class Prodotto
 {
     public int Id { get; set; }
     public string Nome { get; set; }
     public decimal Prezzo { get; set; }
     public int Giacenza { get; set; }
     public string Categoria { get; set; }
-}
+}*/
 /*public class ProdottoAdvanced
 
 {

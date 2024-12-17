@@ -1,4 +1,4 @@
-
+namespace MyApp.Models;
 public class Cliente
 
 {
@@ -8,9 +8,4 @@ public class Cliente
     public List<Prodotto> StoricoAcquisti { get; set; }
     public int PercentualeSconto { get; set; }
     public double Credito { get; set; }
-
-    internal void Remove(Cliente cliente)
-    {
-        throw new NotImplementedException();
-    }
 }
