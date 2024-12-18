@@ -45,7 +45,7 @@ class Program
 
     }
 
-    private class ProdottoAdvanced
+    public class ProdottoAdvanced
     {
         // List<ProdottoAdvanced> prodotti = new List<ProdottoAdvanced>
         // {   //10.5m la m sta per decimal (tipo di dato) e indica che il valore è un decimale (numero con la virgola)
@@ -96,7 +96,7 @@ class Program
             {
                 if (value <= 0)
                 {
-                    throw new ArgumentException("Il prodotto deve essere maggiore di zero.");
+                    throw new ArgumentException("Il prezzo deve essere maggiore di zero.");
                 }
                 prezzoProdotto = value;
             }

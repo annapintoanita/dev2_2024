@@ -1,58 +1,66 @@
 ﻿using Newtonsoft.Json;
-
-class Program // <-- standard/default
+// comando installazione pacchetto Newtonsoft.Json
+// dotnet add package Newtonsoft.Json
+class Program
 {
-    static void Main(string[] args) // <--- entry point. //string args è un array di stringhe (firma main) //un canale di comunicazione
+    static void Main(string[] args)
     {
-        //creare un oggetto di tipo ProdottoRepository per gestire il salvataggio e il caricamento dei dati
+       // Creare un oggetto di tipo ProdottoRepository per gestire il salvataggio e il caricamento dei dati
         ProdottoRepository repository = new ProdottoRepository();
 
-        //caricare i dati da file
-        List<ProdottoAdvanced> prodotti = repository.CaricaProdotti(); //modello
-        
-        ProdottoAdvancedManager manager = new ProdottoAdvancedManager(); // passaggio obbligato da una classe derivare un oggetto utilizzabile
+        // Caricare i dati da file con il metodo CaricaProdotti della classe ProdottoRepository (repository)
+        List<ProdottoAdvanced> prodotti = repository.CaricaProdotti();
 
+        // Creare un oggetto di tipo ProdottoAdvancedManager per gestire i prodotti
+        ProdottoAdvancedManager manager = new ProdottoAdvancedManager();
+
+        // Menu interattivo per eseguire operazioni CRUD sui prodotti
+
+        // variabile per controllare se il programma deve continuare o uscire
         bool continua = true;
 
+        // il ciclo while continua finché la variabile continua è true
         while (continua)
         {
-            Console.WriteLine("\nMenu");
-            Console.WriteLine("1. Visualizza");
-            Console.WriteLine("2. Aggiungi");
-            Console.WriteLine("3. Trova per ID");
-            Console.WriteLine("4. Aggiorna");
-            Console.WriteLine("5. Elimina");
+            Console.WriteLine("\nMenu:");
+            Console.WriteLine("1. Visualizza Prodotti");
+            Console.WriteLine("2. Aggiungi Prodotto");
+            Console.WriteLine("3. Trova Prodotto per ID");
+            Console.WriteLine("4. Aggiorna Prodotto");
+            Console.WriteLine("5. Elimina Prodotto");
             Console.WriteLine("6. Esci");
 
-
-            Console.Write("> ");
+            // acquisire l'input dell'utente
+            Console.Write("\nScelta: ");
             string scelta = Console.ReadLine();
 
+            // switch-case per gestire le scelte dell'utente che usa scelta come variabile di controllo
             switch (scelta)
             {
                 case "1":
                     Console.WriteLine("\nProdotti:");
+
+                    // Visualizzare i prodotti con il metodo OttieniProdotti della classe ProdottoAdvancedManager (manager)
                     foreach (var prodotto in manager.OttieniProdotti())
                     {
                         Console.WriteLine($"ID: {prodotto.Id}, Nome: {prodotto.NomeProdotto}, Prezzo: {prodotto.PrezzoProdotto}, Giacenza: {prodotto.GiacenzaProdotto}");
                     }
                     break;
                 case "2":
-                    Console.Write("ID > ");
-                    int idMain = int.Parse(Console.ReadLine());
-                    Console.Write("Nome > ");
+                    Console.Write("ID: ");
+                    int id = int.Parse(Console.ReadLine());
+                    Console.Write("Nome: ");
                     string nome = Console.ReadLine();
-                    Console.Write("Prezzo > ");
+                    Console.Write("Prezzo: ");
                     decimal prezzo = decimal.Parse(Console.ReadLine());
-                    Console.Write("Giacenza > ");
+                    Console.Write("Giacenza: ");
                     int giacenza = int.Parse(Console.ReadLine());
-                    manager.AggiungiProdotto(new ProdottoAdvanced { Id = idMain, NomeProdotto = nome, PrezzoProdotto = prezzo, GiacenzaProdotto = giacenza });
+                    manager.AggiungiProdotto(new ProdottoAdvanced { Id = id, NomeProdotto = nome, PrezzoProdotto = prezzo, GiacenzaProdotto = giacenza });
                     break;
                 case "3":
-                    Console.Write("ID > ");
+                    Console.Write("ID: ");
                     int idProdotto = int.Parse(Console.ReadLine());
                     ProdottoAdvanced prodottoTrovato = manager.TrovaProdotto(idProdotto);
-
                     if (prodottoTrovato != null)
                     {
                         Console.WriteLine($"\nProdotto trovato per ID {idProdotto}: {prodottoTrovato.NomeProdotto}");
@@ -71,7 +79,7 @@ class Program // <-- standard/default
                     decimal prezzoNuovo = decimal.Parse(Console.ReadLine());
                     Console.Write("Giacenza: ");
                     int giacenzaNuova = int.Parse(Console.ReadLine());
-                    manager.AggiornaProdotto(idProdottoDaAggiornare, new ProdottoAdvanced { Id = idProdottoDaAggiornare, NomeProdotto = nomeNuovo, PrezzoProdotto = prezzoNuovo });
+                    manager.AggiornaProdotto(idProdottoDaAggiornare, new ProdottoAdvanced { Id = idProdottoDaAggiornare, NomeProdotto = nomeNuovo, PrezzoProdotto = prezzoNuovo, GiacenzaProdotto = giacenzaNuova });
                     break;
                 case "5":
                     Console.Write("ID: ");
@@ -80,21 +88,20 @@ class Program // <-- standard/default
                     break;
                 case "6":
                     repository.SalvaProdotti(manager.OttieniProdotti());
-                    continua = false; //imposto la variabile continua a false per uscire dal ciclo while
+                    continua = false; // imposto la variabile continua a false per uscire dal ciclo while
                     break;
                 default:
-                    Console.WriteLine("Scelta non valida. Riprovare");
+                    Console.WriteLine("Scelta non valida. Riprovare.");
                     break;
             }
-
         }
     }
-
 }
-public class ProdottoAdvanced
-{
-    private int id; // campo privato
 
+public class ProdottoAdvanced
+
+{
+    private int id;
     public int Id
     {
         get { return id; }
@@ -108,7 +115,7 @@ public class ProdottoAdvanced
         }
     }
 
-    private string nomeProdotto;  // campo privato
+    private string nomeProdotto;
     public string NomeProdotto
     {
         get { return nomeProdotto; }
@@ -122,7 +129,7 @@ public class ProdottoAdvanced
         }
     }
 
-    private decimal prezzoProdotto;  // campo privato
+    private decimal prezzoProdotto;
     public decimal PrezzoProdotto
     {
         get { return prezzoProdotto; }
@@ -130,50 +137,42 @@ public class ProdottoAdvanced
         {
             if (value <= 0)
             {
-                throw new ArgumentException("Il prezzo deve essere maggiore di zero");
+                throw new ArgumentException("Il prezzo deve essere maggiore di zero.");
             }
             prezzoProdotto = value;
         }
     }
-    private int giacenzaProdotto;  // campo privato
+
+    private int giacenzaProdotto;
     public int GiacenzaProdotto
     {
         get { return giacenzaProdotto; }
-        set
-        {
-            if (value <= 0)
-            {
-                throw new ArgumentException("La giacenza non può essere negativa");
-            }
-            giacenzaProdotto = value;
-        }
+        set { giacenzaProdotto = value; }
     }
 }
 
 public class ProdottoAdvancedManager
 {
-    private List<ProdottoAdvanced> prodotti; // prodotti e' private perche non voglio che venga modificato dall'esterno
+    private List<ProdottoAdvanced> prodotti; // prodotti e private perche non voglio che venga modificato dall'esterno
 
     public ProdottoAdvancedManager()
     {
-         prodotti = new List<ProdottoAdvanced>(); // inizializzo la lista di prodotti nel costruttore pubblico in modo che sia accessibile all'esterno
-         //new è necessario mi rende disponibile una nuova lista (affinchè dal dominio privato della classe possa comunicare all'esterno i dati aggiornati)
-         //un modo per rendere pubblico un dato privato
+        prodotti = new List<ProdottoAdvanced>(); // inizializzo la lista di prodotti nel costruttore pubblco in modo che sia accessibile all'esterno
     }
 
-    // metodo per aggiungere
+    // metodo per aggiungere un prodotto alla lista
     public void AggiungiProdotto(ProdottoAdvanced prodotto)
     {
-        prodotti.Add(prodotto); // quella private
+        prodotti.Add(prodotto);
     }
 
-    // metodo per visualizzare 
+    // metodo per visualizzare la lista di prodotti
     public List<ProdottoAdvanced> OttieniProdotti()
     {
         return prodotti;
     }
 
-    // metodo per cercare un prodotto 
+    // metodo per cercare un prodotto
     public ProdottoAdvanced TrovaProdotto(int id)
     {
         foreach (var prodotto in prodotti)
@@ -186,7 +185,7 @@ public class ProdottoAdvancedManager
         return null;
     }
 
-    // metodo per modificare il prodotto
+    // metodo per mpdificare un prodotto esistente
     public void AggiornaProdotto(int id, ProdottoAdvanced nuovoProdotto)
     {
         var prodotto = TrovaProdotto(id);
@@ -209,34 +208,28 @@ public class ProdottoAdvancedManager
     }
 }
 
-
-//la gestione dei file json è più sicura se il path è privato
-//dunque ogni file json avrà la propria Class Repository per salvare e caricare
-//ma bisogna evitare di mischiare delle cose con delle altre (mantenere i vari blocchi modulari (riutilizzabili)
 public class ProdottoRepository
 {
-    private readonly string filePath = "prodotti.json"; // percorso in cui memorizzare i dati
-
-    //metodo per salvare i dati su file 
+    private readonly string filePath = "prodotti.json"; // il percorso del file in cui memorizzare i dati
+    
     public void SalvaProdotti(List<ProdottoAdvanced> prodotti)
     {
-        string jsonData = JsonConvert.SerializeObject(prodotti, Formatting.Indented);               //serializzazione= sto dando l'indicazione di COME vanno scritti sul json
-        File.WriteAllText(filePath, jsonData); 
-        Console.WriteLine($"Dati salvati in {filePath}:\n{jsonData}");
+        string jsonData = JsonConvert.SerializeObject(prodotti, Formatting.Indented);
+        File.WriteAllText(filePath, jsonData);
+        Console.WriteLine($"Dati salvati in {filePath}:\n");
+        // Console.WriteLine($"Dati salvati in {filePath}:\n{jsonData}\n");
     }
 
     public List<ProdottoAdvanced> CaricaProdotti()
     {
         if (File.Exists(filePath))
-        {                                                       
-                                                                            //deserializzazione= sto dando i pezzetti di codice a c# per farglieli comprendere
-                                                                            
+        {
             string readJsonData = File.ReadAllText(filePath);
-            List<ProdottoAdvanced> prodotti = JsonConvert.DeserializeObject<List<ProdottoAdvanced>>(readJsonData);
+            List<ProdottoAdvanced> prodotti = JsonConvert.DeserializeObject<List<ProdottoAdvanced>>(readJsonData); // deserializzo i dati letti dal file
             Console.WriteLine("Dati caricati da file:");
             foreach (var prodotto in prodotti)
             {
-                Console.WriteLine($"ID: {prodotto.Id}, Nome {prodotto.NomeProdotto}, Prezzo: {prodotto.PrezzoProdotto}, Giacenza: {prodotto.GiacenzaProdotto}");
+                Console.WriteLine($"ID: {prodotto.Id}, Nome: {prodotto.NomeProdotto}, Prezzo: {prodotto.PrezzoProdotto}, Giacenza: {prodotto.GiacenzaProdotto}");
             }
             // restituisco la lista di prodotti letti dal file in modo che possa essere utilizzata all'esterno della classe
             return prodotti;
@@ -244,7 +237,7 @@ public class ProdottoRepository
         else
         {
             Console.WriteLine("Nessun dato trovato. Inizializzare una nuova lista di prodotti.");
-            // restituisco una lista di prodotti vuota se il file non esisteo è vuoto
+            // restituisco una nuova lista di prodotti vuota se il file non esiste o è vuoto in modo che possa essere utilizzata all'esterno della classe
             return new List<ProdottoAdvanced>();
         }
     }

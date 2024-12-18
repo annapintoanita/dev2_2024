@@ -1,4 +1,5 @@
-﻿/*using Newtonsoft.Json; //libreria per gestire il file JSON
+﻿
+/*using Newtonsoft.Json; //libreria per gestire il file JSON
 
 string filePath = "catalogo.json"; //percorso del file JSON
 string scontriniFilePath = "scontrini.json";
@@ -472,9 +473,13 @@ bool continua = true;
 //List<Dictionary<string, object>> scontrino = new List<Dictionary<string, object>>();
 List<Dictionary<string, object>> catalogo = new List<Dictionary<string, object>>();
 List<Dictionary<string, object>> carrello = new List<Dictionary<string, object>>();
-Console.WriteLine("--- Benvenuto al Supermercato Json ---");
+Console.WriteLine("\n--- Benvenuto al Supermercato Json ---");
 
-Console.WriteLine("Digita '1' se sei un nostro dipendente, '2' se sei un cliente ");
+Console.WriteLine("\nIdentificati:");
+Console.WriteLine("1. Dipendente");
+Console.WriteLine("2. Cliente");
+Console.WriteLine("3. Magazziniere");
+Console.WriteLine("4. Amministratore");
 string selezione = Console.ReadLine();
 
 catalogo = CaricaCatalogoDalFile(filePath); // abbiamo inserito qui perchè il cliente non visualizzava il catalogo
@@ -483,7 +488,7 @@ while (continua)
 {
     if (selezione == "1")
     {
-        Console.WriteLine("Seleziona un'operazione da effettuare:");
+        Console.WriteLine("\n--- Menu Dipendente ---");
         Console.WriteLine("1. Visualizza il catalogo");
         Console.WriteLine("2. Aggiungi un prodotto al catalogo tramite ID");
         Console.WriteLine("3. Modifica il prezzo di un prodotto");
@@ -536,7 +541,7 @@ while (continua)
                 break;
         }
     }
-    else
+    if (selezione=="2")
     {
         Console.WriteLine("Scegli un'operazione:");
         Console.WriteLine("1. Visualizza il catalogo");
@@ -579,6 +584,35 @@ while (continua)
 
         }
     }
+    if (selezione=="3")
+    {
+        Console.WriteLine("\n--- Menu magazziniere ---");
+        Console.WriteLine("1. Visualizza prodotti");
+        Console.WriteLine("2. Aggiungi prodotti");
+        Console.WriteLine("3. Aggiorna prodotti");
+        Console.WriteLine("4. Elimina prodotti");
+    }
+    /*inserisco lo switch con le varie funzioni
+    /
+    /
+    /
+    /
+    /
+    */
+    if (selezione=="4")
+    {
+        Console.WriteLine("\n--- Menu Amministratore ---");
+        Console.WriteLine("1. Visualizza dipendenti tramite ID");
+        Console.WriteLine ("2. Imposta ruolo dei dipendenti tramite ID");
+    }
+    /*Inserisco lo switch con le funzioni
+    /
+    /
+    /
+    /
+    /
+    */
+
 }
 
 
@@ -608,7 +642,7 @@ static void AggiungiAlCatalogo(List<Dictionary<string, object>> catalogo)
 
     var prodotto = new Dictionary<string, object>
    {
-        {"ID" , id}, // 123 = 2 EURO
+        {"ID" , id}, 
         {"Nome", nomeProdotto},
         {"Prezzo",prezzoProdotto},
         {"Quantita", quantita},

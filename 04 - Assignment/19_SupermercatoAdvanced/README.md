@@ -80,8 +80,83 @@ flowchart TD
     CATEGORIE
     }-->D
     D[CLIENTE] --> |aggiunge prodotto al carrello|E
-    E(CASSA) --> F[Cassiere]-->|scontrino|G{Cambio stato purchase e aggiornamento giacenza in magazzino}
+    E(CASSA) --> F[Cassiere]-->|scontrino|G{Cambio stato purchase
+     e aggiornamento giacenza 
+     in magazzino}
    
 ```
+# Documentazione
+### Ho creato la cartella 'Models' in cui ho inserito i modelli .cs:
+- Cassa.cs
+- Categoria.cs
+- Cliente.cs
+- Dipendente.cs
+- Prodotto.cs
+- Purchase.cs
 
+### Ho creato la cartella Repositories in cui ho inserito i repositories:
+- CarrelloRepository.cs
+- ClienteRepository.cs
+- DipendenteRepository.cs
+- ProdottoRepository.cs
+
+### Ho creato la cartlla Manager in cui ho inserito:
+- ManagerCarrello.cs
+- ManagerCliente.cs
+- ManagerDipendente.cs
+- ManagerProdotto.cs
+
+>ManagerDipendente e ManagerCliente hanno quasi la stessa struttura
+### Ho inserito i menu per:
+- Il dipendente
+- Il cliente
+- Il magazziniere
+- L' Amministratore
+da cui ognuno può compiere operazioni specifica in base al proprio ruolo
+
+_Nel corso del codice ho inserito un nuovo ->  namespace 'MyApp.Models'(inserito prima di ogni cosa) perchè il compilatore entrava in confusione e trovava ambiguità poichè ho usato più definizioni della classe Prodotto, in questo modo sembra essersi risolto il problema/conflitto_
+
+### Nella cartella `'Utilities'` ho inserito nel codice `'InputManager.cs'`, la funzione `LeggiDouble`, che prima non c'era, per riuscire a convertire `cliente.Credito` che mi dava problemi in `AggiornaCliente (int id, Cliente nuovoCliente)` .
+Per scrivere il codice della conversione in double, ho adattato il codice della conversione del decimale.  Quindi:
+
+```csharp
+public static double LeggiDouble(string messaggio, double min = double.MinValue, double max = double.MaxValue)
+    {
+        double valore; //variabile per memorizzare il valore double acquisito
+        while (true)
+        {
+            Console.Write($"{messaggio}");
+            string input = Console.ReadLine();
+            if (input.Contains(","))
+            {
+                input = input.Replace(",", ",");
+
+                // try parse per convertire la stringa in un double e controllare se l'input è valido
+                if (double.TryParse(input, out valore) && valore >= min && valore <= max)
+                {
+                    return valore;
+                }
+                else
+                {
+                    Console.WriteLine($"errore: inserire un numero double compreso tra {min} e {max}");
+                }
+            }
+        }
+    }
+ ```
+
+```csharp
+ public void AggiornaCliente(int id, Cliente nuovoCliente)
+    {
+        var cliente = TrovaCliente(id);
+        if (cliente != null)
+        {
+            
+            cliente.UserName = InputManager.LeggiStringa("Inserisci nuovo UserName: ");
+            cliente.StoricoAcquisti = nuovoCliente.StoricoAcquisti;
+            cliente.PercentualeSconto = nuovoCliente.PercentualeSconto;
+            cliente.Credito = InputManager.LeggiDouble(" Inserisci nuovo credito: ");
+        }
+    }
+ ```
 

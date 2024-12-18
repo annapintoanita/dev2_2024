@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 public class ClienteRepository
 {
 
-    private readonly string folderPath = "Data/Cliente"; //crea per il file json
+    private string folderPath = "Data/Cliente"; //crea per il file json
     public void SalvaClienti(List<Cliente> clienti)
     {
         if (!Directory.Exists(folderPath))

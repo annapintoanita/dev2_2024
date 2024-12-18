@@ -11,7 +11,7 @@ public static class InputManager
         {
             Console.Write($"{messaggio}"); //messaggio e la variabile di input che dovrò passare al metodo
             string input = Console.ReadLine();//acquisire l'input dell'utente come stringa
-            // try parse per convertire la stringa  in un intero e controllare se l'input è vaòidp
+            // try parse per convertire la stringa  in un intero e controllare se l'input è valido
             if (int.TryParse(input, out valore) && valore >= min && valore <= max) // devo verifiare se il valore e tra min e max e se è un intero
             {
                 return valore; // restituire il valore intero se è valido

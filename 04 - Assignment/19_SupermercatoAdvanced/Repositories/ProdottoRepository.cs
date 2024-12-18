@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 public class ProdottoRepository
 {
 
-    private readonly string folderPath = "Data/Prodotto"; //crea per il file json
+    private static readonly string folderPath = "Data/Prodotto"; //crea per il file json
     public void SalvaProdotti(List<Prodotto> prodotti)
     {
         if (!Directory.Exists(folderPath))

@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 public class CarrelloRepository
 {
 
-    private readonly string folderPath = "Data/Carrello"; //crea per il file json
+    private string folderPath = "Data/Carrello"; //crea per il file json
     public void SalvaCarrello(List<Prodotto> carrello)
     {
         if (!Directory.Exists(folderPath))

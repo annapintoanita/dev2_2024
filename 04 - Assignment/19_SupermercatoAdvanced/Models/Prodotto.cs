@@ -1,4 +1,4 @@
-namespace MyApp.Models;
+namespace MyApp.Models; // da rimuovere e risistemare dal codice
 
     public class Prodotto
     {

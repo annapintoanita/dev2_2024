@@ -1,17 +1,18 @@
 ﻿using Newtonsoft.Json;
-﻿using Newtonsoft.Json;
+// comando installazione pacchetto Newtonsoft.Json
+// dotnet add package Newtonsoft.Json
 class Program
 {
     static void Main(string[] args)
     {
-       // Creare un oggetto di tipo ProdottoRepository per gestire il salvataggio e il caricamento dei dati
+        // Creare un oggetto di tipo ProdottoRepository per gestire il salvataggio e il caricamento dei dati
         ProdottoRepository repository = new ProdottoRepository();
 
         // Caricare i dati da file con il metodo CaricaProdotti della classe ProdottoRepository (repository)
         List<ProdottoAdvanced> prodotti = repository.CaricaProdotti();
 
         // Creare un oggetto di tipo ProdottoAdvancedManager per gestire i prodotti
-        ProdottoAdvancedManager manager = new ProdottoAdvancedManager();
+        ProdottoAdvancedManager manager = new ProdottoAdvancedManager(prodotti);
 
         // Menu interattivo per eseguire operazioni CRUD sui prodotti
 
@@ -152,26 +153,37 @@ public class ProdottoAdvanced
 
 public class ProdottoAdvancedManager
 {
-    private List<ProdottoAdvanced> prodotti; // prodotti e private perche non voglio che venga modificato dall'esterno
+    // Lista di prodotti di tipo ProdottoAdvanced per memorizzare i prodotti
+    private List<ProdottoAdvanced> prodotti;
+    
+    // Oggetto di tipo ProdottoRepository per salvare i dati su file
+    private ProdottoRepository repository;
 
-    public ProdottoAdvancedManager()
+    // Costruttore per inizializzare la lista prodotti con i prodotti passati come argomento
+    // la differenza tra un costruttore ed un metodo è che il costruttore viene chiamato automaticamente quando si crea un'istanza della classe
+    // il compilatore capisce che e un costruttore perche ha lo stesso nome della classe
+    // uso la maiuscola per il nome del parametro per distinguerlo dal campo
+    // il parametro è una lista di prodotti di tipo ProdottoAdvanced (Prodotti)
+    // il campo prodotti è un riferimento alla lista di prodotti passata come argomento (prodotti)
+    // i parametri del costruttore sono condivisi con i metodi della classe e possono essere usati come se fossero proprieta della classe
+    public ProdottoAdvancedManager(List<ProdottoAdvanced> Prodotti)
     {
-        prodotti = new List<ProdottoAdvanced>(); // inizializzo la lista di prodotti nel costruttore pubblco in modo che sia accessibile all'esterno
+        // Inizializzare la lista prodotti con i prodotti passati come argomento
+        prodotti = Prodotti;
+        // inizializzare l'oggetto repository per gestire il salvataggio e il caricamento dei dati
+        repository = new ProdottoRepository();
     }
 
-    // metodo per aggiungere un prodotto alla lista
     public void AggiungiProdotto(ProdottoAdvanced prodotto)
     {
         prodotti.Add(prodotto);
     }
 
-    // metodo per visualizzare la lista di prodotti
     public List<ProdottoAdvanced> OttieniProdotti()
     {
         return prodotti;
     }
 
-    // metodo per cercare un prodotto
     public ProdottoAdvanced TrovaProdotto(int id)
     {
         foreach (var prodotto in prodotti)
@@ -184,7 +196,6 @@ public class ProdottoAdvancedManager
         return null;
     }
 
-    // metodo per mpdificare un prodotto esistente
     public void AggiornaProdotto(int id, ProdottoAdvanced nuovoProdotto)
     {
         var prodotto = TrovaProdotto(id);
@@ -196,48 +207,57 @@ public class ProdottoAdvancedManager
         }
     }
 
-    // metodo per eliminare un prodotto
     public void EliminaProdotto(int id)
     {
         var prodotto = TrovaProdotto(id);
         if (prodotto != null)
         {
             prodotti.Remove(prodotto);
+            // elimina il file JSON corrispondente al prodotto
+            string filePath = Path.Combine("Prodotti", $"{id}.json");
+            File.Delete(filePath);
+            Console.WriteLine($"Prodotto eliminato: {filePath}");
         }
+    }
+
+    public void SalvaProdotti()
+    {
+        repository.SalvaProdotti(prodotti);
     }
 }
 
 public class ProdottoRepository
 {
-    private readonly string filePath = "prodotti.json"; // il percorso del file in cui memorizzare i dati
-    
+    private readonly string folderPath = "Prodotti";
+
     public void SalvaProdotti(List<ProdottoAdvanced> prodotti)
     {
-        string jsonData = JsonConvert.SerializeObject(prodotti, Formatting.Indented);
-        File.WriteAllText(filePath, jsonData);
-        Console.WriteLine($"Dati salvati in {filePath}:\n");
-        // Console.WriteLine($"Dati salvati in {filePath}:\n{jsonData}\n");
+        if (!Directory.Exists(folderPath))
+        {
+            Directory.CreateDirectory(folderPath);
+        }
+
+        foreach (var prodotto in prodotti)
+        {
+            string filePath = Path.Combine(folderPath, $"{prodotto.Id}.json");
+            string jsonData = JsonConvert.SerializeObject(prodotto, Formatting.Indented);
+            File.WriteAllText(filePath, jsonData);
+            Console.WriteLine($"Prodotto salvato in {filePath}:\n{jsonData}\n");
+        }
     }
 
     public List<ProdottoAdvanced> CaricaProdotti()
     {
-        if (File.Exists(filePath))
+        List<ProdottoAdvanced> prodotti = new List<ProdottoAdvanced>();
+        if (Directory.Exists(folderPath))
         {
-            string readJsonData = File.ReadAllText(filePath);
-            List<ProdottoAdvanced> prodotti = JsonConvert.DeserializeObject<List<ProdottoAdvanced>>(readJsonData); // deserializzo i dati letti dal file
-            Console.WriteLine("Dati caricati da file:");
-            foreach (var prodotto in prodotti)
+            foreach (var file in Directory.GetFiles(folderPath, "*.json"))
             {
-                Console.WriteLine($"ID: {prodotto.Id}, Nome: {prodotto.NomeProdotto}, Prezzo: {prodotto.PrezzoProdotto}, Giacenza: {prodotto.GiacenzaProdotto}");
+                string readJsonData = File.ReadAllText(file);
+                ProdottoAdvanced prodotto = JsonConvert.DeserializeObject<ProdottoAdvanced>(readJsonData);
+                prodotti.Add(prodotto);
             }
-            // restituisco la lista di prodotti letti dal file in modo che possa essere utilizzata all'esterno della classe
-            return prodotti;
         }
-        else
-        {
-            Console.WriteLine("Nessun dato trovato. Inizializzare una nuova lista di prodotti.");
-            // restituisco una nuova lista di prodotti vuota se il file non esiste o è vuoto in modo che possa essere utilizzata all'esterno della classe
-            return new List<ProdottoAdvanced>();
-        }
+        return prodotti;
     }
 }

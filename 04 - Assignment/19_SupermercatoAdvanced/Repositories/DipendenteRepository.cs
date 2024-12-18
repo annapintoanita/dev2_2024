@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 public class DipendenteRepository
 {
 
-    private readonly string folderPath = "Data/Dipendente"; //crea per il file json
+    private string folderPath = "Data/Dipendente"; //crea per il file json
     public void SalvaDipendente(List<Dipendente> dipendenti)
     {
         if (!Directory.Exists(folderPath))
