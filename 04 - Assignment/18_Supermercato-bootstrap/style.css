@@ -21,6 +21,7 @@
 .img{
     width: 1250px;
 }
+
 .body, html{
     width: 90px;
  height: auto;
@@ -38,3 +39,19 @@
 .custom-class{
     display:none;
 }
+.container {
+    display: flex; /* Abilita il layout Flexbox */
+    justify-content: flex-start; /* Allinea le card verso sinistra (puoi modificarlo a center o space-between se necessario) */
+    align-items: flex-start; /* Allinea le card verticalmente all'inizio */
+    gap: 10px; /* Aggiunge spazio tra le card */
+  }
+  
+  .card {
+    width: 150px; /* Imposta la larghezza desiderata per ciascuna card */
+    height: 100px; /* Imposta l'altezza desiderata */
+    background-color: lightblue; /* Colore per distinguere le card */
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #333; /* Opzionale: aggiunge un bordo */
+  }
+  
