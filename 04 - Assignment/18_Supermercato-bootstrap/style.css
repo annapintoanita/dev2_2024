@@ -1,57 +1,12 @@
-:root{
-    --bs-primary: red !important;
-    --bs-secondary: blue !important;
-    --bs-verdechiaro: green !important;
-  
+/* per cambiare in tutto il body e quindi in tutta la pagina in questo caso il formato del testo di google font .playwrite-es-deco-guides-regular {
+  font-family: "Playwrite ES Deco Guides", serif;
+  font-weight: 400;
+  font-style: normal;
 }
-.h1 {
-    color: crimson;
-    background-color: deeppink;
-}
-.bd-example>:last-child,.bd-example>nav:last-child .breadcrumb {
-    margin-bottom: 0;
-}
-.div,.class,.dropdown{
-    justify-content: space-around;
-    margin: 0%;
-}
-.head{
-
-}
-.img{
-    width: 1250px;
-}
-
-.body, html{
-    width: 90px;
- height: auto;
-
-}
-
-.container-xs{
-    width: 100%;
-    max-width: 11px;
-    margin-left: auto;
-    margin-right: auto;
-    
-}
-
-.custom-class{
-    display:none;
-}
-.container {
-    display: flex; /* Abilita il layout Flexbox */
-    justify-content: flex-start; /* Allinea le card verso sinistra (puoi modificarlo a center o space-between se necessario) */
-    align-items: flex-start; /* Allinea le card verticalmente all'inizio */
-    gap: 10px; /* Aggiunge spazio tra le card */
-  }
-  
-  .card {
-    width: 150px; /* Imposta la larghezza desiderata per ciascuna card */
-    height: 100px; /* Imposta l'altezza desiderata */
-    background-color: lightblue; /* Colore per distinguere le card */
-    padding: 10px;
-    text-align: center;
-    border: 1px solid #333; /* Opzionale: aggiunge un bordo */
+ ho eliminato la prima riga e sostituita con body senza il punto */
+body {
+    font-family: "Playwrite ES Deco Guides", serif;
+    font-weight: 400;
+    font-style: normal;
   }
   
