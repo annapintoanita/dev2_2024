@@ -3,10 +3,13 @@
   font-weight: 400;
   font-style: normal;
 }
- ho eliminato la prima riga e sostituita con body senza il punto */
-body {
-    font-family: "Playwrite ES Deco Guides", serif;
-    font-weight: 400;
-    font-style: normal;
-  }
-  
+ ho eliminato la prima riga e l'ho sostituita con body senza il punto davanti */
+ 
+
+ body{
+   font-family: "Noto Serif", serif;
+   font-optical-sizing: auto;
+   font-weight: weight;
+   font-style: normal;
+   
+ }
