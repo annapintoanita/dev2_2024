@@ -87,19 +87,19 @@
             <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Next</span>
+            </button> 
+        </div><!--fine del carosello-->
 
-            </button> <!--fine del carosello-->
-        </div>
         <section class="container my-5"></section>
         <!-- per ridimensionare i testi es."mb-5 fs-4 d-sm-block d-md-none"... meglio riscrivere più volte il testo con le diverse misure -->
         <h1 class="mb-5 fs-4 d-sm-block d-md-none"><i class="bi bi-ticket-perforated"></i>Prodotti in offerta</h1>
         <h1 class="mb-5 fs-2 d-none d-md-block d-lg-none"><i class="bi bi-ticket-perforated"></i>Prodotti in offerta
         </h1>
         <h1 class="mb-5 fs-1 d-none d-lg-block"><i class="bi bi-ticket-perforated"></i>Prodotti in offerta</h1>
-        <!--CARD GROUP 1 dei PRODOTTI IN OFFERTA-->
+      <!-- Primo gruppo di card prodotti in offerta con griglia resa responsive -->
         <div class="container my-5">
-            <!-- Primo gruppo di card per la griglia responsiva -->
             <div class="row row-cols-1 row-cols-sm-1 row-cols-md-3 row-col-lg-3 g-4">
+                <!-- Card 1 --> 
                 <div class="col">
                     <div class="card">
                         <div class="header">Sconto 20%</div>
@@ -114,7 +114,7 @@
                         <div class="card-footer"></div>
                     </div>
                 </div>
-
+                <!-- Card 2 -->
                 <div class="col">
                     <div class="card">
                         <div class="header">Sconto 20%</div>
@@ -129,7 +129,7 @@
                         <div class="card-footer"></div>
                     </div>
                 </div>
-
+                 <!-- Card 3 -->
                 <div class="col">
                     <div class="card">
                         <div class="header">Sconto 20%</div>
@@ -146,9 +146,9 @@
                 </div>
             </div>
         </div>
-    </div> <!-- seconda parte di card group prodotti in offerta da modificare -->
+    </div> 
 
-    <!-- modifica della visibilità con 'd-none'  es py-5 d-none d-lg-block -->
+    <!-- modifica della visibilità con 'd-none'  es. py-5 d-none d-lg-block -->
     
         <section class="container my-5">
         <h2 class="mb-5 fs-4 d-sm-block d-md-none"><i class="bi bi-ticket-detailed"></i>Prodotti in vetrina</h2>
@@ -158,7 +158,7 @@
     </div>
 </section>
     </div>
-    <!-- Seconda sezione con layout a griglia per le card -->
+   <!-- secondo gruppo di card es. prodotti in vetrina -->
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-6 g-4 mt-5">
         <!-- Card 1 -->
         <div class="col">
@@ -167,8 +167,8 @@
                 <img src="https://dummyimage.com/100x100/13d617/000000fff.jpg&text=prodotto1" class="card-img-top"
                     alt="PRODOTTO1">
                 </a>
-                <div class="card-body">
-                    <h5 class="card-title">Card title 1</h5>
+                <div class="card-body"> <!--in questo caso ho nascosto il titolo quando lo schermo è piccolo (vedi sotto)-->
+                    <h5 class="card-title d-none d-sm-block">Card title 1</h5>
                     <p class="card-text">DESCRIZIONE PRODOTTO</p>
                 </div>
             </div>
