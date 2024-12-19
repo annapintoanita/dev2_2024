@@ -475,17 +475,20 @@ List<Dictionary<string, object>> catalogo = new List<Dictionary<string, object>>
 List<Dictionary<string, object>> carrello = new List<Dictionary<string, object>>();
 Console.WriteLine("\n--- Benvenuto al Supermercato Json ---");
 
-Console.WriteLine("\nIdentificati:");
-Console.WriteLine("1. Dipendente");
-Console.WriteLine("2. Cliente");
-Console.WriteLine("3. Magazziniere");
-Console.WriteLine("4. Amministratore");
-string selezione = Console.ReadLine();
+
 
 catalogo = CaricaCatalogoDalFile(filePath); // abbiamo inserito qui perchè il cliente non visualizzava il catalogo
 
 while (continua)
 {
+    Console.WriteLine("\nIdentificati:");
+    Console.WriteLine("1. Dipendente");
+    Console.WriteLine("2. Cliente");
+    Console.WriteLine("3. Magazziniere");
+    Console.WriteLine("4. Amministratore");
+    string selezione = Console.ReadLine();
+
+
     if (selezione == "1")
     {
         Console.WriteLine("\n--- Menu Dipendente ---");
@@ -526,22 +529,22 @@ while (continua)
             case "6":
                 catalogo = CaricaCatalogoDalFile(filePath); //  la funzione restituisce una lista di dizionari. Non funzionava perchè il dato del return non aveva una destinazione. In questo modo quindi gli abbiamo assegnato una variabile (o "destinazione")
                 break;
-/*
-            case "7":
-                //SalvaScontrinoSuFile(scontrino, fileScontrinoPath);
-                break;
+            /*
+                        case "7":
+                            //SalvaScontrinoSuFile(scontrino, fileScontrinoPath);
+                            break;
 
-            case "8":
-                //VisualizzaScontrini();
-                break;
-*/
+                        case "8":
+                            //VisualizzaScontrini();
+                            break;
+            */
             case "0":
                 Console.WriteLine("Grazie per il tuo lavoro!");
                 continua = false; //abbiamo aggiunto un bool perchè non usciva mai dalle scelte
                 break;
         }
     }
-    if (selezione=="2")
+    if (selezione == "2")
     {
         Console.WriteLine("Scegli un'operazione:");
         Console.WriteLine("1. Visualizza il catalogo");
@@ -584,7 +587,7 @@ while (continua)
 
         }
     }
-    if (selezione=="3")
+    if (selezione == "3")
     {
         Console.WriteLine("\n--- Menu magazziniere ---");
         Console.WriteLine("1. Visualizza prodotti");
@@ -599,11 +602,11 @@ while (continua)
     /
     /
     */
-    if (selezione=="4")
+    if (selezione == "4")
     {
         Console.WriteLine("\n--- Menu Amministratore ---");
         Console.WriteLine("1. Visualizza dipendenti tramite ID");
-        Console.WriteLine ("2. Imposta ruolo dei dipendenti tramite ID");
+        Console.WriteLine("2. Imposta ruolo dei dipendenti tramite ID");
     }
     /*Inserisco lo switch con le funzioni
     /
@@ -642,7 +645,7 @@ static void AggiungiAlCatalogo(List<Dictionary<string, object>> catalogo)
 
     var prodotto = new Dictionary<string, object>
    {
-        {"ID" , id}, 
+        {"ID" , id},
         {"Nome", nomeProdotto},
         {"Prezzo",prezzoProdotto},
         {"Quantita", quantita},
@@ -651,21 +654,21 @@ static void AggiungiAlCatalogo(List<Dictionary<string, object>> catalogo)
     catalogo.Add(prodotto);
     Console.WriteLine("Il prodotto è stato aggiunto al catalogo.");
 }
-static void ModificaPrezzo(List<Dictionary<string,object>> catalogo)
+static void ModificaPrezzo(List<Dictionary<string, object>> catalogo)
 {
 
     Console.WriteLine("Inserisci ID del prodotto da modificare:");
     int idDaModificare = int.Parse(Console.ReadLine());
     bool trovato = false;
 
-    foreach(var elemento in catalogo) // ciclo foreach perchè ricerco per ogni elemento nel catalogo il suo id
+    foreach (var elemento in catalogo) // ciclo foreach perchè ricerco per ogni elemento nel catalogo il suo id
     {
         if (elemento.ContainsValue(idDaModificare)) // se il valore dell'elemento contiene l id da modifcare allora:
         {
             Console.WriteLine("Prodotto trovato! Inserire nuovo prezzo:");
             decimal prezzo = decimal.Parse(Console.ReadLine()); // 3 EURO
             elemento["Prezzo"] = prezzo; // ID 123 = 3 EURO // nella chiave "prezzo" di quell'elemento specifico, vado a sovrascrivere il nuovo prezzo
-            
+
             trovato = true;
         }
     }
@@ -685,7 +688,7 @@ void RimuoviDalCatalogo() // inserisci funzione visualizzacatalogo
     {
         // Recupero l'ID del prodotto dal dizionario
         int id = (int)prodotto["ID"];   //potevo convertire in to.int32 DA FARSELO SPIEGARE
-        
+
 
         if (id == idProdottoDaEliminare)
         {
@@ -714,7 +717,7 @@ static List<Dictionary<string, object>> CaricaCatalogoDalFile(string filePath)
         Console.WriteLine("Nessun file Json trovato");
         return new List<Dictionary<string, object>>(); //crea una lista vuota e la restituisce al catalogo
     }
- // viene ignorato se si verifica la condizione sopra
+    // viene ignorato se si verifica la condizione sopra
     string json = File.ReadAllText(filePath);
     Console.WriteLine("Catalogo caricatu sul file");
     return JsonConvert.DeserializeObject<List<Dictionary<string, object>>>(json);
@@ -793,16 +796,16 @@ static void AggiungiAlCarrello(List<Dictionary<string, object>> catalogo, List<D
         {"Nome", prodotto["Nome"]},
         {"Prezzo", prodotto["Prezzo"]},
         {"Quantita", quantità}, // aggiungo lla quantità al carrello, non metto ["Quantità"] perchè la quantità nel carrello è quella che l'utente ha scelto
-        {"ID", prodotto["ID"]} 
+        {"ID", prodotto["ID"]}
     });
 
     Console.WriteLine($"{quantità} x {prodotto["Nome"]} aggiunti al carrello");
 }
 void RimuoviProdottoDaCarrello()
 {
-  
-VisualizzaCarrello(carrello);
-   Console.WriteLine("Inserisci l'ID del prodotto da rimuovere:");
+
+    VisualizzaCarrello(carrello);
+    Console.WriteLine("Inserisci l'ID del prodotto da rimuovere:");
     // int idProdottoDaEliminare = int.Parse(Console.ReadLine()); 
     string idProdottoDaEliminare = Console.ReadLine();
     bool trovato = false;
@@ -810,8 +813,8 @@ VisualizzaCarrello(carrello);
     {
         // Recupero l'ID del prodotto dal dizionario
         //int id = (int)prodotto["ID"];   //potevo convertire in to.int32 DA FARSELO SPIEGARE
-    string id=prodotto["ID"].ToString();
-        
+        string id = prodotto["ID"].ToString();
+
 
         if (id == idProdottoDaEliminare)
         {

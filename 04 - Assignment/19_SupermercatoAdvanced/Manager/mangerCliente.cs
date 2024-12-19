@@ -1,5 +1,4 @@
-namespace MyApp.Models;
-using System.Collections.Concurrent;
+
 
 public class ClienteManager // i manager gestiscono i CRUD 
 

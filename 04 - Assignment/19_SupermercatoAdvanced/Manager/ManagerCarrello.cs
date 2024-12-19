@@ -1,5 +1,4 @@
-using System.Data.Common;
-using MyApp.Models;
+
 using Newtonsoft.Json;
 
 public class CarrelloManager

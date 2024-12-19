@@ -1,4 +1,4 @@
-namespace MyApp.Models;
+
 public class DipendenteManager 
 {
     private int Id;

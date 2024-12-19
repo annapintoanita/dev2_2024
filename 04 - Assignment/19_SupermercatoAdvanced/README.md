@@ -114,7 +114,6 @@ flowchart TD
 - L' Amministratore
 da cui ognuno può compiere operazioni specifica in base al proprio ruolo
 
-_Nel corso del codice ho inserito un nuovo ->  namespace 'MyApp.Models'(inserito prima di ogni cosa) perchè il compilatore entrava in confusione e trovava ambiguità poichè ho usato più definizioni della classe Prodotto, in questo modo sembra essersi risolto il problema/conflitto_
 
 ### Nella cartella `'Utilities'` ho inserito nel codice `'InputManager.cs'`, la funzione `LeggiDouble`, che prima non c'era, per riuscire a convertire `cliente.Credito` che mi dava problemi in `AggiornaCliente (int id, Cliente nuovoCliente)` .
 Per scrivere il codice della conversione in double, ho adattato il codice della conversione del decimale.  Quindi:

@@ -1,5 +1,4 @@
 
-namespace MyApp.Models;
 public static class InputManager
 {
     //minvalue e maxvalue sono i metodi di int che rappresentano il valore minimo ed il valore massimo di un intero

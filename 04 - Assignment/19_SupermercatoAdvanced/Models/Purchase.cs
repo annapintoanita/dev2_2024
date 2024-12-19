@@ -1,4 +1,4 @@
-namespace MyApp.Models;
+
 public class Purchase
 {
 public int Id { get; set; }

@@ -1,4 +1,4 @@
-namespace MyApp.Models;
+
 public class Cassa 
  {
     public int Id { get; set; } 
