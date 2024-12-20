@@ -11,5 +11,21 @@
    font-optical-sizing: auto;
    font-weight: weight;
    font-style: normal;
-   
  }
+ 
+.navbar-brand {
+  font-family: "Kanit", serif;
+  font-weight: 700;
+  font-style: normal;
+}
+h1{
+  font-family: "Fjalla One", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+h2 {
+  font-family: "Kanit", serif;
+  font-weight: 100;
+  font-style: italic;
+}
