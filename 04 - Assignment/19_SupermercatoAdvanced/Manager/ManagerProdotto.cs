@@ -5,8 +5,7 @@ public class ProdottoManager // gestiscono i CRUD
 {
     private int prossimoId;
     //lista di prodotti di tipo ProddottoAdvanced per 
-    private readonly string filepath = "prodotti.json";
-    private readonly string dirCatalogo = "Data/Catalogo";
+
     private List<Prodotto> prodotti;
     private ProdottoRepository repository; // prodotti e private perche non voglio che venga modificato dall'esterno
 

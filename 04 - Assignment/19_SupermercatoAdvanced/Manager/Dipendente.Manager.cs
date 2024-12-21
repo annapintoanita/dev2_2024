@@ -2,8 +2,7 @@
 public class DipendenteManager 
 {
     private int Id;
-    private string Cognome;
-    private string Ruolo;
+
     private List <Dipendente> dipendenti;
     private DipendenteRepository repository ;
 
