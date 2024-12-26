@@ -62,17 +62,17 @@
                     </li>
                     <li class="nav-item">
 
-                        <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas"
+                        <button class="btn btn" style="color: greenyellow;" type="button" data-bs-toggle="offcanvas"
                             data-bs-target="#staticBackdrop" aria-controls="staticBackdrop">
-                            Toggle static offcanvas
+                           Carrello
                         </button>
 
                     </li>
 
                 </ul>
                 <form class="d-flex" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
+                    <input class="form-control me-2" type="search" placeholder="Search" style="background-color: green;" aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit" style="color: greenyellow; background-color: rgb(69, 171, 69);">Search</button>
                 </form>
             </div>
         </div>
@@ -82,7 +82,7 @@
     <div class="offcanvas offcanvas-start" data-bs-backdrop="static" tabindex="-1" id="staticBackdrop"
         aria-labelledby="staticBackdropLabel">
         <div class="offcanvas-header">
-            <h5 class="offcanvas-title" id="staticBackdropLabel">Offcanvas</h5>
+            <h5 class="offcanvas-title" id="staticBackdropLabel">Carrello</h5>
             <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body">
@@ -93,7 +93,9 @@
     </div>
     <!-- carosello sotto l'intestazione -->
     <div class="container">
-        <h1>Supermercato Bootstrap</h1> <!--intestazione-->
+       
+        <h1 class="titolo">Supermercato Bootstrap</h1> <!--intestazione-->
+        
         <div id="carouselExample" class="carousel slide">
             <div class="carousel-inner">
                 <div class="carousel-item active">
@@ -122,8 +124,8 @@
         <section class="container my-5"></section>
         <!-- per ridimensionare i testi es."mb-5 fs-4 d-sm-block d-md-none"... meglio riscrivere più volte il testo con le diverse misure -->
         <h2 class="mb-5 fs-4 d-sm-block d-md-none"><i class="bi bi-ticket-perforated"></i>Prodotti in offerta</h2>
-        <h1 class="mb-5 fs-2 d-none d-md-block d-lg-none"><i class="bi bi-ticket-perforated"></i>Prodotti in offerta
-        </h1>
+        <h2 class="mb-5 fs-2 d-none d-md-block d-lg-none"><i class="bi bi-ticket-perforated"></i>Prodotti in offerta
+        </h2>
         <h2 class="mb-5 fs-1 d-none d-lg-block"><i class="bi bi-ticket-perforated"></i>Prodotti in offerta</h2>
         <!-- Primo gruppo di card prodotti in offerta con griglia resa responsive -->
         <div class="container my-5">
@@ -259,56 +261,44 @@
                         affrettati
                     </span>
 
-                    <a href="#">
-                        <img src="https://dummyimage.com/100x100/13d617/000000fff.jpg&text=prodotto6"
+                    <a href="prodotto6.html">
+                        <img src="https://img.joomcdn.net/5ba0c59ac5bdb4750ec4c92a752306d5ddbccaf6_original.jpeg"
                             class="card-img-top  " alt="PRODOTTO6">
 
                     </a>
                     <div class="card-body">
-                        <h5 class="card-title">titolo card 6</h5>
-                        <p class="card-text">DESCRIZIONE PRODOTTO</p>
+                        <h5 class="card-title">Calzini invernali</h5>
+                        <p class="card-text">Calzini unisex, color Camel di spugna e lana</p>
                     </div>
                 </div>
             </div>
         </div>
-        </div>
+
     </section>
-    </div>
-
-
-    </div>
-    </div>
-    </div>
-    </div>
-
-    </div>
     <!-- INIZIO SEZIONE CONSEGNE -->
 
     <div class="container">
         <!--inserimento di icone sopra il footer-->
-
-        <div class="row">
-            <div class="col-md3 d-flex flex-column">
-                <div class=" mb-4">
-                    <p>prova per inserimento icone</p>
-                    <i class="bi bi-star-fill fs-1 p-5"></i>
-                    <i class="bi bi-truck fs-1 p-5"></i>
-                    <i class="bi bi-shield-fill-check fs-1 p-5"></i>
-                    <i class="bi bi-arrow-counterclockwise fs-1 p-5"></i>
-                    <i class="bi bi-credit-card  fs-1 p-5"></i>
-                    <i class="bi bi-telephone  fs-1 p-5"></i>
-                </div>
+        <div class="row text-center d-flex align-item-stretch">
+            <div class=" mb-4">
+                <p>prova per inserimento icone</p>
+                <i class="bi bi-star-fill fs-1 p-5"></i>
+                <i class="bi bi-truck fs-1 p-5"></i>
+                <i class="bi bi-shield-fill-check fs-1 p-5"></i>
+                <i class="bi bi-arrow-counterclockwise fs-1 p-5"></i>
+                <i class="bi bi-credit-card  fs-1 p-5"></i>
+                <i class="bi bi-telephone  fs-1 p-5"></i>
             </div>
-
         </div>
     </div>
     <!-- FINE SEZIONE CONSEGNE -->
-    <div class="container">
+
+    <div class="container my-5">
         <!--card 1-->
         <div class=" row text-center d-flex align-item-stretch">
 
-            <div class="card">
-                <div class="col-lg-3 col-md-6 mb-4">
+            
+                <div class="col-lg-2 col-md-6 mb-4">
                     <div class=" card h-100 border-1">
                         <div class="card-body">
                             <i class="bi bi-star-fill fs-1 p-5"></i>
@@ -316,51 +306,52 @@
                         </div>
                     </div>
                 </div>
-                </div>
-                <!--card 2-->
-                    <div class="col-lg-3 col-md-6 mb-4">
-                        <div class=" card h-100 border-1">
-                            <div class="card-body">
-                                <i class="bi bi-truck fs-1 p-5"></i>
-                                <p class="card-text">prova card icona1</p>
-                            </div>
-                        </div>
-                    </div>
-                <!--card 3-->           
-                    <div class="col-lg-3 col-md-6 mb-4">
-                        <div class=" card h-100 border-1">
-                            <div class="card-body">
-                                <i class="bi bi-shield-fill-check fs-1 p-5"></i>
-                                <p class="card-text">prova card icona1</p>
-                            </div>
-                        </div>
-                    </div>
-                    <!--card 4-->
-                    <div class="col-lg-3 col-md-6 mb-4">
-                        <div class=" card h-100 border-1">
-                            <div class="card-body">
-                                <i class="bi bi-arrow-counterclockwise fs-1 p-5"></i>
-                                <p class="card-text">prova card icona1</p>
-                            </div>
-                        </div>
-                    </div>
-                    <!--card 5-->
-                    <div class="col-lg-3 col-md-6 mb-4">
-                        <div class=" card h-100 border-1">
-                            <div class="card-body">
-                                <i class="bi bi-credit-card  fs-1 p-5"></i>
-                                <p class="card-text">prova card icona1</p>
-                            </div>
-                        </div>
+           
+            <!--card 2-->
+            <div class="col-lg-2 col-md-6 mb-4">
+                <div class=" card h-100 border-1">
+                    <div class="card-body">
+                        <i class="bi bi-truck fs-1 p-5"></i>
+                        <p class="card-text">prova card icona1</p>
                     </div>
                 </div>
-
             </div>
-
+            <!--card 3-->
+            <div class="col-lg-2 col-md-6 mb-4">
+                <div class=" card h-100 border-1">
+                    <div class="card-body">
+                        <i class="bi bi-shield-fill-check fs-1 p-5"></i>
+                        <p class="card-text">prova card icona1</p>
+                    </div>
+                </div>
+            </div>
+            <!--card 4-->
+            <div class="col-lg-2 col-md-6 mb-4">
+                <div class=" card h-100 border-1">
+                    <div class="card-body">
+                        <i class="bi bi-arrow-counterclockwise fs-1 p-5"></i>
+                        <p class="card-text">prova card icona1</p>
+                    </div>
+                </div>
+            </div>
+            <!--card 5-->
+            <div class="col-lg-2 col-md-6 mb-4">
+                <div class=" card h-100 border-1">
+                    <div class="card-body">
+                        <i class="bi bi-credit-card  fs-1 p-5"></i>
+                        <p class="card-text">prova card icona1</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-6 mb-4">
+                <div class=" card h-100 border-1">
+                    <div class="card-body">
+                        <i class="bi bi-telephone  fs-1 p-5"></i>
+                        <p class="card-text">prova card icona1</p>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
-    </div>
-
     </div>
     </div>
     </div>
@@ -369,29 +360,25 @@
     <footer>
         <div class="container">
             <div class="row">
-                <div class="col-md-6 d-flex flex-column">
-
-
-                    <p>Indirizzo da inserire</p>
+                <div class="col-md-6 d-flex flex-column ">
+                    <p class="address">Piazza Matteotti 2/3b</p>
+                    <p>16123, Genova </p>
+                    
                     <hr>
                     <p>Copyright</p>
                     <p><a href="#"><i class="bi bi-telephone-fill"></i> Contatti</a></p>
                     <p><a href="#">Chi siamo</a></p>
-
                 </div>
 
                 <div class="col-md-6 d-flex flex-column">
-
-
-                    <p>I nostri social</p>
-                    <hr>
+                    <p style="margin-top: 20px">I nostri social</p>
+                    <hr style="margin-top: 55px;">
                     <div class="mb-4">
                         <i class="bi bi-instagram fs-1 p-5"></i>
                         <i class="bi bi-facebook fs-1 p-5"></i>
                         <i class="bi bi-whatsapp fs-1 p-5"></i>
                     </div>
                 </div>
-
             </div>
         </div>
     </footer>

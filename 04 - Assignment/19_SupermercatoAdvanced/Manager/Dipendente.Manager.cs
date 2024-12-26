@@ -1,20 +1,20 @@
 
-public class DipendenteManager 
+public class DipendenteManager
 {
     private int Id;
 
-    private List <Dipendente> dipendenti;
-    private DipendenteRepository repository ;
+    private List<Dipendente> dipendenti;
+    private DipendenteRepository repository;
 
 
-   public DipendenteManager(List<Dipendente> Dipendenti)
+    public DipendenteManager(List<Dipendente> Dipendenti)
     {
-         
-       dipendenti = Dipendenti ;
-       repository = new DipendenteRepository();
-       Id = 1;
 
-    foreach (var dipendente in dipendenti)
+        dipendenti = Dipendenti;
+        repository = new DipendenteRepository();
+        Id = 1;
+
+        foreach (var dipendente in dipendenti)
         {
             if (dipendente.Id >= Id)
             {
@@ -32,7 +32,7 @@ public class DipendenteManager
         dipendenti.Add(dipendente);
         Console.WriteLine($"Cliente aggiunto con ID: {dipendente.Id}");
     }
-     public List<Dipendente> OttieniDipendente()
+    public List<Dipendente> OttieniDipendente()
     {
         return dipendenti;
     }
@@ -41,7 +41,7 @@ public class DipendenteManager
     {
         // Intestazioni con larghezza fissa
         Console.WriteLine(
-            $"{"ID",-5} {"UserName",-20} {"Ruolo", -10}"
+            $"{"ID",-5} {"UserName",-20} {"Ruolo",-10}"
         );
         Console.WriteLine(new string('-', 50)); // Linea separatrice
 
@@ -60,7 +60,7 @@ public class DipendenteManager
         {
             if (dipendente.Id == id)
             {
-                return dipendente; 
+                return dipendente;
             }
         }
         return null;
@@ -73,7 +73,7 @@ public class DipendenteManager
             dipendente.Id = nuovoDipendente.Id;
             dipendente.UserName = nuovoDipendente.UserName;
             dipendente.Ruolo = nuovoDipendente.Ruolo;
-           
+
         }
     }
     public void EliminaDipendente(int id)
@@ -82,11 +82,26 @@ public class DipendenteManager
         if (dipendente != null)
         {
             dipendenti.Remove(dipendente);
-            //elimina il file json corrispondente al  prodotto
-            string filePath = Path.Combine("Dipendenti", $"{id}.json");
+
+            string filePath = Path.Combine("Data/Dipendente", $"{id}.json");
             File.Delete(filePath);
             Console.WriteLine($"Dipendente eliminato: {filePath}");
         }
     }
-
+    public void ImpostaRuolo(int idDipendente)
+    {
+        bool trovato = false;
+        foreach (var dipendente in dipendenti)
+        {
+            if (dipendente.Id == idDipendente)
+            {
+                dipendente.Ruolo = InputManager.LeggiStringa("\nInserisci ruolo: ");
+                trovato = true;
+            }
+        }
+        if (!trovato)
+        {
+            Console.WriteLine("Dipendente non trovato!");
+        }
+    }
 }

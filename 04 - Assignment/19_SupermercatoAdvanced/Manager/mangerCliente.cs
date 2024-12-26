@@ -45,7 +45,7 @@ public class ClienteManager // i manager gestiscono i CRUD
     {
         // Intestazioni con larghezza fissa
         Console.WriteLine(
-            $"{"ID",-5} {"UserName",-20} {"Carrello",-10} {"Storico Acquisti",-10} {"Prcentuale Sconto"} {"Credito"}"
+            $"{"ID",-5} {"UserName",-20} {"% Sconto",-20} {"Credito"}"
         );
         Console.WriteLine(new string('-', 50)); // Linea separatrice
 
@@ -53,7 +53,7 @@ public class ClienteManager // i manager gestiscono i CRUD
         foreach (var cliente in clienti)
         {
             Console.WriteLine(
-            $"{cliente.Id,-5} {cliente.UserName,-20} {cliente.Carrello,-10} {cliente.StoricoAcquisti,-10} {cliente.PercentualeSconto} {cliente.Credito}"
+            $"{cliente.Id,-5} {cliente.UserName,-20} {cliente.PercentualeSconto, -20} {cliente.Credito}"
             );
         }
     }
@@ -79,7 +79,7 @@ public class ClienteManager // i manager gestiscono i CRUD
             cliente.UserName = InputManager.LeggiStringa("Inserisci nuovo UserName: ");
             cliente.StoricoAcquisti = nuovoCliente.StoricoAcquisti;
             cliente.PercentualeSconto = nuovoCliente.PercentualeSconto;
-            cliente.Credito = InputManager.LeggiDouble(" Inserisci nuovo credito: ");
+            cliente.Credito = InputManager.LeggiDecimale(" Inserisci nuovo credito: ");
         }
     }
 
@@ -90,7 +90,7 @@ public class ClienteManager // i manager gestiscono i CRUD
         {
             clienti.Remove(cliente);
             //elimina il file json corrispondente al  cliente
-            string filePath = Path.Combine("Clienti", $"{id}.json");
+            string filePath = Path.Combine("Data/Cliente", $"{id}.json");
             File.Delete(filePath);
             Console.WriteLine($"Cliente eliminato: {filePath}");
         }

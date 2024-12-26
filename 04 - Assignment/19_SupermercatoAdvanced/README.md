@@ -94,26 +94,61 @@ flowchart TD
 - Prodotto.cs
 - Purchase.cs
 
+<details>
+<summary>Ho completato:</summary>
+
+- [ ] Cassa
+- [ ] Categoria
+- [x] Cliente
+- [x] Dipendente
+- [x] Prodotto
+- [ ] Purchase
+</details>
+
 ### Ho creato la cartella Repositories in cui ho inserito i repositories:
 - CarrelloRepository.cs
 - ClienteRepository.cs
 - DipendenteRepository.cs
 - ProdottoRepository.cs
 
-### Ho creato la cartlla Manager in cui ho inserito:
-- ManagerCarrello.cs
-- ManagerCliente.cs
-- ManagerDipendente.cs
-- ManagerProdotto.cs
+<details>
+<summary>Ho completato:</summary>
 
->ManagerDipendente e ManagerCliente hanno quasi la stessa struttura
-### Ho inserito i menu per:
-- Il dipendente
-- Il cliente
-- Il magazziniere
-- L' Amministratore
-da cui ognuno può compiere operazioni specifica in base al proprio ruolo
+- [ ] CarrelloRepository.cs
+- [ ] ClienteRepository.cs
+- [ ] DipendenteRepository.cs
+- [ ] ProdottoRepository.cs
+</details>
 
+### Ho creato la cartella Manager per:                                 
+- ManagerCarrello.cs                                              
+- ManagerCliente.cs                                                     
+- ManagerDipendente.cs                                                
+- ManagerProdotto.cs    
+
+<details>
+<summary>Ho completato:</summary>
+
+- [ ] ManagerCarrello.cs
+- [ ] ManagerCliente.cs
+- [ ] ManagerDipendente.cs 
+- [ ] ManagerProdotto.cs  
+</details> 
+
+### Ho inserito i menu per:                                          
+- Il dipendente                                                    
+- Il cliente                                                       
+- Il magazziniere                                                  
+- L' Amministratore 
+
+<details>
+<summary>Ho completato:</summary>                                            
+
+ - [ ] Il cassiere
+ - [ ] Il cliente
+ - [x] Il magazziniere
+ - [x] L' Amministratore
+ </details> 
 
 ### Nella cartella `'Utilities'` ho inserito nel codice `'InputManager.cs'`, la funzione `LeggiDouble`, che prima non c'era, per riuscire a convertire `cliente.Credito` che mi dava problemi in `AggiornaCliente (int id, Cliente nuovoCliente)` .
 Per scrivere il codice della conversione in double, ho adattato il codice della conversione del decimale.  Quindi:
@@ -128,7 +163,7 @@ public static double LeggiDouble(string messaggio, double min = double.MinValue,
             string input = Console.ReadLine();
             if (input.Contains(","))
             {
-                input = input.Replace(",", ",");
+                input = input.Replace(".", ",");
 
                 // try parse per convertire la stringa in un double e controllare se l'input è valido
                 if (double.TryParse(input, out valore) && valore >= min && valore <= max)
@@ -158,4 +193,8 @@ public static double LeggiDouble(string messaggio, double min = double.MinValue,
         }
     }
  ```
-
+- [X] Risolto il bug che impediva di rivisualizzare il menu dopo essere usciti (una volta usciti bisognava ripetere l'identificazione e non si poteva invece visualizzare ancora il menu interessato).
+- [x] Completata la parte delle operazione CRUD del magazziniere e dell'Amministratore.
+- [x] Ho scritto la funzione ImpostaRuolo per impostare il ruolo del dipendente tramite il suo ID.
+- [x] Completato tutto il menu dell'amministratore
+- [X] Ho aggiunto il bool ContinuaCliente ed ho sistemato il while all'interno dell'if.

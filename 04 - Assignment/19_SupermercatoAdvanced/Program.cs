@@ -8,18 +8,25 @@ class Program
         // Creare un oggetto di tipo ProdottoRepository per gestire il salvataggio e il caricamento dei dati
         ProdottoRepository repository = new ProdottoRepository();
         DipendenteRepository repositoryDip = new DipendenteRepository();
+        ClienteRepository repositoryCliente = new ClienteRepository();
+        CarrelloRepository repositoryCarrello= new CarrelloRepository();
         // Caricare i dati da file con il metodo CaricaProdotti della classe ProdottoRepository (repository)
         List<Prodotto> prodotti = repository.CaricaProdotti();
         List<Dipendente> listaDipendenti = repositoryDip.CaricaDipendenti();
+        List<Cliente> listaClienti = repositoryCliente.CaricaClienti();
+        List<Prodotto> prodottoCarrello= repositoryCarrello.CaricaCarrello();
         // Creare un oggetto di tipo ProdottoAdvancedManager per gestire i prodotti
         ProdottoManager manager = new ProdottoManager(prodotti);
         DipendenteManager managerDip = new DipendenteManager(listaDipendenti);
+        ClienteManager managerCliente = new ClienteManager(listaClienti);
+        CarrelloManager managerCarrello = new CarrelloManager(prodottoCarrello);
 
         // Menu interattivo per eseguire operazioni CRUD sui prodotti
 
         // variabile per controllare se il programma deve continuare o uscire
         bool continua = true;
         bool continuaMagazziniere = true;
+        bool continuaCliente = true;
         bool continuaAmministratore = true;
         // il ciclo while continua finché la variabile continua è true
         while (continua)
@@ -33,7 +40,7 @@ class Program
             Console.WriteLine("4. Amministratore");
 
 
-            string identificazione = InputManager.LeggiIntero("Scelta :", 1, 4).ToString();
+            string identificazione = InputManager.LeggiIntero("Scelta: ", 1, 4).ToString();
             //pulisco la console
             Console.Clear();
 
@@ -49,17 +56,16 @@ class Program
                     Console.WriteLine("3. Trova Prodotto per ID");
                     Console.WriteLine("4. Aggiorna Prodotto");
                     Console.WriteLine("5. Elimina Prodotto");
-                    Console.WriteLine("6. Esci");
-                    string sceltaDipendente = InputManager.LeggiIntero("Scelta :", 1, 6).ToString();
+                    Console.WriteLine("0. Esci");
+                    string sceltaDipendente = InputManager.LeggiIntero("Scelta: ", 0, 6).ToString();
                     Console.Clear();
                     switch (sceltaDipendente)
                     {
                         case "1":
-                            Console.WriteLine("\nProdotti:");
+                            Console.WriteLine("\nProdotti: ");
                             //string scelta = Console.ReadLine();
                             //string scelta = acquisita mediante il metodo LeggiInteri della classe InputManager
                             //string scelta = InputManager.LeggiIntero();
-
                             // Visualizzare i prodotti con il metodo OttieniProdotti della classe ProdottoAdvancedManager (manager)
                             manager.StampaProdottiIncolonnati();
                             break;
@@ -89,11 +95,11 @@ class Program
                             break;
 
                         case "4":
-                            //Console.Write("ID: ");
-                            int idProdottoDaAggiornare = InputManager.LeggiIntero("\nID:");
-                            //Console.Write("Nome: ");
+
+                            int idProdottoDaAggiornare = InputManager.LeggiIntero("\nID: ");
+
                             string nomeNuovo = InputManager.LeggiStringa("\nNome: ");
-                            //Console.Write("Prezzo: ");
+
                             decimal prezzoNuovo = InputManager.LeggiDecimale("\nPrezzo: ");
                             Console.Write("Giacenza: ");
                             int giacenzaNuova = int.Parse(Console.ReadLine());
@@ -102,8 +108,6 @@ class Program
 
                         case "5":
                             int idProdottoDaEliminare = InputManager.LeggiIntero("\nID: ");
-                            //Console.Write("ID: ");
-                            //int idProdottoDaEliminare = int.Parse(Console.ReadLine());
                             manager.EliminaProdotto(idProdottoDaEliminare);
                             break;
 
@@ -127,34 +131,62 @@ class Program
                     }
                 }
             }
+            // devo creare cliente dall' amministratore.
             if (identificazione == "2")
             {
-                Console.WriteLine("\n --- Menu cliente ---");
-                Console.WriteLine("Scegli un'operazione:");
-                Console.WriteLine("1. Visualizza il catalogo");
-                Console.WriteLine("2. Aggiungi prodotto al carrello");
-                Console.WriteLine("3. Elimina un prodotto dal carrello");
-                Console.WriteLine("4. Visualizza il carrello");
-                Console.WriteLine("5. ESCI");
-                string sceltaCliente = InputManager.LeggiIntero("Scelta :", 1, 5).ToString();
-                switch (sceltaCliente)
+                while (continuaCliente)
                 {
-                    case "1":
+                    
+                    Console.WriteLine("\n --- Menu cliente ---");
+                    Console.WriteLine("Scegli un'operazione: ");
+                    Console.WriteLine("1. Visualizza il catalogo");
+                    Console.WriteLine("2. Aggiungi prodotto al carrello");
+                    Console.WriteLine("3. Elimina un prodotto dal carrello");
+                    Console.WriteLine("4. Visualizza il carrello"); //provo sola
+                    Console.WriteLine("0. ESCI"); //sola
+                    string sceltaCliente = InputManager.LeggiIntero("Scelta: ", 0, 5).ToString();
+                    switch (sceltaCliente)
+                    {
+                        case "1":
+                            Console.WriteLine("\nCatalogo: ");
+                            manager.StampaProdottiIncolonnati();
+                            break;
 
-                        break;
+                        case "2":
+                            string nome= InputManager.LeggiStringa("\nNome: ");
+                            int quantita= InputManager.LeggiIntero("\nQuantita: ");
+                            string categoria= InputManager.LeggiStringa("\nCategoria: ");
+                            
+                          
+                            break;
 
-                    case "2":
+                        case "3":
+                        
+                            break;
 
-                        break;
-                    case "3":
+                        case "4":
+                         
 
-                        break;
-                    case "4":
+                            break;
 
-                        break;
-                    case "5":
-
-                        break;
+                        case "5":
+                            
+                            Console.WriteLine("Vuoi uscire dal programma? s/n");
+                            string rispostaCliente = Console.ReadLine().ToLower();
+                            if (rispostaCliente == "n")
+                            {
+                                continuaCliente = false;
+                            }
+                            else
+                            {
+                                continua = false;
+                                continuaCliente = false;
+                            }
+                            break;
+                        default:
+                            Console.WriteLine("Scelta non valida. Riprovare.");
+                            break;
+                    }
                 }
             }
             if (identificazione == "3")
@@ -163,8 +195,8 @@ class Program
                 Console.WriteLine("1. Visualizza prodotti");
                 Console.WriteLine("2. Aggiungi prodotti");
                 Console.WriteLine("3. Elimina prodotti");
-                Console.WriteLine("4. ESCI");
-                string sceltaCassiere = InputManager.LeggiIntero("Scelta :", 1, 4).ToString();
+                Console.WriteLine("0. ESCI");
+                string sceltaCassiere = InputManager.LeggiIntero("Scelta: ", 0, 4).ToString();
                 switch (sceltaCassiere)
                 {
                     case "1":
@@ -194,71 +226,58 @@ class Program
                     Console.WriteLine("2. Imposta ruolo dei dipendenti tramite ID");
                     Console.WriteLine("3. Aggiungi dipendente");
                     Console.WriteLine("4. Elimina dipendente");
-                    Console.WriteLine("5. Visualizza prodotti");
-                    //Console.WriteLine("6. Aggiungi prodotti");
-                    //Console.WriteLine("7. Aggiorna pprodotti");
-                    //Console.WriteLine("8. Elimina prodotti");
-                    //Console.WriteLine("9. Visualizza cliente");
-                    //Console.WriteLine("10. Elimina cliente");
-                    Console.WriteLine("11. Salva");
-                    string sceltaAmministratore = InputManager.LeggiIntero("Scelta :", 1, 11).ToString();
+                    Console.WriteLine("5. Aggiungi cliente");
+                    Console.WriteLine("6. Visualizza cliente");
+                    Console.WriteLine("7. Elimina cliente");
+                    Console.WriteLine("0. Salva ed esci");
+                    string sceltaAmministratore = InputManager.LeggiIntero("Scelta :", 0, 11).ToString();
                     switch (sceltaAmministratore)
                     {
-                        case "1":
+                        case "1":// visualizza dipendenti
                             managerDip.StampaDipendentiIncolonnati();
                             break;
 
-                        case "2":
-
+                        case "2": //impostare il ruolo del dipendente tramite ID
+                            int idDipendenteRuolo = InputManager.LeggiIntero("ID: ", 0);
+                            managerDip.ImpostaRuolo(idDipendenteRuolo);
                             break;
 
-                        case "3":
+                        case "3": //aggiungi dipendente
                             string userNameDip = InputManager.LeggiStringa("\nAggiungi il nome del dipendente:");
                             string ruoloDip = InputManager.LeggiStringa("\nImposta il suo ruolo:");
                             managerDip.AggiungiDipendente(new Dipendente { UserName = userNameDip, Ruolo = ruoloDip });
                             break;
 
-                        case "4":
-
+                        case "4"://elimina dipendente
+                            int idDipendenteDaEliminare = InputManager.LeggiIntero("ID:");
+                            managerDip.EliminaDipendente(idDipendenteDaEliminare);
                             break;
 
-                        case "5":
-                            manager.StampaProdottiIncolonnati();
+                        case "5":// aggiungi cliente
+                            string UserNameCliente = InputManager.LeggiStringa("\nAggiungi username del cliente:");
+                            managerCliente.AggiungiCliente(new Cliente
+                            {
+                                UserName = UserNameCliente,
+                                Carrello = new List<Prodotto>(),
+                                StoricoAcquisti = new List<Prodotto>(),
+                                PercentualeSconto = 0,
+                                Credito = 100
+                            });
                             break;
 
-                        case "6":
-                            string nome = InputManager.LeggiStringa("\nNome: ");
+                        case "6":// visualizza clienti
+                            managerCliente.StampaClientiIncolonnati();
                             break;
 
-                        case "7":
-                            int idProdottoDaAggiornare = InputManager.LeggiIntero("\nID:");
-                            //Console.Write("Nome: ");
-                            string nomeNuovo = InputManager.LeggiStringa("\nNome: ");
-                            //Console.Write("Prezzo: ");
-                            decimal prezzoNuovo = InputManager.LeggiDecimale("\nPrezzo: ");
-                            Console.Write("Giacenza: ");
-                            int giacenzaNuova = int.Parse(Console.ReadLine());
-                            manager.AggiornaProdotto(idProdottoDaAggiornare, new Prodotto { Nome = nomeNuovo, Prezzo = prezzoNuovo, Giacenza = giacenzaNuova });
+                        case "7"://elimina cliente
+                            int idClienteDaEliminare = InputManager.LeggiIntero("ID:");
+                            managerCliente.EliminaCliente(idClienteDaEliminare);
                             break;
 
-                        case "8":
-                            int idProdottoDaEliminare = InputManager.LeggiIntero("\nID: ");
-                            //Console.Write("ID: ");
-                            //int idProdottoDaEliminare = int.Parse(Console.ReadLine());
-                            manager.EliminaProdotto(idProdottoDaEliminare);
-                            break;
-
-                        case "9":
-
-                            break;
-
-                        case "10":
-
-                            break;
-
-                        case "11":
+                        case "0": //salva ed esci
                             repositoryDip.SalvaDipendente(listaDipendenti);
-                             Console.WriteLine("Vuoi uscire dal programma? s/n");
+                            repositoryCliente.SalvaClienti(listaClienti);
+                            Console.WriteLine("Vuoi uscire dal programma? s/n");
                             string rispostaAmministratore = Console.ReadLine().ToLower();
                             if (rispostaAmministratore == "n")
                             {
@@ -276,20 +295,12 @@ class Program
                     }
                 }
             }
-
-
-
-            // acquisire l'input dell'utente
-            //Console.Write("\nScelta: ");
-            //string scelta = Console.ReadLine();
-            //string scelta = acquisire mediante il metodo LeggiInteri della classe InputManager
-
-
-            // switch-case per gestire le scelte dell'utente che usa scelta come variabile di controllo
+            //Resetto il bool del while a true altrimenti non è più accessibile al menu del dipendente che mi interessa
             continuaMagazziniere = true;
+            continuaCliente = true;
+            //
+            continuaAmministratore = true;
         }
-
-
     }
 }
 

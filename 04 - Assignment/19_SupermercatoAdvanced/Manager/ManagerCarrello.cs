@@ -9,9 +9,11 @@ public class CarrelloManager
     private ProdottoRepository repositoryCatalogo;
     private CarrelloRepository repositoryCarrello;
     private ClienteRepository repositoryCliente;
+    private List <Prodotto> listaCarrello;
+    private int quantita;
 
 
-    public CarrelloManager (List<Prodotto> listaProdotti)
+    public CarrelloManager(List<Prodotto> listaProdotti)
     {
         prodotti = listaProdotti;
         repositoryCatalogo = new ProdottoRepository();
@@ -19,8 +21,9 @@ public class CarrelloManager
         repositoryCliente = new ClienteRepository();
 
         prossimoId = 1;
-       
-        
+        quantita =0;
+
+
         if (listaProdotti != null)
         {
             prodotti = listaProdotti;
@@ -39,17 +42,28 @@ public class CarrelloManager
         }
 
     }
-    public void AggiungiProdotto(string ProdottoDaAggiungere, List<Prodotto> carrello, ref Cliente cliente)
+    public void AggiungiProdotto(string prodottoCarrello, List<Prodotto> carrello, string Cliente)
     {
         catalogo = repositoryCatalogo.CaricaProdotti();
 
-        bool trovato = false;
-        foreach (var prodotto in catalogo)
+    }
+
+    public void VisualizzaCarrello(List<Prodotto> listaCarrello)
+    {
+        Console.WriteLine(
+       $"{"Nome",-20} {"Prezzo",-10} {"Quantita",-10}"
+     );
+        Console.WriteLine(new string('-', 50)); // Linea separatrice
+
+        // Stampa ogni prodotto con larghezza fissa
+        foreach (var prodotti in listaCarrello)
         {
-            if(prodotto.Nome.ToString() == ProdottoDaAggiungere)
-            {
-                
-            }
+            Console.WriteLine(
+                $" {prodotti.Nome,-20} {prodotti.Prezzo,-10} {prodotti.Quantita}"
+            );
         }
+
+
+
     }
 }

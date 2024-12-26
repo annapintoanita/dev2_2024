@@ -1,5 +1,5 @@
-namespace MyApp.Models
-{
+
+
     public class Categoria
     {
         // Proprietà dell'entità Categoria
@@ -11,4 +11,3 @@ namespace MyApp.Models
         public string DolciCategoria { get; set; }
         public string CasaCategoria { get; set; }
     }
-}

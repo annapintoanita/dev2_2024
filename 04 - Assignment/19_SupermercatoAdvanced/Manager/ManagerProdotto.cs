@@ -110,7 +110,7 @@ public void EliminaProdotto(int id)
     {
         prodotti.Remove(prodotto);
         //elimina il file json corrispondente al  prodotto
-        string filePath = Path.Combine("Prodotti", $"{id}.json");
+        string filePath = Path.Combine("Data/Prodotto", $"{id}.json");
         File.Delete(filePath);
         Console.WriteLine($"Prodotto eliminato: {filePath}");
     }
