@@ -75,6 +75,22 @@ public void StampaProdottiIncolonnati()
         );
     }
 }
+public void StampaProdottiCliente()
+{
+    // Intestazioni con larghezza fissa
+    Console.WriteLine(
+        $" {"Nome",-20} {"Prezzo",-10} {"Categoria", -10}"
+    );
+    Console.WriteLine(new string('-', 50)); // Linea separatrice
+
+    // Stampa ogni prodotto con larghezza fissa
+    foreach (var prodotto in prodotti)
+    {
+        Console.WriteLine(
+            $"{prodotto.Nome,-20} {prodotto.Prezzo,-10} {prodotto.Categoria,-10}"
+        );
+    }
+}
 
 // metodo per cercare un prodotto
 public Prodotto TrovaProdotto(int id)

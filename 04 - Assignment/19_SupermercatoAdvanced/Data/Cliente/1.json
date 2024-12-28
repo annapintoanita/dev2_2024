@@ -1,7 +1,16 @@
 {
   "Id": 1,
   "UserName": "Eleonora",
-  "Carrello": [],
+  "Carrello": [
+    {
+      "Id": 1,
+      "Nome": "fagiolini",
+      "Prezzo": 2.99,
+      "Giacenza": 47,
+      "Quantita": 3,
+      "Categoria": null
+    }
+  ],
   "StoricoAcquisti": [],
   "PercentualeSconto": 0,
   "Credito": 100.0

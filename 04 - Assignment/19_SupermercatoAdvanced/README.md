@@ -198,3 +198,85 @@ public static double LeggiDouble(string messaggio, double min = double.MinValue,
 - [x] Ho scritto la funzione ImpostaRuolo per impostare il ruolo del dipendente tramite il suo ID.
 - [x] Completato tutto il menu dell'amministratore
 - [X] Ho aggiunto il bool ContinuaCliente ed ho sistemato il while all'interno dell'if.
+
+Riscontravo un errore in ManagerCarrello, "Quantita" : 'Prodotto' non contiene una definizione di 'Quantita' e non è stato trovato alcun metodo di estensione accessibile 'Quantita' che accetta un primo argomento di tipo 'Prodotto'. Probabilmente manca una direttiva using o un riferimento all'assembly.
+
+```csharp
+    public void VisualizzaCarrello(List<Prodotto> listaCarrello)
+    {
+        Console.WriteLine(
+       $"{"Nome",-20} {"Prezzo",-10} {"Quantita",-10}"
+     );
+        Console.WriteLine(new string('-', 50)); // Linea separatrice
+
+        // Stampa ogni prodotto con larghezza fissa
+        foreach (var prodotti in listaCarrello)
+        {
+            Console.WriteLine(
+                $" {prodotti.Nome,-20} {prodotti.Prezzo,-10} {prodotti.Quantita}"
+            );
+        }
+    }
+```
+Corretto aggiungendo nel modello del prodotto:
+
+```csharp 
+public int Quantita { get; set; } 
+```
+In questo modo verrà visualizzato nel file del prodotto anche la quantità.
+
+Sono andata a creare due nuovi metodi nella in ClienteRepository che sono 
+```csharp
+public void SalvaClienteSingolo(Cliente cliente)
+    {
+        if (!Directory.Exists(folderPath))
+        {
+            Directory.CreateDirectory(folderPath);
+        }
+
+
+        string filePath = Path.Combine(folderPath, $"{cliente.Id}.json"); //percorso del file JSON
+        string jsonData = JsonConvert.SerializeObject(cliente, Formatting.Indented);
+        File.WriteAllText(filePath, jsonData);
+        Console.WriteLine($"Prodotto salvato in {filePath}: \n");
+    }
+ public Cliente CaricaClienteSingolo()//questo metodo carica un cliente singolo
+    {
+        if (Directory.Exists(folderPath))//legge tutto quello che c'è nel file del singolo cliente
+        {
+            string readJsonData = File.ReadAllText("Data/Cliente/1.json");
+            Cliente cliente = JsonConvert.DeserializeObject<Cliente>(readJsonData);
+
+            return cliente;// se la condizione è vera e lo trova
+        }
+        return null;//se non lo trova, ritorna l'avviso che non l'ha trovato
+    }
+```
+Ho creato  nel ManagerProdotto il metodo `StampaProdottiCliente`per mostrare al cliente solo il nome, il prezzo e la categoria dei prodotti.
+```csharp
+public void StampaProdottiCliente()
+{
+    // Intestazioni con larghezza fissa
+    Console.WriteLine(
+        $" {"Nome",-20} {"Prezzo",-10} {"Categoria", -10}"
+    );
+    Console.WriteLine(new string('-', 50)); // Linea separatrice
+
+    // Stampa ogni prodotto con larghezza fissa
+    foreach (var prodotto in prodotti)
+    {
+        Console.WriteLine(
+            $"{prodotto.Nome,-20} {prodotto.Prezzo,-10} {prodotto.Categoria,-10}"
+        );
+    }
+}
+```
+Ho implementato il menu del cliente:
+
+- [x] Visualizza Catalogo (cioè i prodotti del supermercato con `StampaProdottiCliente`).
+- [x] Aggiungi prodotto al carrello.
+- [x] Elimina prodotto dal carrello.
+
+- Attualmente quando elimino un prodotto dal carrello elimino qualunque sia la quantità inserita mentre più in là vorrei inserire la quantita specifica da eliminare.
+
+- Vorrei che in visualizza carrello si vedesse anche il totale da pagare.

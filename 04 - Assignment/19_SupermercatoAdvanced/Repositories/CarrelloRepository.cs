@@ -3,7 +3,6 @@ using Newtonsoft.Json;
 
 public class CarrelloRepository
 {
-
     private string folderPath = "Data/Carrello"; //crea per il file json
     public void SalvaCarrello(List<Prodotto> carrello)
     {
@@ -23,7 +22,6 @@ public class CarrelloRepository
 
     public List<Prodotto> CaricaCarrello()
     {
-
         List<Prodotto> prodotti = new List<Prodotto>();
         if (Directory.Exists(folderPath))
         {
@@ -35,7 +33,5 @@ public class CarrelloRepository
             }
         }
         return prodotti;
-
     }
-  
 }

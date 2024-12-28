@@ -62,8 +62,5 @@ public class CarrelloManager
                 $" {prodotti.Nome,-20} {prodotti.Prezzo,-10} {prodotti.Quantita}"
             );
         }
-
-
-
     }
 }
