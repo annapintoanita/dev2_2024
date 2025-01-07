@@ -17,7 +17,7 @@ public class ProdottoRepository
             string filePath = Path.Combine(folderPath, $"{prodotto.Id}.json"); //percorso del file JSON
             string jsonData = JsonConvert.SerializeObject(prodotto, Formatting.Indented);
             File.WriteAllText(filePath, jsonData);
-            Console.WriteLine($"Prodotto salvato in {filePath}: \n");
+            //Console.WriteLine($"Prodotto salvato in {filePath}: \n");
         }
     }
 
@@ -35,7 +35,6 @@ public class ProdottoRepository
             }
         }
         return prodotti;
-
     }
   
 }

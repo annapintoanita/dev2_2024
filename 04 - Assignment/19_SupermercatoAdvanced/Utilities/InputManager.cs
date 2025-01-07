@@ -31,7 +31,7 @@ public static class InputManager
             //sostituisco la virgola con il punto per gestire i decimali
             if (input.Contains(".")) //se l'input contiene la virgola e non contiene il punto
             {
-                input = input.Replace(",", ","); //sostituire la virgola con il punto
+                input = input.Replace(",", "."); //sostituire la virgola con il punto
             }
 
             // try parse per convertire la stringa in un decimale e controllare se l'input è valido

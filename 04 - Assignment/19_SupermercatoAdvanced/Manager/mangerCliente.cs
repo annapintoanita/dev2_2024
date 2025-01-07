@@ -32,7 +32,7 @@ public class ClienteManager // i manager gestiscono i CRUD
         //incrementa il prossimo ID per il prossim cliente
         prossimoId++;
         clienti.Add(cliente);
-        Console.WriteLine($"Prodotto aggiunto con ID: {cliente.Id}");
+        Console.WriteLine($"Cliente aggiunto con ID: {cliente.Id}");
     }
 
     // metodo per visualizzare la lista clienti
@@ -63,6 +63,17 @@ public class ClienteManager // i manager gestiscono i CRUD
         foreach (var cliente in clienti)
         {
             if (cliente.Id == id)
+            {
+                return cliente; 
+            }
+        }
+        return null;
+    }
+     public Cliente TrovaClienteNome(string userName)
+    {
+        foreach (var cliente in clienti)
+        {
+            if (cliente.UserName == userName)
             {
                 return cliente; 
             }

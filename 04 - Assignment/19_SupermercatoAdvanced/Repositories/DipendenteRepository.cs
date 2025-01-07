@@ -17,7 +17,7 @@ public class DipendenteRepository
             string filePath = Path.Combine(folderPath, $"{dipendente.Id}.json"); //percorso del file JSON
             string jsonData = JsonConvert.SerializeObject(dipendente, Formatting.Indented);
             File.WriteAllText(filePath, jsonData);
-            Console.WriteLine($"Dipendente salvato in {filePath}: \n");
+            //Console.WriteLine($"Dipendente salvato in {filePath}: \n");
         }
     }
 

@@ -9,7 +9,7 @@ public class CarrelloManager
     private ProdottoRepository repositoryCatalogo;
     private CarrelloRepository repositoryCarrello;
     private ClienteRepository repositoryCliente;
-    private List <Prodotto> listaCarrello;
+    private List<Prodotto> listaCarrello;
     private int quantita;
 
 
@@ -21,7 +21,7 @@ public class CarrelloManager
         repositoryCliente = new ClienteRepository();
 
         prossimoId = 1;
-        quantita =0;
+        quantita = 0;
 
 
         if (listaProdotti != null)
@@ -62,5 +62,25 @@ public class CarrelloManager
                 $" {prodotti.Nome,-20} {prodotti.Prezzo,-10} {prodotti.Quantita}"
             );
         }
+    }
+    public decimal CalcoloTotale(Cliente clienteSingolo)
+    {
+        decimal calcoloTotale = 0;
+        //per ogni prodotto nel carrello 
+        //sommare il prezzo del prodotto a calcoloTotale
+        foreach (var prodotto in clienteSingolo.Carrello)
+        {
+            if (prodotto.Quantita == 1)
+            {
+                //se i prodotti da sommare sono singoli svolgo l istruzione:
+                calcoloTotale += prodotto.Prezzo;
+            }
+            else
+            {
+                //altrimenti significa che bisogna tenere conto anche della quantità:
+                calcoloTotale += prodotto.Prezzo * prodotto.Quantita;
+            }
+        }
+        return calcoloTotale;
     }
 }

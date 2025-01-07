@@ -23,9 +23,11 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Fjalla+One&family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Playwrite+ES+Deco+Guides&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
         rel="stylesheet">
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Lora:ital,wght@0,400..700;1,400..700&family=Lugrasimo&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Lora:ital,wght@0,400..700;1,400..700&family=Lugrasimo&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -33,6 +35,7 @@
 
 <body>
     <!--inizio della navbar col suo menu-->
+    
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">Supermercato Bootstrap</a>
@@ -42,12 +45,12 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 mt-3">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="Contatti.html">Contatti</a>
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                            <li class="breadcrumb-item active">Contatti</li>
+                          </ol>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
@@ -92,82 +95,89 @@
         </div>
         <div class="offcanvas-body">
             <div>
-
+                <!--tabella del carrello-->
+                <table class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                          <th scope="col">#</th>
+                          <th scope="col">Prodotto</th>
+                          <th scope="col">Prezzo</th>
+                          <th scope="col">Quantità</th>
+                          <th scope="col">Totale</th>
+                        </tr>
+                      </thead>
+                      
+                      <tbody>
+                        
+                        <tr>
+                          <th scope="row">1</th>
+                          <td>calzini invernali di spugna e lana unisex color camel</td>
+                          <td>0</td>
+                          <td>0</td>
+                          <td>0</td>
+                        </tr>
+                        <tr>
+                          <th scope="row">2</th>
+                          <td>prodotto2</td>
+                          <td>0</td>
+                          <td>0</td>
+                          <td>0</td>
+                        </tr>
+                        <tr>
+                          <th scope="row">3</th>
+                          <td>prodotto3</td>
+                          <td>0</td>
+                          <td>0</td>
+                          <td>0</td>
+                        </tr>
+                      </tbody>
+                  </table>
+                  <!--fine tabella carrello-->
             </div>
         </div>
     </div>
-    <!-- carosello sotto l'intestazione -->
-    <div class="container">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6 d-flex flex-column ">
-                    <div class="col">                      
-                        <div id="carouselExampleIndicators" class="carousel slide">
-                            <div class="carousel-indicators">
-                              <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                              <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                              <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-                            </div>
-                            <div class="carousel-inner">
-                              <div class="carousel-item active">
-                                <img src="https://img.joomcdn.net/5ba0c59ac5bdb4750ec4c92a752306d5ddbccaf6_original.jpeg" class="d-block w-100" alt="...">
-                              </div>
-                              <div class="carousel-item">
-                                <img src="https://img.joomcdn.net/f5cc4408e4c7cc959130bda4907c7bb5e64688fd_original.jpeg" class="d-block w-100" alt="...">
-                              </div>
-                              <div class="carousel-item">
-                                <img src="https://img.joomcdn.net/4f6f87c5eba655b11014fcc610baef5656cab2b5_original.jpeg" class="d-block w-100" alt="...">
-                              </div>
-                            </div>
-                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-                              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                              <span class="visually-hidden">Previous</span>
-                            </button>
-                            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-                              <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                              <span class="visually-hidden">Next</span>
-                            </button>
-                          </div>  
-                    </div>
-                </div>
 
-                <div class="col-md-6 d-flex flex-column">
-                    <h2 class="descrizioneTitoloProdotto">Descrizione</h2>
-                    <hr style="margin-top: 10px;">
-                    <div class="mb-4">
-                        <h6>CALZINI MORBIDI E CALDI: </h6>
-                            <p class="descrizioneProdotto">Calzini di lana super spessi, pensati per il freddo, molto morbidi e caldi. Mantengono i piedi caldi nelle stagioni fredde.</p>
-                        
-                        <h6>STILE DI COPPIA:</h6>
-                         <p class="descrizioneProdotto">Calzini di lana spessa unisex. </p>
-                        
-                        <h6>MULTIFUNZIONE:</h6>
-                          <p class="descrizioneProdotto">La lana soffice foderata all'interno le rende morbide e confortevoli, mantengono i piedi e le dita dei piedi calde tutto il giorno, il colore semplice può essere facilmente abbinato ai tuoi outfits. Sono adatte per la stagione invernale.</p>
-                        
-                        <h6>OTTIMI COME IDEA REGALO:</h6>
-                         <p class="descrizioneProdotto">Questi calzini invernali in lana spessa sono il regalo perfetto per Natale o per l'uso quotidiano. È un grande regalo in inverno per familiari e amici.</p>
-                        <h6>MISURE:</h6>
-                        <p class="descrizioneProdotto">
-                        XL, lunghezza 22,5 cm-24,5 cm
-                        </p>
-                        <p class="descrizioneProdotto">
-                        XXL, lunghezza 25.0cm-28cm
-                        </p>
-                        <h6>Genere:</h6> <p class="descrizioneProdotto">Calzini</p>
-                        
-                        <h6>Materiale:</h6> <p class="descrizioneProdotto">Spugna e lana</p>
-                       
-                      <h6>Avviso: </h6>
-                      <p class="descrizioneProdotto">Il pacchetto include: 3 paia. 
-                        Si prega di consentire un errore di 1-3 cm dovuto alla misurazione manuale.
-                        <h6>Lavaggio:</h6> <p class="descrizioneProdotto">Lavare a mano a freddo o in lavatrice, Lavare a secco, Asciugare all'ombra, Non candeggiare.</p>
+<!-- ho creato due colonne per mettere le informazioni e il form di contatto uno di fianco all'altro e aggiunto i margini-->
+    <div class="container mt-4">
+        <div class="row">
+            <!-- Contatti -->
+            <div class="col-lg-6">
+                <h2 class="titoloContatti">I nostri contatti</h2>
+                <hr style="margin-top: 10px;">
+                <h5>Indirizzo:</h5>
+                <p class="address">Piazza Matteotti 2/3 b - Genova 16123</p>
+                <h5>Numero di telefono:</h5>
+                <p class="telefono">0105879821</p>
+                <h5>Email:</h5>
+                <p class="email">SupermercatoBootstrap@gmail.com</p>
+            </div>
+            <!-- Form di contatto -->
+            <div class="col-lg-6">
+                <h2>Contattaci</h2>
+                <form>
+                    <div class="mb-3">
+                        <label for="nome" class="form-label">Nome</label>
+                        <input type="text" class="form-control" id="nome" placeholder="Inserisci il tuo nome" required>
                     </div>
-                </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="email" placeholder="Inserisci la tua email" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="messaggio" class="form-label">Messaggio</label>
+                        <textarea class="form-control" id="messaggio" rows="5" placeholder="Scrivi il tuo messaggio"
+                            required></textarea>
+                    </div>
+                    <div class="mb-3">
+                     <button type="submit" class="btn btn-primary w-50">Invia</button>
+                   </div>
+                </form>
             </div>
         </div>
     </div>
     
-   
+    
+
 
     <!--INIZIO DEL FOOTER-->
     <footer>
@@ -179,7 +189,7 @@
 
                     <hr>
                     <p>Copyright</p>
-                    <p><a href="Contatti.html"><i class="bi bi-telephone-fill"></i> Contatti</a></p>
+                    <p><a href="#"></i> Contatti</a></p>
                     <p><a href="#">Chi siamo</a></p>
                 </div>
 

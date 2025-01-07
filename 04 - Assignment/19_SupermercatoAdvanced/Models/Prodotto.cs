@@ -8,4 +8,5 @@
         public int Giacenza { get; set; }
         public int Quantita { get; set; }
         public string Categoria { get; set; }
+        public string Data { get; set; } = null;
     }

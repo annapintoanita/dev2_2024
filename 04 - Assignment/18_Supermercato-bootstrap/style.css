@@ -75,4 +75,22 @@ p.descrizioneProdotto {
   font-weight: weight;
   font-style: normal;
 }
+table.table-striped.table.table-striped{
+  background-color: #344E41;
+}
+.header{
+  background-color: red;
+  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+h2.titoloContatti{
+  font-family: "Libre Baskerville", serif;
+  font-weight: 700;
+  font-style: normal;
+  text-align: center;
+  margin-top: 30px;
+}
+a{
+text-decoration: none;
+color: white;
+}
 

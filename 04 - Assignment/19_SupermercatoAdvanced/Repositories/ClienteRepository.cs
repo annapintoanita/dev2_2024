@@ -17,7 +17,7 @@ public class ClienteRepository
             string filePath = Path.Combine(folderPath, $"{cliente.Id}.json"); //percorso del file JSON
             string jsonData = JsonConvert.SerializeObject(cliente, Formatting.Indented);
             File.WriteAllText(filePath, jsonData);
-            Console.WriteLine($"Prodotto salvato in {filePath}: \n");
+            //Console.WriteLine($"Categoria salvato in {filePath}: \n");
         }
     }
     public void SalvaClienteSingolo(Cliente cliente)
@@ -31,7 +31,7 @@ public class ClienteRepository
         string filePath = Path.Combine(folderPath, $"{cliente.Id}.json"); //percorso del file JSON
         string jsonData = JsonConvert.SerializeObject(cliente, Formatting.Indented);
         File.WriteAllText(filePath, jsonData);
-        Console.WriteLine($"Prodotto salvato in {filePath}: \n");
+        //Console.WriteLine($"Prodotto salvato in {filePath}: \n");
     }
 
     public List<Cliente> CaricaClienti()

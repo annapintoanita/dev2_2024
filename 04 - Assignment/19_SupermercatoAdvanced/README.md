@@ -98,11 +98,11 @@ flowchart TD
 <summary>Ho completato:</summary>
 
 - [ ] Cassa
-- [ ] Categoria
+- [x] Categoria
 - [x] Cliente
 - [x] Dipendente
 - [x] Prodotto
-- [ ] Purchase
+- [x] Purchase
 </details>
 
 ### Ho creato la cartella Repositories in cui ho inserito i repositories:
@@ -110,29 +110,37 @@ flowchart TD
 - ClienteRepository.cs
 - DipendenteRepository.cs
 - ProdottoRepository.cs
+- PurchaseRepository.cs
+- CategoriaRepository.cs
 
 <details>
 <summary>Ho completato:</summary>
 
-- [ ] CarrelloRepository.cs
-- [ ] ClienteRepository.cs
-- [ ] DipendenteRepository.cs
-- [ ] ProdottoRepository.cs
+- [x] CarrelloRepository.cs
+- [x] ClienteRepository.cs
+- [x] DipendenteRepository.cs
+- [x] ProdottoRepository.cs
+- [x] PurchaseRepository.cs
+- [x] CategoriaRepository.cs
 </details>
 
 ### Ho creato la cartella Manager per:                                 
 - ManagerCarrello.cs                                              
 - ManagerCliente.cs                                                     
 - ManagerDipendente.cs                                                
-- ManagerProdotto.cs    
+- ManagerProdotto.cs  
+- ManagerPurchase.cs  
+- ManagerCategoria.cs
 
 <details>
 <summary>Ho completato:</summary>
 
-- [ ] ManagerCarrello.cs
-- [ ] ManagerCliente.cs
-- [ ] ManagerDipendente.cs 
-- [ ] ManagerProdotto.cs  
+- [x] ManagerCarrello.cs
+- [x] ManagerCliente.cs
+- [x] ManagerDipendente.cs 
+- [x] ManagerProdotto.cs 
+- [x] ManagerPurchase.cs
+- [x] ManagerCategoria.cs
 </details> 
 
 ### Ho inserito i menu per:                                          
@@ -140,12 +148,13 @@ flowchart TD
 - Il cliente                                                       
 - Il magazziniere                                                  
 - L' Amministratore 
+- Il cassiere
 
 <details>
 <summary>Ho completato:</summary>                                            
 
  - [ ] Il cassiere
- - [ ] Il cliente
+ - [x] Il cliente
  - [x] Il magazziniere
  - [x] L' Amministratore
  </details> 
@@ -163,7 +172,7 @@ public static double LeggiDouble(string messaggio, double min = double.MinValue,
             string input = Console.ReadLine();
             if (input.Contains(","))
             {
-                input = input.Replace(".", ",");
+                input = input.Replace(".", ".");
 
                 // try parse per convertire la stringa in un double e controllare se l'input è valido
                 if (double.TryParse(input, out valore) && valore >= min && valore <= max)
@@ -199,7 +208,7 @@ public static double LeggiDouble(string messaggio, double min = double.MinValue,
 - [x] Completato tutto il menu dell'amministratore
 - [X] Ho aggiunto il bool ContinuaCliente ed ho sistemato il while all'interno dell'if.
 
-Riscontravo un errore in ManagerCarrello, "Quantita" : 'Prodotto' non contiene una definizione di 'Quantita' e non è stato trovato alcun metodo di estensione accessibile 'Quantita' che accetta un primo argomento di tipo 'Prodotto'. Probabilmente manca una direttiva using o un riferimento all'assembly.
+Riscontravo un errore in ManagerCarrello, "Quantita" : `'Prodotto' non contiene una definizione di 'Quantita' e non è stato trovato alcun metodo di estensione accessibile 'Quantita' che accetta un primo argomento di tipo 'Prodotto'. Probabilmente manca una direttiva using o un riferimento all'assembly.`
 
 ```csharp
     public void VisualizzaCarrello(List<Prodotto> listaCarrello)
@@ -225,7 +234,7 @@ public int Quantita { get; set; }
 ```
 In questo modo verrà visualizzato nel file del prodotto anche la quantità.
 
-Sono andata a creare due nuovi metodi nella in ClienteRepository che sono 
+Sono andata a creare due nuovi metodi in ClienteRepository che sono 
 ```csharp
 public void SalvaClienteSingolo(Cliente cliente)
     {
@@ -233,8 +242,6 @@ public void SalvaClienteSingolo(Cliente cliente)
         {
             Directory.CreateDirectory(folderPath);
         }
-
-
         string filePath = Path.Combine(folderPath, $"{cliente.Id}.json"); //percorso del file JSON
         string jsonData = JsonConvert.SerializeObject(cliente, Formatting.Indented);
         File.WriteAllText(filePath, jsonData);
@@ -252,7 +259,7 @@ public void SalvaClienteSingolo(Cliente cliente)
         return null;//se non lo trova, ritorna l'avviso che non l'ha trovato
     }
 ```
-Ho creato  nel ManagerProdotto il metodo `StampaProdottiCliente`per mostrare al cliente solo il nome, il prezzo e la categoria dei prodotti.
+Ho creato nel ManagerProdotto il metodo `StampaProdottiCliente`per mostrare al cliente solo il nome, il prezzo e la categoria dei prodotti.
 ```csharp
 public void StampaProdottiCliente()
 {
@@ -278,5 +285,41 @@ Ho implementato il menu del cliente:
 - [x] Elimina prodotto dal carrello.
 
 - Attualmente quando elimino un prodotto dal carrello elimino qualunque sia la quantità inserita mentre più in là vorrei inserire la quantita specifica da eliminare.
+- [x] Modifica effettuata.
 
-- Vorrei che in visualizza carrello si vedesse anche il totale da pagare.
+- Vorrei che in visualizza carrello si vedesse anche il totale da pagare, attualmente si vede solo il singolo prezzo del prodotto.
+- [x] Modifica effettuata.
+
+Ho implementato il menu del cassiere con
+- [x] Visualizza il carrello del cliente.
+- [x] Aggiungi prodotto al carrello del cliente.
+- [x] Elimina prodotto dal carrello del cliente.
+(aggiunte superflue, è da implementare bene)
+
+Ho implementato il menu del cliente :
+- [x] Decremento della quantità del prodotto dalla giacenza.
+- [x] Incremento della quantita del prodotto alla giacenza nel caso venisse rimosso dal carrello.
+- [x] Procedimento del pagamento.
+- [x] Aggiunta della data di acquisto nello StoricoAcquisti.
+- [x] Aggiunta della data e dell'ora di acquisto nel Purchase.
+
+Da sistemare :
+- [x] Il cliente non deve essere creato manualmente, ma deve crearsi dall'input dell'utente.
+- [x] L'amministratore non deve creare il cliente.
+quindi eliminare dal menu le voci che riguardano il cliente.
+
+Da fare ancora :
+- [ ] Cassa.
+- [ ] Menu cassiere.
+- [x] Categorie.
+ Per adesso sono riuscita ad assegnare la categoria ai prodotti e a salvarli nella cartella Prodotti, ma devo:
+ - inserire ancora l'id
+ - implementare tutte le sue funzioni nel main
+
+ ### In sintesi, di tutto il programma mi mancano:
+ - Cassa.
+ - Cassiere (con relativo menu).
+ - Implementare le funzioni della categoria nel main.
+Non riesco a creare la cartella Categoria in Data
+
+
