@@ -1,7 +1,53 @@
 {
   "Id": 3,
   "UserName": "Anita",
-  "Carrello": [],
+  "Carrello": [
+    {
+      "Id": 1,
+      "Nome": "fagiolini",
+      "Prezzo": 2.99,
+      "Giacenza": 25,
+      "Quantita": 1,
+      "Categoria": null,
+      "Data": null
+    },
+    {
+      "Id": 20,
+      "Nome": "crostini",
+      "Prezzo": 2.50,
+      "Giacenza": 496,
+      "Quantita": 1,
+      "Categoria": null,
+      "Data": null
+    },
+    {
+      "Id": 1,
+      "Nome": "fagiolini",
+      "Prezzo": 2.99,
+      "Giacenza": 25,
+      "Quantita": 1,
+      "Categoria": null,
+      "Data": null
+    },
+    {
+      "Id": 1,
+      "Nome": "fagiolini",
+      "Prezzo": 2.99,
+      "Giacenza": 25,
+      "Quantita": 1,
+      "Categoria": null,
+      "Data": null
+    },
+    {
+      "Id": 1,
+      "Nome": "fagiolini",
+      "Prezzo": 2.99,
+      "Giacenza": 25,
+      "Quantita": 1,
+      "Categoria": null,
+      "Data": null
+    }
+  ],
   "StoricoAcquisti": [
     [
       {

@@ -2,8 +2,8 @@
   "Id": 23,
   "Nome": "stracchino",
   "Prezzo": 2.45,
-  "Giacenza": 300,
-  "Quantita": 0,
+  "Giacenza": 299,
+  "Quantita": 1,
   "Categoria": null,
   "Data": null
 }

@@ -13,7 +13,9 @@
 //INSERT INTO categorie (nome) VALUES ('verdura');
 //Runtime error: UNIQUE constraint failed: categorie.nome (19)
 //SELECT * FROM prodotti JOIN categorie ON prodotti.id_categoria = categorie.id
-//.mode column
+//SELECT * FROM prodotti ORDER BY DESC;
+///SELECT * FROM prodotti ORDER BY ASC;
+//.mod column
 //SELECT * FROM PRODOTTI JOIN categorie ON prodotti.id_categoria = categorie.id; 
 /*id  nome  prezzo  quantita  id_categoria  id  nome  
 --  ----  ------  --------  ------------  --  ------

@@ -2,8 +2,8 @@
   "Id": 1,
   "Nome": "fagiolini",
   "Prezzo": 2.99,
-  "Giacenza": 30,
-  "Quantita": 5,
+  "Giacenza": 25,
+  "Quantita": 1,
   "Categoria": null,
   "Data": null
 }

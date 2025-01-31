@@ -42,9 +42,7 @@ public static class InputManager
             else
             {
                 Console.WriteLine($"errore: inserire un numero decimale comprso tra {min} e {max}");
-
             }
-
         }
     }
 
@@ -81,7 +79,6 @@ public static class InputManager
             {
                 Console.WriteLine("errore: rispondere con 's' o 'n' ");
             }
-
         }
     }
     public static double LeggiDouble(string messaggio, double min = double.MinValue, double max = double.MaxValue)
@@ -91,8 +88,6 @@ public static class InputManager
         {
             Console.Write($"{messaggio}");
             string input = Console.ReadLine();
-
-
             if (input.Contains(","))
             {
                 input = input.Replace(",", ",");
@@ -107,7 +102,6 @@ public static class InputManager
                     Console.WriteLine($"errore: inserire un numero double compreso tra {min} e {max}");
 
                 }
-
             }
         }
     }

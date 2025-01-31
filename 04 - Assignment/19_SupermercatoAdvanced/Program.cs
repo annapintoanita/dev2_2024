@@ -1,6 +1,4 @@
 ﻿
-using System.ComponentModel.DataAnnotations;
-using System.Runtime.InteropServices;
 using Newtonsoft.Json;
 class Program
 {
@@ -178,7 +176,7 @@ class Program
                 }
             }
 
-            if (identificazione == "2")
+            if (identificazione == "2") // cliente
             {
                 string userName = InputManager.LeggiStringa("\n UserName: ");
                 bool userNameTrovato = false;
@@ -246,7 +244,7 @@ class Program
                             managerCarrello.VisualizzaCarrello(clienteSingolo.Carrello); //il cliente visualizza prima il suo carrello
                             string nomeProdottoDaEliminare = InputManager.LeggiStringa("\n Quale prodotto vuoi eliminare?: ");
                             bool trovato = false;// creo la variabile per il controllo dell'esistenza del prodotto in 
-                                                 //modo che possa diventare true se si trova
+                                                 // modo che possa diventare true se si trova
                             var prodottoDaEliminare = new Prodotto();
                             int quantitaEliminata = 0;
                             int quantitaDaEliminare = 0;

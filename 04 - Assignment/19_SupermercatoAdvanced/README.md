@@ -320,6 +320,6 @@ Da fare ancora :
  - Cassa.
  - Cassiere (con relativo menu).
  - Implementare le funzioni della categoria nel main.
-Non riesco a creare la cartella Categoria in Data
+ - Sconti
 
 
