@@ -14,6 +14,6 @@ public class DettaglioProdottoModel : PageModel
     public void OnGet(Prodotto prodotto) //sarebbe più giusto mettere i vari argomenti qui mentre 
                                          //intero solo se vogliamo prendere più campi (che mi servono)
     {
-        Prodotto = prodotto ; // var non e necessario in quanto il tipo e gia specificato nel metodo
+        Prodotto = prodotto  ; // var non e necessario in quanto il tipo e gia specificato nel metodo
     } 
 }
