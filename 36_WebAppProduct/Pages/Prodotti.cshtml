@@ -1,0 +1,33 @@
+@page
+@model ProdottiModel
+@{
+    ViewData["Title"]= "Prodotti";
+}
+<h1>@ViewData["Title"]</h1>
+
+<div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Prezzo</th>
+                <th>Dettaglio</th>
+                <!--<th>Immagine</th>-->
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var prodotto in Model.Prodotti)
+            {
+                <tr>
+                    <td>@prodotto.Nome </td>
+                    <td>@prodotto.Prezzo</td>
+                    <td>@prodotto.Dettaglio</td>
+                    <td><img src= "@prodotto.Immagine" alt= "prodotto.Nome" width= "200" /></td>
+                    <td><a asp-page="Prodotti">Torna a Prodotti</a>
+                    <td><a asp-page="ProdottoDettaglio" asp-route-id= "@prodotto.Nome" asp-route-dettaglio="@prodotto.Dettaglio" asp-route-prezzo="@prodotto.Prezzo" asp-route-immagine="@prodotto.Immagine">Dettaglio</a>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+</div>
