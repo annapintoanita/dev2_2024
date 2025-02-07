@@ -12,7 +12,7 @@
 </div>
 
 <div>
-    <form method="get">
+    <form method="get"> @*get indica che stiamo passando dati tramite url e quindi sono visibili*@
         <div class="form-group">
             <label for="minPrezzo">Min Prezzo</label>
             <input type="text" class="form-control" name="minPrezzo">
@@ -20,7 +20,7 @@
         <div class="form-group">
             <label for="maxPrezzo">Max Prezzo</label>
             <input type="text" class="form-control" name="maxPrezzo">
-            <button type="submit" class="btn btn-primary">Filtra</button>
+            <button type="submit" class="btn btn-primary">Filtra</button> @*il submit esegue le cose che ci sono scritte nell'onget del modello*@
         </div>
     </form>
 </div>
@@ -40,9 +40,18 @@
             {
                 <tr>
                     <td><img src="@prodotto.Immagine" alt="@prodotto.Nome" width="100" height="100" /></td>
-                    <td class="text-white">@prodotto.Nome</td>
-                    <td class="text-white">@prodotto.Prezzo</td>
-                    <td class="text-white"><a asp-page="ProdottoDettaglio" asp-route-id="@prodotto.Id">@prodotto.Dettaglio</a></td>
+                    <td class="text-dark">@prodotto.Nome</td>
+                    <td>
+                    @if (prodotto.Prezzo < 50)
+                    {
+                        <p class="text-success">@prodotto.Prezzo</p>
+                    }
+                    else
+                    {
+                       <p class="text-warning">@prodotto.Prezzo</p>
+                    }
+                    </td>
+                    <td class="text-dark"><a asp-page="ProdottoDettaglio" asp-route-id="@prodotto.Id">@prodotto.Dettaglio</a></td>
                     <td> <a asp-page="ModificaProdotto" asp-route-id="@prodotto.Id"><div class="btn btn-primary"><strong>Modifica prodotto</strong></div></a></td>
                     <td> <a asp-page="CancellaProdotto" asp-route-id="@prodotto.Id"><div class="btn btn-primary"><strong>Cancella prodotto</strong></div></a></td>
                 </tr>
@@ -52,10 +61,14 @@
 </div>
 
 <div>
+    @*modulo per mantenere il valore del filtro tra una pagina e l'altra*@
+    @*request.query e una variabile che contiene i dati passati tramite url*@
     <form method="get">
         <input type="hidden" name="minPrezzo" value="@Request.Query["minPrezzo"]" />
         <input type="hidden" name="maxPrezzo" value="@Request.Query["maxPrezzo"]" />
         @for (int i = 1; i <= Model.numeroPagine; i++)
+        @*stampiamo i bottoni che servono con il ciclo for.*@
+        @*utilizziamo l'indice i per visualizzare il nome del bottone*@
         {
             <button type="submit" class="btn btn-primary" name="pageIndex" value="@i">@i</button>
         }

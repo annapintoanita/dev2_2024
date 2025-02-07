@@ -14,11 +14,12 @@ public class CancellaProdottoModel : PageModel
     }
 
     public Prodotto Prodotto;
+    //qui mi serve l'onget per visualizzare i dati del prodotto che sto in questo caso eliminando.
     public void OnGet(int id)
     {
-        string filePath = "wwwroot/prodotti.json";
+        string filePath = "wwwroot/json/prodotti.json";
         var json = System.IO.File.ReadAllText(filePath);
-        var prodotti = JsonConvert.DeserializeObject<IEnumerable<Prodotto>>(json);
+        var prodotti = JsonConvert.DeserializeObject<List<Prodotto>>(json);
 
         foreach (var prodotto in prodotti)
         {
@@ -29,10 +30,10 @@ public class CancellaProdottoModel : PageModel
             }
         }
     }
-
+    //uso for anziche foreach perchè abbiamo bisogno solo dell'indice.
     public IActionResult OnPost(int id)
     {
-        string filePath = "wwwroot/prodotti.json";
+        string filePath = "wwwroot/json/prodotti.json";
         var json = System.IO.File.ReadAllText(filePath);
         var prodotti = JsonConvert.DeserializeObject<List<Prodotto>>(json);
 
@@ -45,7 +46,7 @@ public class CancellaProdottoModel : PageModel
             }
         }
 
-        System.IO.File.WriteAllText("wwwroot/prodotti.json", JsonConvert.SerializeObject(prodotti, Formatting.Indented));
+        System.IO.File.WriteAllText("wwwroot/json/prodotti.json", JsonConvert.SerializeObject(prodotti, Formatting.Indented));
         return RedirectToPage("Prodotti");
     }
 }

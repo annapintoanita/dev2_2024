@@ -1,10 +1,4 @@
-using System.Collections.Generic;
-using System.Text.Json;
-using System;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.Extensions.Logging;
-using System.IO;
 using Newtonsoft.Json;
 
 public class ProdottiModel : PageModel
@@ -13,19 +7,22 @@ public class ProdottiModel : PageModel
 
     public ProdottiModel(ILogger<ProdottiModel> logger)
     {
-        _logger = logger;
+        _logger = logger;//visualizza i messaggi di log, mi mostra in console i messaggi di bug
+                        //li stampa ma quando eseguo l'azione sulla pagina interessata.
     }
 
-    public int numeroPagine { get; set; }
-    public IEnumerable<Prodotto> Prodotti { get; set; }
-    string filePath;
-    public void OnGet(decimal? minPrezzo, decimal? maxPrezzo, int? pageIndex)
+    public int numeroPagine { get; set; }//proprietà del modello che possono essere
+                                         // lette e scritte.
+    public IEnumerable<Prodotto>? Prodotti { get; set; } //IEnumerable è una condizione generica,ad esempio in questo caso
+                                                        //possiamo fare una lista senza sapere prima come è fatta.
+    string? filePath; //variabile locale del modello, memorizza qualcosa.
+    public void OnGet(decimal? minPrezzo, decimal? maxPrezzo, int? pageIndex)//onget è un metodo che viene richiamato quando viene caricata una pagina.
     {
-        filePath = "wwwroot/prodotti.json";
-        string json = System.IO.File.ReadAllText(filePath);
-        Prodotti = JsonConvert.DeserializeObject<IEnumerable<Prodotto>>(json);
+        filePath = "wwwroot/json/prodotti.json"; // stiamo assegnando la rotta wwwroot/prodotti.json alla variabile filePath.
+        string json = System.IO.File.ReadAllText(filePath);// leggo cio che c'è nel filePath wwwroot/prodotti.json.
+        Prodotti = JsonConvert.DeserializeObject<List<Prodotto>>(json);// deserializziamo il file json in una lista prodotto.
 
-        var allProdotti = Prodotti;
+        //var allProdotti = Prodotti; 
 
         /*{
             Prodotti = new List<Prodotto>
@@ -37,17 +34,17 @@ public class ProdottiModel : PageModel
             _logger.LogInformation("Prodotti caricati");
 
              //inizializimo la lista filtrata
-        var prodottiFiltrati = new List<Prodotto>();
+        var prodottiFiltrati = new List<Prodotto>(); //nuova lista in cui ci sono solo i prodotti che soddisfano i criteri
 
-        foreach (var prodotto in allProdotti)
+        foreach (var prodotto in Prodotti)
         {
-            bool aggiungi = true;
+            bool aggiungi = true; // variabile che dice se aggiungere o meno il prodotto alla lista filtrata.
 
-            if (minPrezzo.HasValue)
+            if (minPrezzo.HasValue) //hasvalue per controllare se il valore è stato assegnato.
             {
-                if (prodotto.Prezzo < minPrezzo.Value)
+                if (prodotto.Prezzo < minPrezzo.Value)//value è il corrispottivo di hasvalue e restituisce il valore del nullable
                 {
-                    aggiungi = false;
+                    aggiungi = false;// non aggiunge il prodotto alla lista filtrata.
                 }
             }
 
@@ -66,12 +63,13 @@ public class ProdottiModel : PageModel
         }
         Prodotti = prodottiFiltrati;
 
-        numeroPagine = (int)Math.Ceiling(Prodotti.Count() / 6.0);
-        // calcola il numero di pagine Math.eiling arrotonda il numero di pagine all'interno del pià vicino 
-        // Prodotti,Count restituisc il numero di elementi nella lista Prodotti
+        numeroPagine = (int)Math.Ceiling(Prodotti.Count() / 6.0);//(int)per fare un casting esplicito ad un numero intero.
+        // Math.ceiling arrotonda il numero di pagine all'interno del più vicino 
+        // Prodotti.Count restituisce il numero di elementi nella lista Prodotti
         // 6.0 è il numero di prodotti per pagina
     
         Prodotti = Prodotti.Skip(((pageIndex ?? 1) - 1) * 6).Take(6);
+        // '??' operatore di coalescenza se pageindex è nullo ci restituisce 1
         // esegue la paginazione
         // skip salta i primi ((pageIndex ?? 1) - 1) * 6 elementi
         // take prende i successivi 6 prodotti

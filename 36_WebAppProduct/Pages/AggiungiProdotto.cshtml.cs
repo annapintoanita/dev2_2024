@@ -14,17 +14,19 @@ public class AggiungiProdottoModel : PageModel
         _logger = logger;
     }
 
-    public void OnGet()
+    public void OnGet()// onget è vuoto perchè non serve che al caricamento della pagina vengano visualizzati i dati del prodotto.
     {
     }
 
 
-    // Metodo che viene eseguito quando si invia un modulo (POST) con nome, prezzo e dettaglio del prodotto.
-    public IActionResult OnPost(string nome, decimal prezzo, string dettaglio,string immagine)
+    //Metodo che viene eseguito quando si invia un modulo (POST) con nome, prezzo e dettaglio del prodotto.
+    //IActionResult è il tipo di dato che indica che metodo restituisce un risultato che può essere una View o un redirect.
+    public IActionResult OnPost(string nome, decimal prezzo, string dettaglio)//onpost modifica le impostazioni
+
     {
 
         // Legge il contenuto del file JSON che contiene i dati dei prodotti.
-        var json = System.IO.File.ReadAllText("wwwroot/prodotti.json");
+        var json = System.IO.File.ReadAllText("wwwroot/json/prodotti.json");
 
         // Deserializza il contenuto JSON in una lista di oggetti di tipo Prodotto.
         var prodotti = JsonConvert.DeserializeObject<List<Prodotto>>(json);
@@ -33,14 +35,21 @@ public class AggiungiProdottoModel : PageModel
         var id = 1;
         if (prodotti.Count > 0)
         {
-            id = prodotti[prodotti.Count-1].Id +1;
+            id = prodotti[prodotti.Count - 1].Id + 1;
         }
 
         // Aggiunge un nuovo prodotto alla lista con i valori passati tramite il form (nome, prezzo, dettaglio).
-        prodotti.Add(new Prodotto { Id = id, Nome = nome, Prezzo = prezzo, Dettaglio = dettaglio });
+        prodotti.Add(new Prodotto
+        {
+            Id = id,
+            Nome = nome,
+            Prezzo = prezzo,
+            Dettaglio = dettaglio
+        });
 
-        // Scrive la lista aggiornata di prodotti nel file JSON, serializzandola di nuovo in formato JSON.
-        System.IO.File.WriteAllText("wwwroot/prodotti.json", JsonConvert.SerializeObject(prodotti, Formatting.Indented));
+        // Scrive la lista aggiornata di prodotti nel file JSON, serializzandola di nuovo l'informazione in formato JSON.
+        // crea il file partendo dalla lista, lo serializza e lo formatta.
+        System.IO.File.WriteAllText("wwwroot/json/prodotti.json", JsonConvert.SerializeObject(prodotti, Formatting.Indented));
 
         // Reindirizza l'utente alla pagina "Prodotti" dopo aver aggiunto il nuovo prodotto.
         return RedirectToPage("Prodotti");
