@@ -1,0 +1,19 @@
+@*@page
+@model FornitoreModel
+@{
+    ViewData["Title"] = "Aggiungi Fornitore";
+}
+<form method="post">
+    <div class="form-group">
+        <label for="fornitore">Fornitore</label>
+        <select class="form-control" name="fornitore">
+            <option value="">--- Selezione Fornitore ---</option>
+            @foreach (var fornitore in Model.Fornitore)
+            {
+                <option value="@fornitore">@fornitore</option>
+            }
+        </select>
+
+    </div>
+</form>
+*@

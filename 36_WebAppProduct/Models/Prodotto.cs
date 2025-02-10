@@ -9,4 +9,5 @@ public class Prodotto
     public string Categoria { get; set; }
     //public string DataInserimento {get; set; }
     public DateTime DataInserimento { get; set; }
+    public string Fornitore {get; set;}
 }

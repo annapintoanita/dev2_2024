@@ -24,7 +24,9 @@
         </div>
     </form>
 </div>
-
+<br>
+<p>@TempData["Messaggio"]</p>
+<br>
 <div>
     <table class="table">
         <thead>
@@ -73,6 +75,8 @@
             <button type="submit" class="btn btn-primary" name="pageIndex" value="@i">@i</button>
         }
     </form>
+
+    
    
     
 </div>
@@ -96,6 +100,22 @@
     <img src=@prodotto.Immagine" width="100" height="100"/> *@
 
     @* TempData
-       VieBag
+       ViewBag
        .Keep
        .Peek *@
+
+@*il TempData è un dizionario di chiave-valore e viene utilizzato per passare un messaggio temporaneo in una pagina.
+  il metodo Keep ci aiuta a mantenere questo messaggio mentre il metodo Peek fa la cosa opposta, permette di cancellarlo una volta lanciato.
+  Permette di passare dati tra OnPost e OnGet senza perdere informazioni.
+  Viene automaticamente cancellato dopo essere stato letto (a meno di usare Keep() o Peek()).
+  Il Keep va usato nel metodo OnGet, prima di leggere il valore, per mantenere il valore anche dopo il primo accesso. Il Peek permette di leggere 
+  il valore senza consumarlo, quindi sarà ancora disponibile nella richiesta successiva.
+  Il keep deve essere inserito prima di leggere il valore, nel metodo OnGet oppure:
+  var message = TempData.Peek("Message"); Così il valore non verrà eliminato subito dopo essere stato letto.*@
+
+       @*Sono andata sul cs di AggiungiProdotto e sopra la riga dell'OnGet ho aggiunto [TempData] e poi sotto, la proprieta Messaggio
+        e nella riga prima del return redirect ho aggiunto  Messaggio = "sono disperata"; ora l ho modificato
+        TempData.Keep(Messaggio); 
+        "sono disperata" è un messaggio scherzoso, riferendoci all'aggiungi prodotto il messaggio sarebbe in realtà 
+        "prodotto aggiunto con successo". Poi sono tornata su
+        prodotti.cshtml ed ho inserito   <p>@TempData["Messaggio"]</p> sotto la fine del form ma prima della tabella (dopo il filtra di filtra prodotti)"*@

@@ -38,6 +38,18 @@
             }
             </select>
             <div class="form-group">
+                <label for="fornitore">Fornitore</label>
+                <select class="form-control" name="fornitore">
+                    <option value="@Model.Prodotto.Fornitore">@Model.Prodotto.Fornitore</option>
+                    @foreach (var fornitore in Model.Fornitori)
+                    {
+                        <option value="@fornitore">@fornitore</option>
+                    }
+                </select>
+
+            </div>
+
+            <div class="form-group">
             <label for="dataInserimento">Data Inserimento prodotto</label>
             <input type="text" class="form-control" name="dataInserimento" value="@Model.Prodotto.DataInserimento" />
         </div>
