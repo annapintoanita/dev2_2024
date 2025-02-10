@@ -7,5 +7,6 @@ public class Prodotto
     public string Immagine { get; set; }
      public int Quantita { get; set; }
     public string Categoria { get; set; }
-
+    //public string DataInserimento {get; set; }
+    public DateTime DataInserimento { get; set; }
 }

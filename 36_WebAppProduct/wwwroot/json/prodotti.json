@@ -6,7 +6,8 @@
     "Dettaglio": "Dettaglio 9",
     "Immagine": "https://img.joomcdn.net/f5cc4408e4c7cc959130bda4907c7bb5e64688fd_original.jpeg",
     "Quantita": 0,
-    "Categoria": null
+    "Categoria": "Abbigliamento",
+    "DataInserimento": "2025-02-10T11:40:02.580335+01:00"
   },
   {
     "Id": 6,
@@ -15,7 +16,8 @@
     "Dettaglio": "Dettaglio 4",
     "Immagine": "https://dummyimage.com/600x400/343a40/fff",
     "Quantita": 0,
-    "Categoria": "Elettronica"
+    "Categoria": "Elettronica",
+    "DataInserimento": "2025-02-10T11:40:02.580335+01:00"
   },
   {
     "Id": 6,
@@ -24,7 +26,8 @@
     "Dettaglio": "Dettaglio 4",
     "Immagine": "https://dummyimage.com/600x400/343a40/fff",
     "Quantita": 0,
-    "Categoria": "Elettronica"
+    "Categoria": "Elettronica",
+    "DataInserimento": "2025-02-10T11:40:02.580335+01:00"
   },
   {
     "Id": 6,
@@ -33,7 +36,8 @@
     "Dettaglio": "Dettaglio 4",
     "Immagine": "https://dummyimage.com/600x400/343a40/fff",
     "Quantita": 0,
-    "Categoria": "Elettronica"
+    "Categoria": "Elettronica",
+    "DataInserimento": "2025-02-10T11:40:02.580335+01:00"
   },
   {
     "Id": 6,
@@ -42,7 +46,8 @@
     "Dettaglio": "Dettaglio 4",
     "Immagine": "https://img.joomcdn.net/5ba0c59ac5bdb4750ec4c92a752306d5ddbccaf6_original.jpeg",
     "Quantita": 0,
-    "Categoria": "Elettronica"
+    "Categoria": "Elettronica",
+    "DataInserimento": "2025-02-10T11:40:02.580335+01:00"
   },
   {
     "Id": 6,
@@ -51,6 +56,27 @@
     "Dettaglio": "Dettaglio 4",
     "Immagine": "https://dummyimage.com/600x400/343a40/fff",
     "Quantita": 0,
-    "Categoria": "Elettronica"
+    "Categoria": "Elettronica",
+    "DataInserimento": "2025-02-10T11:40:02.580335+01:00"
+  },
+  {
+    "Id": 7,
+    "Nome": "chicco di caffè",
+    "Prezzo": 1.0,
+    "Dettaglio": "chicchettino di caffè",
+    "Immagine": null,
+    "Quantita": 0,
+    "Categoria": "Cucina",
+    "DataInserimento": "2025-02-10T11:42:58.4288646+01:00"
+  },
+  {
+    "Id": 8,
+    "Nome": "pippi",
+    "Prezzo": 4.0,
+    "Dettaglio": "niente",
+    "Immagine": null,
+    "Quantita": 0,
+    "Categoria": "Cucina",
+    "DataInserimento": "2025-02-10T11:43:41.8720486+01:00"
   }
 ]

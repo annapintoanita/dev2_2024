@@ -5,23 +5,31 @@ using System.Diagnostics; // Importa il namespace per il debugging e il logging 
 
 // Definizione della classe AggiungiProdottoModel che eredita da PageModel
 public class AggiungiProdottoModel : PageModel
+
 {
     // Inizializzazione della variabile _logger per il logging delle informazioni (non viene usata nel codice fornito).
+
     private readonly ILogger<AggiungiProdottoModel> _logger;
 
     public AggiungiProdottoModel(ILogger<AggiungiProdottoModel> logger)
     {
         _logger = logger;
     }
-
+    
+    public List<string> Categorie { get; set; } 
+    
     public void OnGet()// onget è vuoto perchè non serve che al caricamento della pagina vengano visualizzati i dati del prodotto.
     {
+        
+        var json = System.IO.File.ReadAllText("wwwroot/json/categorie.json");
+        Categorie = JsonConvert.DeserializeObject<List<string>>(json);
     }
+    
 
 
     //Metodo che viene eseguito quando si invia un modulo (POST) con nome, prezzo e dettaglio del prodotto.
     //IActionResult è il tipo di dato che indica che metodo restituisce un risultato che può essere una View o un redirect.
-    public IActionResult OnPost(string nome, decimal prezzo, string dettaglio)//onpost modifica le impostazioni
+    public IActionResult OnPost(string nome, decimal prezzo, string dettaglio, string categoria, DateTime dataInserimento)//onpost modifica le impostazioni
 
     {
 
@@ -44,13 +52,16 @@ public class AggiungiProdottoModel : PageModel
             Id = id,
             Nome = nome,
             Prezzo = prezzo,
-            Dettaglio = dettaglio
+            Dettaglio = dettaglio,
+            Categoria = categoria,
+            //DataInserimento = dataInserimento
+            DataInserimento = DateTime.Now
+            
         });
 
         // Scrive la lista aggiornata di prodotti nel file JSON, serializzandola di nuovo l'informazione in formato JSON.
         // crea il file partendo dalla lista, lo serializza e lo formatta.
         System.IO.File.WriteAllText("wwwroot/json/prodotti.json", JsonConvert.SerializeObject(prodotti, Formatting.Indented));
-
         // Reindirizza l'utente alla pagina "Prodotti" dopo aver aggiunto il nuovo prodotto.
         return RedirectToPage("Prodotti");
     }
