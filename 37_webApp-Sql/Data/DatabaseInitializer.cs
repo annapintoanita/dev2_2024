@@ -78,10 +78,12 @@ public static class DatabaseInitializer
         }
         //seed dei dati per Prodotti (solo se non esistono gia)
         countCommand = new SQLiteCommand("SELECT COUNT(*) FROM Prodotti", connection);
-
+       
         //dato che count di sql è un valore numerico, posso usare execute scalar per ottenere il valore
         //execute scalar ritorna un oggetto quindi faccio il casting a long per ottenere  il valore numerico
         count = (long)countCommand.ExecuteScalar();
+        //Se la tabella Prodotti è vuota, inseriamo prodotti predefiniti con il loro prezzo e categoria.
+        //Per ottenere CategoriaId, usiamo SELECT Id FROM Categorie WHERE Nome= 'Elettronica'.
         if (count == 0)
         {
             // Seed dei dati per la tabella Prodotti
@@ -97,7 +99,7 @@ public static class DatabaseInitializer
             }
         }
     }
-    //metodo pe ottenere la connessione al database in modo da poter essere utilizzato in altre parti del codice
+    //metodo per ottenere la connessione al database in modo da poter essere utilizzato in altre parti del codice
     //oltretutto database initializer è una classe statica quindi posso chiamare questo metodo senza creare un istanza della classe
     public static SQLiteConnection GetConnection()
     {

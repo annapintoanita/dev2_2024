@@ -1,4 +1,4 @@
-//Librerie che servono per utilizzare i metodi, modelli, proprieta 
+//Librerie che servono per utilizzare metodi, modelli, proprietà
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages; //pagine che contengono codice html e codice c#
 using Microsoft.AspNetCore.Mvc.Rendering; //per utilizzare il SelectListItem ---> che mi serve per visualizzare il menu a tendina
@@ -13,18 +13,21 @@ public class CreateModel : PageModel //creo un modello di pagina Razor che deriv
     // nel form della pagina web nel tag input inserendo asp-for è possibile richiamare il campo della proprieta dichiarata
     //ad esempio :  <input type="text" asp-for="Prodotto.Nome" class="form-control "> assocerà il valore passato con quell'input direttamente nel campo Nome della proprieta Prodotto
     [BindProperty] 
-    //proprieta pubblica di tipo prodotto per contenere i dati del prodotto
+    //proprieta pubblica di tipo Prodotto per contenere i dati del prodotto
     public Prodotto Prodotto { get; set; }
 
     //creo una lista di select list per contenere le categorie
     //select list item è un oggetto che rappresenta un elemento di una select list
+    //Questa lista contiene le opzioni per il menu a tendina delle categorie.
+   
     public List<SelectListItem> CategorieSelectList { get; set; } = new List<SelectListItem>();
+
 
     //metodo per caricare le categorie
     public void OnGet() //gestisce tutto cio che succede nella pagina quando essa viene caricata
     {
         CaricaCategorie();//abbiamo inserito il metodo CaricaCategorie nell'onget perchè quando carico la pagina dell'aggiungi prodotto la pagina visualizza il form di inserimento dei dati del prodotto,
-        //ma a me serve che all'interno del form mi venga visualizzata una lista delle categorie caricata dal database, questa parte del formè una get. . Carica la lista delle categorie nell'onget, se non lo faccio
+        //ma a me serve che all'interno del form mi venga visualizzata una lista delle categorie caricata dal database, questa parte del form una get. . Carica la lista delle categorie nell'onget, se non lo faccio
         //quando richiamo dall'altra parte con l'onget , non visualizzo niente, la parte del form che mi visualizza questo è:
         /*
         <label asp-for="Prodotto.CategoriaId"></label>
@@ -78,6 +81,7 @@ public class CreateModel : PageModel //creo un modello di pagina Razor che deriv
     //metodo per caricare le categorie
     private void CaricaCategorie()
     {
+        //Ottiene e apre una connessione al database.
         using var connection = DatabaseInitializer.GetConnection();
         connection.Open();
 
@@ -87,6 +91,7 @@ public class CreateModel : PageModel //creo un modello di pagina Razor che deriv
 
         //creo un comando per eseguire la query
         using var command = new SQLiteCommand(sql, connection);
+        //leggo il risultato 
         using var reader = command.ExecuteReader();
 
         //finche il reader ha dati
@@ -97,6 +102,7 @@ public class CreateModel : PageModel //creo un modello di pagina Razor che deriv
                 Value = reader.GetInt32(0).ToString(),
                 Text = reader.GetString(1)
             });
+           
 
 
         }
