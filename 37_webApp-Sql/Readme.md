@@ -19,6 +19,16 @@ Abbiamo creato in Pages:
 - Create.cshtml.cs
 
 Nel Program.cs abbiamo aggiunto `DatabaseInitializer.InitializerDatabase();`
+perchè? --> per garantire che il database venga inizializzato all'avvio dell'applicazione e serve a:
+- Creare il database se non esiste-->Se il file prodottiapp.db non è presente, viene generato automaticamente.
+- Creare le tabelle necessarie
+- Effettuare il seeding dei dati.
+>che cos'è il `seeding?` --> è il processo di inserimento di dati iniziali in un database automaticamente quando viene creato.
+
+>a cosa serve? --> Serve per avere dati di base già presenti nel sistema senza doverli inserire manualmente ogni volta.
+
+Se le tabelle sono vuote, vengono inseriti dati iniziali per categorie e prodotti.
+In questo modo, quando l'app viene avviata, ci assicuriamo che il database sia pronto per essere utilizzato, senza doverlo creare manualmente. 
 
 In DatabaseInitializer.cs abbiamo:
 - Creato il database `prodottiapp.db` e la stringa di connessione `Data Source=prodottiapp.db.`
@@ -37,18 +47,6 @@ Quando la pagina viene caricata (OnGet()), viene chiamato il metodo `CaricaCateg
 
 Quando il form viene inviato (OnPost()):
 
-<details>
-
-<summary>ONGET/ONPOST</summary>
-
-`OnGet()`: Recupera e prepara i dati per la visualizzazione quando la pagina viene aperta.
-
-`OnPost()`: Gestisce i dati inviati dall'utente, li valida e li salva nel database.
-
-
-</details>
-
-
 - Verifica se il modello è valido con `ModelState.IsValid`
 
 - Apre la connessione al database:
@@ -64,6 +62,19 @@ command.Parameters.AddWithValue("@prezzo", Prodotto.Prezzo);
 command.Parameters.AddWithValue("@categoriaId", Prodotto.CategoriaId);
 ```
 - Reindirizza l'utente alla pagina di elenco dei prodotti (Index).
+<details>
+
+<summary>ONGET/ONPOST</summary>
+
+`OnGet()`: Recupera e prepara i dati per la visualizzazione quando la pagina viene aperta.
+
+`OnPost()`: Gestisce i dati inviati dall'utente, li valida e li salva nel database.
+
+
+</details>
+
+
+
 
 ## DatabaseInitializer.cs
 
@@ -232,7 +243,7 @@ using System.Data.SQLite;
 //namespace ProdottiApp.Pages.Prodotti; (per chi ha deciso di utilizzare i namespace)
 public class ProdottiModel : PageModel
 //creo una proprieta  pubblica di tipo lista di prodotti view model
-//devo ceare la lista sulla quale lavoro creando una proprieta pubblica che prendo da prodottoviewmodel
+//devo creare la lista sulla quale lavoro creando una proprieta pubblica che prendo da prodottoviewmodel
 
 {
     public List<ProdottoViewModel> Prodotti { get; set; } = new List<ProdottoViewModel>();
