@@ -1,12 +1,13 @@
 @page
-@model CreateModel
+@model EditModel
 @{
-    ViewData["Title"] = "Crea Nuovo Prodotto";
+    ViewData["Title"] = "Edit";
 }
-<h1>Crea Prodotto</h1>
+<h1>Modifica Prodotto</h1>
 
 <form method="post">
     <div class= "form-group">
+        <input type="hidden" asp-for= "Prodotto.Id"/>
         <label asp-for="Prodotto.Nome"></label>
         <input asp-for="Prodotto.Nome" class="form-control ">
     </div>
@@ -14,15 +15,16 @@
         <label asp-for="Prodotto.Prezzo"></label>
         <input asp-for="Prodotto.Prezzo" class="form-control ">
     </div>
+
+
     <div class= "form-group">
         <label asp-for="Prodotto.CategoriaId"></label>
         <select asp-for="Prodotto.CategoriaId" class="form-control" asp-items="Model.CategorieSelectList">
             <option value="">--- Selezione Categoria --- </option>
             </select>
     </div>
+    
     <button type= "submit" class="btn btn-primary my-3">Salva</button>
-    <a asp-page="Prodotti/Create"class="btn btn-secondary">Annulla</a>
+    <a asp-page="Prodotti"class="btn btn-secondary">Annulla</a>
 
 </form>
-
-

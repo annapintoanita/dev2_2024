@@ -10,7 +10,7 @@ public class ProdottiModel : PageModel
     public List<ProdottoViewModel> Prodotti { get; set; } = new List<ProdottoViewModel>();
     public void OnGet()
     {
-        //invoco il metodo GetConnection per ottenre la connessione al db
+        //invoco il metodo GetConnection per ottenere la connessione al db
         using var connection = DatabaseInitializer.GetConnection();
         //apro la connessione
         connection.Open();
@@ -49,7 +49,7 @@ public class ProdottiModel : PageModel
                 //IsDBNull restituisce un booleano,controlla se il campo è null e restituisce true se è null
                 //se è null restituisco l'elemento alla sinistra dei due punti
                 //se non è null restituisco l'elemento alla destra dei due punti
-                CategoriaNome = reader.IsDBNull(3) ? "Nessuna" : reader.GetString(3)
+                CategoriaNome = reader.IsDBNull(3) ? "Nessuna" : reader.GetString(3) //operatore ternario
             });
         }
 

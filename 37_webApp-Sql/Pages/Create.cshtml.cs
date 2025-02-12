@@ -41,8 +41,9 @@ public class CreateModel : PageModel //creo un modello di pagina Razor che deriv
     public IActionResult OnPost() //è un metodo che viene eseguito quando invio un modulo sulla pagina web.
     /*Verifica dei dati: Prima di tutto, il sistema controlla se i dati che l'utente ha inserito sono corretti e completi.
     Salvataggio nel database: Se i dati sono validi, vengono salvati nel database (ad esempio, aggiungendo un nuovo prodotto).
-    Reindirizzamento: Dopo aver salvato i dati, l'utente viene indirizzato a un'altra pagina, come la lista dei prodotti.
+    Reindirizzamento con IActionResult: Dopo aver salvato i dati, l'utente viene indirizzato a un'altra pagina, come la lista dei prodotti.
     In breve, OnPost è il metodo che gestisce l'azione quando l'utente invia un modulo.*/
+
     {
         //controllo se il modello è valido cioe se i dati inseriti dall'utente rispettano le regole di validazione
         //se il modello non e valido ritorno la pagina con gli errori
@@ -52,7 +53,7 @@ public class CreateModel : PageModel //creo un modello di pagina Razor che deriv
             //page e un metodo di page model che restituisce un oggetto page result che rappresenta la pagina nella quale siamo
             return Page(); //se il modello non è valido ritorno la pagina 
         }
-        //invoco il metodo GecConnection per ottenere la connessione al db
+        //invoco il metodo GetConnection per ottenere la connessione al db
         using var connection = DatabaseInitializer.GetConnection();
         //apro la connessione
         connection.Open();
@@ -67,7 +68,7 @@ public class CreateModel : PageModel //creo un modello di pagina Razor che deriv
         //creo un comando sql per eseguire la query sulla connesione che ho creato
         using var command = new SQLiteCommand(sql, connection);
 
-        //aggiungo i parametri al comando con il metodo add with value che prende il nome del parametro e il valore
+        //aggiungo i parametri al comando con il metodo add with value che prende il nome del parametro e il valore che al posto del valore inseriscono il codice malevolo che quindi viene letto
         command.Parameters.AddWithValue("@nome", Prodotto.Nome);
         command.Parameters.AddWithValue("@prezzo", Prodotto.Prezzo);
         command.Parameters.AddWithValue("@categoriaId", Prodotto.CategoriaId);
@@ -99,7 +100,7 @@ public class CreateModel : PageModel //creo un modello di pagina Razor che deriv
         {
             CategorieSelectList.Add(new SelectListItem
             {
-                Value = reader.GetInt32(0).ToString(),
+                Value = reader.GetInt32(0).ToString(),// converto in string in modo da poter essere usato
                 Text = reader.GetString(1)
             });
            

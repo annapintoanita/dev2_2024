@@ -11,7 +11,7 @@ public static class DatabaseInitializer
     private static string _connectionString = "Data Source=prodottiapp.db";//utilizzeremo _connectionString in modo da ottenere la connessione al db
     public static void InitializerDatabase()
     {
-        using var connection = new SQLiteConnection(_connectionString);
+        using var connection = new SQLiteConnection(_connectionString);//creiamo una connessione al db tramite using
         connection.Open(); //apriamo la connessione
                            //gestisco l' eccezione se il db esiste gia in sql
 
