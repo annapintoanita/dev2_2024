@@ -11,4 +11,5 @@ public class ProdottoViewModel
 
   
     public string CategoriaNome { get; set; }
+    
 }
