@@ -1,0 +1,22 @@
+@page
+@model CreateCategoriaModel
+@{
+    ViewData["Title"] = "Crea Nuova Categoria";
+}
+@section Scripts
+{
+    <partial name="_ValidationScriptsPartial"/>
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<form method="post">
+    <div class="form-group">
+        <label asp-for="NuovaCategoria"></label>
+        <input asp-for="NuovaCategoria" class="form-control" placeholder="Inserisci il nome della nuova categoria">
+        <span asp-validation-for="NuovaCategoria" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary my-3">Aggiungi Categoria</button>
+    <a asp-page="Index" class="btn btn-secondary">Annulla</a>
+</form>

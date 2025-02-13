@@ -1,5 +1,5 @@
 @page
-@model DeleteModel
+@model DeleteCategoriaModel
 @{
     ViewData["Title"] = "Delete";
     //creiamo in ViewData una chiave che salva la pagina di provenienza, tramite il Referer della request
@@ -7,11 +7,12 @@
     //mi occorre l'url in formato stringa per poterlo passare poi al bottone di ritorno 
     ViewData["ReurnUrl"] = Request.Headers["Referer"].ToString();
 }
-<h1>@ViewData["Title"]Elimina Prodotto</h1>
+<h1>@ViewData["Title"]Elimina Categoria</h1>
 
 <form method="post">
-<input  type="hidden" asp-for="Prodotto.Id" />
+<input  type="hidden" asp-for="Categoria.Id" />
     
     <button type= "submit" class="btn btn-primary my-3">Elimina</button>
     <a asp-page="Prodotti"class="btn btn-secondary">Annulla</a>
+
 </form>

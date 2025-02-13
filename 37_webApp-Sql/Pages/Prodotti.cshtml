@@ -2,7 +2,7 @@
 @model ProdottiModel
 
 @{
-    ViewData["Title"] = "Delete";
+    ViewData["Title"] = "Prodotti";
 }
 
 <h1>@ViewData["Title"]</h1>
@@ -26,9 +26,9 @@
                 <td>@prodotto.Prezzo</td>
                 <td>@prodotto.CategoriaNome</td>
                 <td>
-                     <a asp-page="Dettagli" class="btn btn-secondary" asp-route-id="@prodotto.Id">Dettagli</a>
-                     <a asp-page="Edit" class="btn btn-secondary" asp-route-id="@prodotto.Id">Edit</a>
-                     <a asp-page="Delete" class="btn btn-secondary" asp-route-id="@prodotto.Id">Delete</a>
+                     <a asp-page="Dettagli" class="btn btn-dark" asp-route-id="@prodotto.Id">Dettagli</a>
+                     <a asp-page="Edit" class="btn btn-warning" asp-route-id="@prodotto.Id">Edit</a>
+                     <a asp-page="Delete" class="btn btn-danger" asp-route-id="@prodotto.Id">Delete</a>
                 </td>
             </tr>
         }

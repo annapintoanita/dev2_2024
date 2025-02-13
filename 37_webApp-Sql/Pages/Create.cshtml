@@ -1,28 +1,37 @@
+
 @page
 @model CreateModel
 @{
     ViewData["Title"] = "Crea Nuovo Prodotto";
 }
+@section Scripts
+{
+    <partial name="_ValidationScriptsPartial"/>
+}
+
 <h1>Crea Prodotto</h1>
 
 <form method="post">
     <div class= "form-group">
         <label asp-for="Prodotto.Nome"></label>
         <input asp-for="Prodotto.Nome" class="form-control ">
+        <span asp-validation-for = "Prodotto.Nome" class= "text-danger"></span>
     </div>
     <div class= "form-group">
         <label asp-for="Prodotto.Prezzo"></label>
         <input asp-for="Prodotto.Prezzo" class="form-control ">
+        <span asp-validation-for = "Prodotto.Prezzo" class= "text-danger"></span>
     </div>
     <div class= "form-group">
         <label asp-for="Prodotto.CategoriaId"></label>
         <select asp-for="Prodotto.CategoriaId" class="form-control" asp-items="Model.CategorieSelectList">
-            <option value="">--- Selezione Categoria --- </option>
+            <option value="">--- Selezione Categoria --- </option> 
             </select>
+            <span asp-validation-for = "Prodotto.CategoriaId" class= "text-danger"></span> 
+             
     </div>
     <button type= "submit" class="btn btn-primary my-3">Salva</button>
     <a asp-page="Prodotti/Create"class="btn btn-secondary">Annulla</a>
 
 </form>
-
 

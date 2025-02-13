@@ -1,0 +1,22 @@
+@page
+@model EditCategoriaModel
+@{
+    ViewData["Title"] = "Edit Categoria";
+}
+@section Scripts
+{
+    <partial name="_ValidationScriptsPartial"/>
+}
+<h1>Modifica Categoria</h1>
+
+<form method="post">
+    <div class= "form-group">
+        <input type="hidden" asp-for= "Categoria.Id"/>
+        <label asp-for="Categoria.Nome"></label>
+        <input asp-for="Categoria.Nome" class="form-control ">
+        <span asp-validation-for = "Categoria.Nome" class= "text-danger"></span>
+    </div>
+    <button type= "submit" class="btn btn-primary my-3">Salva</button>
+    <a asp-page="Categoria"class="btn btn-secondary">Annulla</a>
+
+</form>

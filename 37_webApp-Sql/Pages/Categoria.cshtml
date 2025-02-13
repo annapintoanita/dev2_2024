@@ -1,0 +1,36 @@
+@page
+@model CategoriaModel
+@{
+    ViewData["Title"] = "Categoria";
+}
+
+@section Scripts
+{
+    <partial name="_ValidationScriptsPartial" />
+}
+
+<h2>@ViewData["Title"]</h2>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Nome Categoria</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var categoria in Model.Categorie)
+        {
+            <tr>
+                <td>@categoria.Id</td>
+                <td>@categoria.Nome</td>
+                <td>
+                    <a asp-page="EditCategoria" class="btn btn-warning" asp-route-id="@categoria.Id">Modifica</a>
+                    <a asp-page="DeleteCategoria" class="btn btn-danger" asp-route-id="@categoria.Id">Elimina</a>
+                
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

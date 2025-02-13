@@ -30,8 +30,20 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/Create">Create</a>
+                            
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Categoria">Categorie</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-page="/CreateCategoria"> Aggiungi Categoria</a>
+                        </li>
+                        @*<a asp-page="CreateCategoria" class="btn btn-success" asp-route-id="@categoria.Id">Aggiungi Categoria</a>*@                      
                     </ul>
+                     @*inseriamo la partial view per la ricerca dei prodotti*@
+                        <div class="d-flex">
+                            @await Html.PartialAsync("ProductSearch")
+                        </div>
                 </div>
             </div>
         </nav>
