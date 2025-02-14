@@ -46,6 +46,7 @@ public static class DatabaseInitializer
         FOREIGN KEY(CategoriaId) REFERENCES Categorie(Id)
         );
         ";
+        // DEFAULT 0 sta ad indicare che il prodotto non è in offerta e 1 invece che è in offerta
 
         //lancio il comando sulla connessione che ho creato
         using (var command = new SQLiteCommand(createProdottiTable, connection))

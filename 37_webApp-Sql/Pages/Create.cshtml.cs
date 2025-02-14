@@ -72,6 +72,7 @@ public class CreateModel : PageModel //creo un modello di pagina Razor che deriv
         command.Parameters.AddWithValue("@nome", Prodotto.Nome);
         command.Parameters.AddWithValue("@prezzo", Prodotto.Prezzo);
         command.Parameters.AddWithValue("@categoriaId", Prodotto.CategoriaId);
+       
 
         //eseguo il comando
         command.ExecuteNonQuery();

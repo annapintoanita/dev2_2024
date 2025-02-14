@@ -1,0 +1,44 @@
+@page 
+@model DashboardModel
+
+@{
+    ViewData["Title"] = "Dashboard";
+}
+@section Scripts
+{
+    <partial name="_ValidationScriptsPartial"/>
+}
+<form method="get" class="mb-3">
+    <div class="input-group">
+    </div>
+</form>
+
+<h1>@ViewData["Title"]</h1>
+<table class="table">
+    <thead>
+        <tr>
+            @if (Model.Prodotti.Any())
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Prodotti più costosi</th>
+                <th>Prodotti più recenti</th>
+                <th>Prodotti in Elettronica</th>
+
+            </tr>
+        </thead>
+    </table>
+    <tbody>
+         @foreach (var prodotto in Model.Prodotti)
+        {
+            <tr>              
+                <td>@prodotto.Nome</td>
+                <td>@prodotto.Prezzo</td>
+                
+                
+            </tr>
+            
+        }
+    </tbody>
+}

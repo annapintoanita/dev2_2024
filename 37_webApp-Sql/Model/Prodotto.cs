@@ -14,6 +14,7 @@ public class Prodotto
     [Required(ErrorMessage = "La categoria è obbligatoria.")]
     
     public int CategoriaId { get; set; }
+    
 
 }
 // <span asp-validation-for = "Prodotto.Nome" class= "text-danger"></span>

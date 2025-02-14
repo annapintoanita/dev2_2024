@@ -1,11 +1,9 @@
-//Librerie che servono per utilizzare metodi, modelli, proprietà
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages; //pagine che contengono codice html e codice c#
 using Microsoft.AspNetCore.Mvc.Rendering; //per utilizzare il SelectListItem ---> che mi serve per visualizzare il menu a tendina
 using System.Data.SQLite;
 
-//namespace ProdottiApp.Pages.Prodotti; //dichiaro 
-public class ProdottiModel : PageModel
+public class DashboardModel : PageModel
 //creo una proprieta  pubblica di tipo lista di prodotti view model
 //devo ceare la lista sulla quale lavoro creando una proprieta pubblica che prendo da prodottoviewmodel
 
