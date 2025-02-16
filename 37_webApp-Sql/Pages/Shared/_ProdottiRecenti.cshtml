@@ -1,5 +1,14 @@
-<form method="get" asp-page="ProdottoRecente" class="d-flex">
-<input type="text" name="q" class="form-control me-2" placeholder="Più recente"
-value="@Context.Request.Query["q"]" />
-<button type="submit"class="btn btn-outline">Cerca</button>
-</form>
+<h2>Prodotti più recenti</h2>
+
+@foreach (var prodotti in Model)
+{
+<div>
+    <strong>@prodotti.Nome</strong>
+</div>  
+<div>
+    <th>@prodotti.Prezzo</th>
+</div>
+<div>
+    <th>@prodotti.CategoriaNome</th>
+</div>
+}
