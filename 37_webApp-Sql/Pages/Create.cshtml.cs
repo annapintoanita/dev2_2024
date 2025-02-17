@@ -1,4 +1,5 @@
 //Librerie che servono per utilizzare metodi, modelli, proprietà
+using _37_webApp_Sql.Utilities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages; //pagine che contengono codice html e codice c#
 using Microsoft.AspNetCore.Mvc.Rendering; //per utilizzare il SelectListItem ---> che mi serve per visualizzare il menu a tendina
@@ -53,11 +54,31 @@ public class CreateModel : PageModel //creo un modello di pagina Razor che deriv
             //page e un metodo di page model che restituisce un oggetto page result che rappresenta la pagina nella quale siamo
             return Page(); //se il modello non è valido ritorno la pagina 
         }
+        try
+        {
+            DbUtils.ExecuteNonQuery(
+                "INSERT INTO Prodotti(Nome, Prezzo, CategoriaId) VALUES (@nome, @prezzo, @categoriaId)",
+                cmd=>
+                {
+                    cmd.Parameters.AddWithValue("@nome", Prodotto.Nome);
+                    cmd.Parameters.AddWithValue("@prezzo", Prodotto.Prezzo);
+                    cmd.Parameters.AddWithValue("@categoriaId", Prodotto.CategoriaId);
+                }
+                );
+        }
+        catch (Exception ex)
+        {
+            SimpleLogger.Log(ex);
+            ModelState.AddModelError("", "Errore durante il salvataggio del prodotto.");
+            CaricaCategorie();
+            return Page();
+        }
+        return RedirectToPage("Prodotti");
         //invoco il metodo GetConnection per ottenere la connessione al db
-        using var connection = DatabaseInitializer.GetConnection();
+        //using var connection = DatabaseInitializer.GetConnection();
         //apro la connessione
-        connection.Open();
-
+        //connection.Open();
+/*
         //creo la query sql per inserire un nuovo prodotto usando i parametri
         //i parametri servono in modo da evitare sql injection
         //la sql injection è un attacco informatico che sfrutta le query sql per inserire codice
@@ -79,34 +100,41 @@ public class CreateModel : PageModel //creo un modello di pagina Razor che deriv
 
         //reindirizzo il utente alla pagina di elenco dei prodotti
         return RedirectToPage("Index");
+        */
     }
     //metodo per caricare le categorie
     private void CaricaCategorie()
     {
-        //Ottiene e apre una connessione al database.
-        using var connection = DatabaseInitializer.GetConnection();
-        connection.Open();
-
-        //creo la query sql per ottenere i dati delle categorie
-        var sql = "SELECT Id, Nome FROM Categorie";
-
-
-        //creo un comando per eseguire la query
-        using var command = new SQLiteCommand(sql, connection);
-        //leggo il risultato 
-        using var reader = command.ExecuteReader();
-
-        //finche il reader ha dati
-        while (reader.Read())
+        try
         {
-            CategorieSelectList.Add(new SelectListItem
+            //Ottiene e apre una connessione al database.
+            using var connection = DatabaseInitializer.GetConnection();
+            connection.Open(); 
+
+            //creo la query sql per ottenere i dati delle categorie
+            var sql = "SELECT Id, Nome FROM Categorie";
+
+
+            //creo un comando per eseguire la query
+            using var command = new SQLiteCommand(sql, connection);
+            //leggo il risultato 
+            using var reader = command.ExecuteReader();
+
+            //finche il reader ha dati
+            while (reader.Read())
             {
-                Value = reader.GetInt32(0).ToString(),// converto in string in modo da poter essere usato
-                Text = reader.GetString(1)
-            });
-           
-
-
+                CategorieSelectList.Add(new SelectListItem
+                {
+                    Value = reader.GetInt32(0).ToString(),// converto in string in modo da poter essere usato
+                    Text = reader.GetString(1)
+                });
+            }    
+        }
+        catch (Exception ex)
+        {
+            SimpleLogger.Log(ex);
+            ModelState.AddModelError("", "Errore durante il caricamento del prodotto.");
+            CaricaCategorie();
         }
     }
 }
