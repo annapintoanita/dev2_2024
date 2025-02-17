@@ -6664,3 +6664,11 @@ Stack Trace:    at System.Data.SQLite.SQLite3.Prepare(SQLiteConnection cnn, SQLi
    at System.Data.SQLite.SQLiteCommand.ExecuteReader(CommandBehavior behavior)
    at System.Data.SQLite.SQLiteCommand.ExecuteReader()
    at EditModel.CaricaCategorie() in C:\Users\Dev2\Documents\dev2_2024\37_webApp-Sql\Pages\Edit.cshtml.cs:line 108
+2025-02-17 02:09:30 - Exception: Sequence contains no elements
+Stack Trace:    at System.Linq.ThrowHelper.ThrowNoElementsException()
+   at System.Linq.Enumerable.First[TSource](IEnumerable`1 source)
+   at DeleteModel.OnPost(Int32 id) in C:\Users\david\Documents\dev2_2024\37_webApp-Sql\Pages\Delete.cshtml.cs:line 55
+2025-02-17 02:09:33 - Exception: Sequence contains no elements
+Stack Trace:    at System.Linq.ThrowHelper.ThrowNoElementsException()
+   at System.Linq.Enumerable.First[TSource](IEnumerable`1 source)
+   at DeleteModel.OnPost(Int32 id) in C:\Users\david\Documents\dev2_2024\37_webApp-Sql\Pages\Delete.cshtml.cs:line 55

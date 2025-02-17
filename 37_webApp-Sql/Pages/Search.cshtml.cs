@@ -2,6 +2,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages; //pagine che contengono codice html e codice c#
 using Microsoft.AspNetCore.Mvc.Rendering; //per utilizzare il SelectListItem ---> che mi serve per visualizzare il menu a tendina
 using System.Data.SQLite;
+using _37_webApp_Sql.Utilities;
+
 
 public class SearchModel : PageModel
 {
@@ -15,7 +17,29 @@ public class SearchModel : PageModel
         //se la stringa di ricerca non è vuota
         if (!string.IsNullOrWhiteSpace(q))
         {
-            using var connection = DatabaseInitializer.GetConnection();
+            try
+            {
+                Prodotti = DbUtils.ExecuteReader(
+                "SELECT p.Id, p.Nome, p.Prezzo, c.Nome as CategoriaNome FROM Prodotti p LEFT JOIN Categorie c ON p.CategoriaId = c.Id WHERE p.Nome LIKE @searchTerm",
+                reader => new ProdottoViewModel
+                {
+                    Id = reader.GetInt32(0),
+                    Nome = reader.GetString(1),
+                    Prezzo = reader.GetDouble(2),
+                    CategoriaNome = reader.IsDBNull(3) ? "Nessuna" : reader.GetString(3)
+                },
+                cmd =>
+                {
+                    cmd.Parameters.AddWithValue("@searchTerm", $"%{q}%");
+                }
+                );
+            }
+            catch (Exception ex)
+            {
+                  SimpleLogger.Log(ex);
+
+            }
+            /*using var connection = DatabaseInitializer.GetConnection();
             connection.Open();
 
             //query per selezionare i prodotti che contengono la stringa di ricerca
@@ -46,9 +70,7 @@ public class SearchModel : PageModel
                     CategoriaNome = reader.IsDBNull(3) ? "Nessuna" : reader.GetString(3)
                 });
 
-            }
+            }*/
         }
     }
-
-
 }

@@ -8,73 +8,89 @@ public class EditCategoriaModel : PageModel
     [BindProperty]
     public Categoria Categoria { get; set; }
 
-    //passo l id come parametro perchè voglio modificare un prodottoesistente sul quale ho cliccato in precedenza
     public IActionResult OnGet(int id)
     {
-        using var connection = DatabaseInitializer.GetConnection();
-        connection.Open();
-        //uso la clausola WHERE di sql in modo da ottenere solo il prodotto con id passato  come parametro
-        var sql = "SELECT Id, Nome FROM Categorie WHERE Id = @id";
-        using var command = new SQLiteCommand(sql, connection);
-        command.Parameters.AddWithValue("@id", id);
-
-        //eseguo il comando e ottengo il reeader che è un oggetto che permette di leggere i dati
-        using var reader = command.ExecuteReader();
-
-        //se il reader ha dati
-        if (reader.Read())
+        try
         {
-            Categoria = new Categoria
-            {
-                Id = reader.GetInt32(0),
-                Nome = reader.GetString(1),
-            };
-        }
-        else
-        {
-            //se il prodotto non esiste ritorno NOT FOUND 
-            // not found e un metodo di Page Model che restituisce un oggetto not found result che rappresenta la pagina  non trovata
-            return NotFound();
-
-        }
-        return Page();
-
-    }
-    public IActionResult OnPost(int id)
-    {
-     try
-        {
-            DbUtils.ExecuteNonQuery(
-                "INSERT INTO Categorie(Nome) VALUES (@nome)",
-                cmd=>
+            var Categorie = DbUtils.ExecuteReader(
+                "SELECT Id, Nome FROM Categorie WHERE Id = @id",
+                reader => new Categoria
                 {
-                    cmd.Parameters.AddWithValue("@nome",Categoria.Nome);
-                    
+                    Id = reader.GetInt32(0),
+                    Nome = reader.GetString(1)
+                },
+                cmd =>
+                {
+                    cmd.Parameters.AddWithValue("@id", id);
                 }
             );
+            Categoria = Categorie.First();
         }
-        catch(Exception ex)
+        catch (Exception ex)
         {
             SimpleLogger.Log(ex);
-            ModelState.AddModelError("", "Errore durante il salvataggio della categoria.");
+            return NotFound();
+        }
+        return Page();
+    }
+    /*using var connection = DatabaseInitializer.GetConnection();
+    connection.Open();
+
+    var sql = "SELECT Id, Nome FROM Categorie WHERE Id = @id";
+    using var command = new SQLiteCommand(sql, connection);
+    command.Parameters.AddWithValue("@id", id);
+
+    using var reader = command.ExecuteReader();
+
+    if (reader.Read())
+    {
+        Categoria = new Categoria
+        {
+            Id = reader.GetInt32(0),
+            Nome = reader.GetString(1)
+        };
+    }
+    else
+    {
+        return NotFound();
+    }
+
+    return Page();*/
+
+
+    public IActionResult OnPost()
+    {
+        if (!ModelState.IsValid)
+        {
             return Page();
         }
 
-
-
-        //invoco il metodo getconnection per ottenere la connessione al db ed apro la pagina
-        using var connection = DatabaseInitializer.GetConnection();
-        connection.Open();
-
-        //costruisco la query basandomi sull input
-        var sql = "UPDATE Categorie SET Nome = @nome WHERE Id = @id";
-        using var command = new SQLiteCommand(sql, connection);
-        command.Parameters.AddWithValue("@nome", Categoria.Nome);
-        command.Parameters.AddWithValue("@id", Categoria.Id);
-
-        //eseguo il comando e aggiorno il prodotto poi reinderizzo alla pagina elenco dei prodotti
-        command.ExecuteNonQuery();
+        try
+        {
+            DbUtils.ExecuteNonQuery(
+                "UPDATE Categorie SET Nome = @nome WHERE Id = @id",
+                cmd =>
+                {
+                    cmd.Parameters.AddWithValue("@nome", Categoria.Nome);
+                    cmd.Parameters.AddWithValue("@id", Categoria.Id);
+                }
+            );
+        }
+        catch (Exception ex)
+        {
+            SimpleLogger.Log(ex);
+        }
         return RedirectToPage("Categoria");
     }
-    //metodo per caricare le categorie    
 }
+/*using var connection = DatabaseInitializer.GetConnection();
+connection.Open();
+
+var sql = "UPDATE Categorie SET Nome = @nome WHERE Id = @id";
+using var command = new SQLiteCommand(sql, connection);
+command.Parameters.AddWithValue("@nome", Categoria.Nome);
+command.Parameters.AddWithValue("@id", Categoria.Id);
+
+command.ExecuteNonQuery();
+
+return RedirectToPage("Categoria");*/
