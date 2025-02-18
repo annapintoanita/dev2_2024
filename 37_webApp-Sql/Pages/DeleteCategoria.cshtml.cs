@@ -19,12 +19,13 @@ public class DeleteCategoriaModel : PageModel
                 Id = reader.GetInt32(0),
                 Nome = reader.GetString(1)
             },
+            //command cmd separato perchè  per passare paramatero nell'on get e ci serve così perchè dobbiamo identicìficato il prodotto separato dal reader che va a leggere la query, la chiocciola per passarlo al reader e vedere l'id che abbiamo inizializzato
             cmd =>
             {
                 cmd.Parameters.AddWithValue("@id", id);
             }
             );
-            //Categoria = Categorie.First();
+            //Categoria = Categorie.First(); //.First(); 
         }
             catch (Exception ex)
             {

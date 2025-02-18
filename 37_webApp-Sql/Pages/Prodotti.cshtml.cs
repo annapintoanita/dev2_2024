@@ -64,7 +64,8 @@ public class ProdottiModel : PageModel
     }
 }
 */
-
+using System.Globalization;
+namespace ProdottiApp.Utilities;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages; //pagine che contengono codice html e codice c#
@@ -74,6 +75,7 @@ using _37_webApp_Sql.Utilities;
 public class ProdottiModel : PageModel
 {
     public List<ProdottoViewModel> Prodotti {get; set;} = new List<ProdottoViewModel>();
+    public int TotaleProdotti {get; set;}
     public void OnGet()
 
     {
@@ -89,6 +91,7 @@ public class ProdottiModel : PageModel
                     Nome = reader.GetString(1),
                     Prezzo = reader.GetDouble(2),
                     CategoriaNome = reader.IsDBNull(3) ? "Nessuna" : reader.GetString(3) //operatore ternario
+                    
                 }
             );   
         }
@@ -96,6 +99,5 @@ public class ProdottiModel : PageModel
         {
             SimpleLogger.Log(ex);
         }
-    
     }
 }
