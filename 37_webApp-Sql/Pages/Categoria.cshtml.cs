@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages; //pagine che contengono codice html e
 using Microsoft.AspNetCore.Mvc.Rendering; //per utilizzare il SelectListItem ---> che mi serve per visualizzare il menu a tendina
 using System.Data.SQLite;
 using _37_webApp_Sql.Utilities;
+using _37_webApp_Sql.Utilities;
 public class CategoriaModel : PageModel
 {
     

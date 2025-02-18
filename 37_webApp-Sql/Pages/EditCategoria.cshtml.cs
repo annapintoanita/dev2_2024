@@ -8,7 +8,6 @@ public class EditCategoriaModel : PageModel
     [BindProperty]
     public Categoria Categoria { get; set; }
 
-    //passo l id come parametro perchè voglio modificare un prodottoesistente sul quale ho cliccato in precedenza
     public IActionResult OnGet(int id)
     {
         try
