@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages; //pagine che contengono codice html e
 using Microsoft.AspNetCore.Mvc.Rendering; //per utilizzare il SelectListItem ---> che mi serve per visualizzare il menu a tendina
 using System.Data.SQLite;
 using _37_webApp_Sql.Utilities;
-using System.Linq.Expressions;
+
 
 public class EditModel : PageModel
 {
@@ -53,22 +53,20 @@ public class EditModel : PageModel
         try
         {
             DbUtils.ExecuteNonQuery(
-                "UPDATE Prodotti SET Nome = @nome, Prezzo= @prezzo, CategoriaId= @categoriaId WHERE Id= @id",
+                "UPDATE Prodotti SET Nome = @nome, Prezzo = @prezzo, CategoriaId = @categoriaId WHERE Id = @id",
                 cmd =>
                 {
                     cmd.Parameters.AddWithValue("@nome", Prodotto.Nome);
                     cmd.Parameters.AddWithValue("@prezzo", Prodotto.Prezzo);
                     cmd.Parameters.AddWithValue("@categoriaId", Prodotto.CategoriaId);
-                    cmd.Parameters.AddWithValue("@Id",Prodotto.Id);
+                    cmd.Parameters.AddWithValue("@id", Prodotto.Id);
                 }
                 );
         }
         catch (Exception ex)
         {
             SimpleLogger.Log(ex);
-            ModelState.AddModelError("", "Errore durante la modifica del prodotto.");
-            CaricaCategorie();
-            return Page();
+
         }
         return RedirectToPage("Prodotti");
         /*
@@ -95,35 +93,44 @@ public class EditModel : PageModel
         try
         {
             //Ottiene e apre una connessione al database.
-            using var connection = DatabaseInitializer.GetConnection();
-            connection.Open();
-
-            //creo la query sql per ottenere i dati delle categorie
-            var sql = "UPDATE Id, Nome FROM Categorie";
-
-
-            //creo un comando per eseguire la query
-            using var command = new SQLiteCommand(sql, connection);
-            //leggo il risultato 
-            using var reader = command.ExecuteReader();
-
-            //finche il reader ha dati
-            while (reader.Read())
-            {
-                CategorieSelectList.Add(new SelectListItem
-                {
-                    Value = reader.GetInt32(0).ToString(),// converto in string in modo da poter essere usato
-                    Text = reader.GetString(1)
-                });
-            }
+            CategorieSelectList = DbUtils.ExecuteReader(
+             "SELECT Id, Nome FROM Categorie",
+              reader => new SelectListItem
+              {
+                  Value = reader.GetInt32(0).ToString(),// converto in string in modo da poter essere usato
+                  Text = reader.GetString(1)
+              }
+            );
         }
         catch (Exception ex)
         {
-
             SimpleLogger.Log(ex);
-            ModelState.AddModelError("", "Errore durante il caricamento del prodotto.");
-            CaricaCategorie();
         }
+
+
+
     }
 
 }
+/*Ottiene e apre una connessione al database.
+using var connection = DatabaseInitializer.GetConnection();
+connection.Open();
+
+//creo la query sql per ottenere i dati delle categorie
+var sql = "SELECT Id, Nome FROM Categorie";
+
+
+//creo un comando per eseguire la query
+using var command = new SQLiteCommand(sql, connection);
+//leggo il risultato 
+using var reader = command.ExecuteReader();
+
+//finche il reader ha dati
+while (reader.Read())
+{
+    CategorieSelectList.Add(new SelectListItem
+    {
+        Value = reader.GetInt32(0).ToString(),// converto in string in modo da poter essere usato
+        Text = reader.GetString(1)
+    });
+}*/
