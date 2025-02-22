@@ -5,7 +5,7 @@
 using System.Data.SQLite;
 using Microsoft.AspNetCore.Mvc;
 //classi utulities per semplifcare dei passaggi, la prima per il database
-namespace _37_webApp_Sql.Utilities;
+namespace _37_WebApp_SQLite.Utilities;
 public static class DbUtils
 {
     /// <summary>

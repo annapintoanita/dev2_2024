@@ -1,0 +1,25 @@
+@page
+@model DeleteCategoriaModel
+@using _37_WebApp_SQLite.Pages.Categorie;
+
+@{
+    ViewData["Title"] = "Elimina";
+
+    //creiamo in ViewData una chiave che salva la pagina di provenienza, tramite il Referer della request
+    //il Referer è l indirizzo della pagina che ha fatto la richiesta
+    //mi occorre l'url in formato stringa per poterlo passare poi al bottone di ritorno 
+    
+    ViewData["ReurnUrl"] = Request.Headers["Referer"].ToString();
+}
+<h1>@ViewData["Title"]Elimina Categoria</h1>
+
+<form method="post">
+    
+        <input  type="hidden" asp-for="Categoria.Id" />
+    
+
+    
+    <button type= "submit" class="btn btn-primary my-3">Elimina</button>
+    <a asp-page="Categoria"class="btn btn-secondary">Annulla</a>
+
+</form>

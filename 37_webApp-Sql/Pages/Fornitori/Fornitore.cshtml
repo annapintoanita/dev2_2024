@@ -1,0 +1,36 @@
+@page
+@model FornitoreModel
+@using _37_WebApp_SQLite.Pages.Fornitori;
+@using _37_WebApp_SQLite.Utilities;
+@{
+    ViewData["Title"] = "Fornitori";
+}
+
+
+<h2>@ViewData["Title"]</h2>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Nome Fornitore</th>
+            <th>Azioni</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var fornitore in Model.Fornitori)
+        {
+            <tr>
+                <td>@fornitore.Id</td>
+                <td>@fornitore.Nome</td>
+                <td>
+                    
+                    <a asp-page="/Fornitori/EditFornitore" class="btn btn-warning" asp-route-id="@fornitore.Id">Modifica</a>
+                    <a asp-page="/Fornitori/DeleteFornitore" class="btn btn-danger" asp-route-id="@fornitore.Id">Elimina</a>
+                
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

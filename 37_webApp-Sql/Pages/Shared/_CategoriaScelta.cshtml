@@ -1,3 +1,6 @@
+@using System.Globalization;
+@using _37_WebApp_SQLite.Utilities;
+
 <h2>Categoria</h2>
 
 @foreach (var prodotti in Model)
@@ -6,7 +9,7 @@
     <strong>@prodotti.Nome</strong>
 </div>  
 <div>
-    <th>@prodotti.Prezzo</th>
+    <th>@PriceFormatter.Format(prodotti.Prezzo)</th>
 </div>
 <div>
     <th>@prodotti.CategoriaNome</th>

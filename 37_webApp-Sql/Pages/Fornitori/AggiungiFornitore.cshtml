@@ -1,0 +1,20 @@
+@page
+@model AggiungiFornitoreModel
+
+@using _37_webApp_SQLite.Pages.Fornitori;
+
+@{
+    ViewData["Title"] = "Aggiungi Fornitore";
+}
+
+<h2>Aggiungi Fornitore</h2>
+
+<form method="post">
+    <div class="form-group">
+        <label asp-for="Fornitore.Nome"></label>
+        <input asp-for="Fornitore.Nome" class="form-control" />
+    </div>
+
+    <button type="submit" class="btn btn-primary my-3">Aggiungi Fornitore</button>
+    <a asp-page="Index" class="btn btn-secondary">Annulla</a>
+</form>

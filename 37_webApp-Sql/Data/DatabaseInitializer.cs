@@ -2,7 +2,8 @@
 //questo filegestisce la connessione al database ed inizializza i dati tramite seeding
 
 using System.Data.SQLite;
-
+using System.Runtime.CompilerServices;
+using _37_WebApp_SQLite.Utilities;
 
 public static class DatabaseInitializer
 {
@@ -31,6 +32,14 @@ public static class DatabaseInitializer
             command.ExecuteNonQuery();//eseguiamo la query ma il comando sql non ritorna niente
         }
 
+        var createFornitoriTable = @"CREATE TABLE IF NOT EXISTS Fornitori (Id INTEGER PRIMARY KEY AUTOINCREMENT,
+        Nome TEXT NOT NULL);";
+
+        using (var command = new SQLiteCommand(createFornitoriTable, connection))
+        {
+            command.ExecuteNonQuery();
+        }
+
         //apriamo la connessione
         //gestisco l' eccezione se il db esiste gia in sql
 
@@ -43,10 +52,11 @@ public static class DatabaseInitializer
         Nome TEXT NOT NULL,
         Prezzo REAL NOT NULL,
         CategoriaId INTEGER,
-        FOREIGN KEY(CategoriaId) REFERENCES Categorie(Id)
+        FornitoreId INTEGER,
+        FOREIGN KEY(CategoriaId) REFERENCES Categorie(Id),
+        FOREIGN KEY(FornitoreId) REFERENCES Fornitori(Id)
         );
         ";
-        // DEFAULT 0 sta ad indicare che il prodotto non è in offerta e 1 invece che è in offerta
 
         //lancio il comando sulla connessione che ho creato
         using (var command = new SQLiteCommand(createProdottiTable, connection))
@@ -77,9 +87,37 @@ public static class DatabaseInitializer
                 command.ExecuteNonQuery();
             }
         }
+
+        var countCommandFornitori = new SQLiteCommand("SELECT COUNT(*) FROM Fornitori", connection);
+        //Dato che count di sql è un valore numerico, posso usare execute scalar per ottenere il valore
+        //execute scalar ritorna un oggetto quindi faccio il casting a long per ottenere il valore numerico
+        var countFornitori = (long)countCommand.ExecuteScalar();
+
+        //se il count è uguale a zero, allora non ci sono categorie nel db e posso fare il seed dei dati
+        if (count == 0)
+        {
+            try
+            {
+                //sto inserendo più valori in una sola query quindi devo mettere le parentesi tonde intorno ai valori
+                var insertFornitori = "INSERT INTO Fornitori (Nome) VALUES ('Fornitore1'), ('Freez and Free'), ('ForniturePerTe');";
+
+                //Lancio il comando sulla connessione che ho creato
+                using (var command = new SQLiteCommand(insertFornitori, connection))
+                {
+                    command.ExecuteNonQuery();
+                }
+            }
+            catch (Exception ex)
+            {
+                SimpleLogger.Log(ex);
+            }
+
+
+        }
+
         //seed dei dati per Prodotti (solo se non esistono gia)
         countCommand = new SQLiteCommand("SELECT COUNT(*) FROM Prodotti", connection);
-       
+
         //dato che count di sql è un valore numerico, posso usare execute scalar per ottenere il valore
         //execute scalar ritorna un oggetto quindi faccio il casting a long per ottenere  il valore numerico
         count = (long)countCommand.ExecuteScalar();
@@ -89,9 +127,9 @@ public static class DatabaseInitializer
         {
             // Seed dei dati per la tabella Prodotti
             var insertProdotti = @"
-                INSERT INTO Prodotti (Nome,Prezzo,CategoriaId) VALUES ('Gameboy',18.99, (SELECT Id FROM Categorie WHERE Nome= 'Elettronica')),
-                ('T-shirt', 19.99, (SELECT Id FROM Categorie WHERE Nome= 'Abbigliamento')), 
-                ('Lampada', 49.99, (SELECT Id FROM Categorie WHERE Nome='Casa' ));
+                INSERT INTO Prodotti (Nome, Prezzo, CategoriaId, FornitoreId) VALUES ('Gameboy',18.99, (SELECT Id FROM Categorie WHERE Nome= 'Elettronica'), (SELECT Id FROM Fornitori WHERE Nome = 'Fornitore1')),
+                ('T-shirt', 19.99, (SELECT Id FROM Categorie WHERE Nome= 'Abbigliamento'), (SELECT Id FROM Fornitori WHERE Nome = 'Freez and Free')), 
+                ('Lampada', 49.99, (SELECT Id FROM Categorie WHERE Nome='Casa' ), (SELECT Id FROM Fornitori WHERE Nome = 'ForniturePerTe'));
                 ";
             //lancio il comando sulla connessione che ho creato
             using (var command = new SQLiteCommand(insertProdotti, connection))
