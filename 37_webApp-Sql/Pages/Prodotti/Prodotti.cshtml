@@ -1,0 +1,46 @@
+@page
+@model ProdottiModel
+
+
+@using _37_WebApp_SQLite.Pages.Prodotti;
+@using _37_WebApp_SQLite.Utilities;
+
+@{
+    ViewData["Title"] = "Prodotti";
+}
+
+<h1>@ViewData["Title"]</h1>
+<h1>Totale Prodotti @Model.TotaleProdotti</h1>
+<div class="d-flex">
+    @await Html.PartialAsync("_ProductSearch")
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Nome</th>
+            <th>Prezzo</th>
+            <th>Categoria</th>
+            <th>Fornitore</th>
+            <th>Azioni</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var prodotto in Model.Prodotti)
+        {
+            <tr>
+                <td>@prodotto.Id</td>
+                <td>@prodotto.Nome</td>
+                <td>@PriceFormatter.Format(prodotto.Prezzo)</td>
+                <td>@prodotto.CategoriaNome</td>
+                <td>@prodotto.FornitoreNome</td>
+                <td>
+                    <a asp-page="Dettagli" class="btn btn-dark" asp-route-id="@prodotto.Id">Dettagli</a>
+                    <a asp-page="/Prodotti/Edit" class="btn btn-warning" asp-route-id="@prodotto.Id">Edit</a>
+                    <a asp-page="/Prodotti/Delete" class="btn btn-danger" asp-route-id="@prodotto.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

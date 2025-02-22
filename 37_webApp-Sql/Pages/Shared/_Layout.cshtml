@@ -26,25 +26,33 @@
                             <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Prodotti">Prodotti</a>
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Prodotti/Prodotti">Prodotti</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Create">Create</a>
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Prodotti/Create">Create</a>
                             
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Categoria">Categorie</a>
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Categorie/Categoria">Categorie</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/CreateCategoria"> Aggiungi Categoria</a>
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Categorie/CreateCategoria"> Aggiungi Categoria</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Fornitori/Fornitore"> Fornitori</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Fornitori/AggiungiFornitore"> Aggiungi Fornitore</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Dashboard"> Visualizza Dashborad</a>
                         </li>
                         @*<a asp-page="CreateCategoria" class="btn btn-success" asp-route-id="@categoria.Id">Aggiungi Categoria</a>*@                      
                     </ul>
                      @*inseriamo la partial view per la ricerca dei prodotti*@
                         <div class="d-flex">
-                            @await Html.PartialAsync("ProductSearch")
-                        </div>
-                        
+                            @*@await Html.PartialAsync("_ProductSearch")*@
+                        </div> 
                 </div>
             </div>
         </nav>

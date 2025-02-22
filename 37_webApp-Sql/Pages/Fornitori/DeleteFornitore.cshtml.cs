@@ -1,0 +1,59 @@
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages; //pagine che contengono codice html e codice c#
+using Microsoft.AspNetCore.Mvc.Rendering; //per utilizzare il SelectListItem ---> che mi serve per visualizzare il menu a tendina
+using System.Data.SQLite;
+using _37_WebApp_SQLite.Models;
+using _37_WebApp_SQLite.Utilities;
+
+namespace _37_webApp_SQLite.Pages.Fornitori;
+
+public class DeleteFornitoreModel : PageModel
+{
+
+    public Fornitore Fornitore { get; set; }
+    public IActionResult OnGet(int id)
+    {
+        try
+        {
+            var Fornitore = DbUtils.ExecuteReader("SELECT Id, Nome FROM Fornitori WHERE Id = @id",
+            reader => new Fornitore
+            {
+                Id = reader.GetInt32(0),
+                Nome = reader.GetString(1)
+            },
+            //command cmd separato perchè  per passare paramatero nell'on get e ci serve così perchè dobbiamo identicìficato il prodotto separato dal reader che va a leggere la query, la chiocciola per passarlo al reader e vedere l'id che abbiamo inizializzato
+            cmd =>
+            {
+                cmd.Parameters.AddWithValue("@id", id);
+            }
+            );
+            //Fornitore = Fornitori.First();
+
+        }
+        catch (Exception ex)
+        {
+            SimpleLogger.Log(ex);
+        }
+        return Page();
+    }
+
+    //uso l id del prodotto nell onpost
+    public IActionResult OnPost(int id)
+    {
+        try
+        {
+            DbUtils.ExecuteNonQuery(
+                "DELETE FROM Fornitori WHERE Id = @id",
+                cmd =>
+                {
+                    cmd.Parameters.AddWithValue("@id", id);
+                }
+            );
+        }
+        catch (Exception ex)
+        {
+            SimpleLogger.Log(ex);
+        }
+        return RedirectToPage("Fornitore");
+    }
+}

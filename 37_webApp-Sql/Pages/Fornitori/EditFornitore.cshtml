@@ -1,0 +1,19 @@
+@page
+@model EditFornitoreModel
+@using _37_WebApp_SQLite.Pages.Fornitori;
+@{
+    ViewData["Title"] = "Edit Fornitore";
+}
+
+<h1>Modifica Fornitore</h1>
+
+<form method="post">
+    <div class= "form-group">
+        <input type="hidden" asp-for= "Fornitore.Id"/>
+        <label asp-for="Fornitore.Nome"></label>
+        <input asp-for="Fornitore.Nome" class="form-control ">
+        <span asp-validation-for = "Fornitore.Nome" class= "text-danger"></span>
+    </div>
+    <button type= "submit" class="btn btn-primary my-3">Salva</button>
+    <a asp-page="Fornitore"class="btn btn-secondary">Annulla</a>
+</form>

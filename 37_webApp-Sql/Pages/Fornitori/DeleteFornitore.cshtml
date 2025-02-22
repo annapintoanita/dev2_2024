@@ -1,0 +1,19 @@
+@page
+@model DeleteFornitoreModel
+@using _37_webApp_SQLite.Pages.Fornitori;
+@{
+    ViewData["Title"] = "Elimina";
+    //creiamo in ViewData una chiave che salva la pagina di provenienza, tramite il Referer della request
+    //il Referer è l indirizzo della pagina che ha fatto la richiesta
+    //mi occorre l'url in formato stringa per poterlo passare poi al bottone di ritorno 
+    ViewData["ReurnUrl"] = Request.Headers["Referer"].ToString();
+}
+<h1>@ViewData["Title"]Elimina Fornitore</h1>
+
+<form method="post">
+<input  type="hidden" asp-for="Fornitore.Id" />
+    
+    <button type= "submit" class="btn btn-primary my-3">Elimina</button>
+    <a asp-page="Fornitore"class="btn btn-secondary">Annulla</a>
+
+</form>

@@ -1,0 +1,23 @@
+@page
+@model CreateCategoriaModel
+
+@using _37_WebApp_SQLite.Pages.Categorie;
+
+@{
+    ViewData["Title"] = "Crea Nuova Categoria";
+}
+
+
+<h1>@ViewData["Title"]</h1>
+
+<form method="post">
+    <div class="form-group">
+        <label asp-for="Categoria.Nome"></label>
+        <input asp-for="Categoria.Nome" class="form-control" placeholder="Inserisci il nome della nuova categoria">
+        <span asp-validation-for="Categoria.Nome" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary my-3">Aggiungi Categoria</button>
+    <a asp-page="Index" class="btn btn-secondary">Annulla</a>
+</form>
+

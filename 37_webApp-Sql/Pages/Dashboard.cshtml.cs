@@ -2,18 +2,19 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages; //pagine che contengono codice html e codice c#
 using Microsoft.AspNetCore.Mvc.Rendering; //per utilizzare il SelectListItem ---> che mi serve per visualizzare il menu a tendina
 using System.Data.SQLite;
-using _37_webApp_Sql.Utilities;
+using _37_WebApp_SQLite.Models;
+using _37_WebApp_SQLite.Utilities;
 
 public class DashboardModel : PageModel
 //creo una proprieta  pubblica di tipo lista di prodotti view model
 //devo ceare la lista sulla quale lavoro creando una proprieta pubblica che prendo da prodottoviewmodel
 
 {
-    [BindProperty(SupportsGet = true)]
     public List<ProdottoViewModel> ProdottoCostoso { get; set; } = new List<ProdottoViewModel>();
     public List<ProdottoViewModel> ProdottoEconomico { get; set; } = new List<ProdottoViewModel>();
     public List<ProdottoViewModel> ProdottoRecente { get; set; } = new List<ProdottoViewModel>();
     public List<ProdottoViewModel> SceltaCategoria { get; set; } = new List<ProdottoViewModel>();
+    public List<ProdottoViewModel> ProdottiPerFornitore {get;set;} = new List<ProdottoViewModel>();
 
     public void OnGet()
     {
@@ -21,13 +22,15 @@ public class DashboardModel : PageModel
         {
 
             ProdottoCostoso = DbUtils.ExecuteReader(
-                "SELECT p.Id, p.Nome, p.Prezzo, c.Nome as CategoriaNome FROM Prodotti p LEFT JOIN Categorie c ON p.CategoriaId = c.Id ORDER BY p.Prezzo DESC LIMIT 3",
+                "SELECT p.Id, p.Nome, p.Prezzo, c.Nome, f.Nome FROM Prodotti p LEFT JOIN Categorie c ON p.CategoriaId = c.Id LEFT JOIN Fornitori f ON p.FornitoreId= f.Id ORDER BY p.Prezzo DESC LIMIT 3",
                 reader => new ProdottoViewModel
                 {
                     Id = reader.GetInt32(0),
                     Nome = reader.GetString(1),
                     Prezzo = reader.GetDouble(2),
-                    CategoriaNome = reader.IsDBNull(3) ? "Nessuna" : reader.GetString(3)
+                    CategoriaNome = reader.IsDBNull(3) ? "Nessuna" : reader.GetString(3),
+                    FornitoreNome = reader.IsDBNull(4) ? "Nessuno" : reader.GetString(4)
+
                 }
             );
         }
@@ -37,13 +40,15 @@ public class DashboardModel : PageModel
         }
         try
         {
-            ProdottoEconomico = DbUtils.ExecuteReader("SELECT p.Id, p.Nome, p.Prezzo, c.Nome as CategoriaNome FROM Prodotti p LEFT JOIN Categorie c ON p.CategoriaId = c.Id ORDER BY p.Prezzo ASC LIMIT 3",
+            ProdottoEconomico = DbUtils.ExecuteReader("SELECT p.Id, p.Nome, p.Prezzo, c.Nome, f.Nome FROM Prodotti p LEFT JOIN Categorie c ON p.CategoriaId = c.Id LEFT JOIN Fornitori f ON p.FornitoreId= f.Id  ORDER BY p.Prezzo ASC LIMIT 3",
              reader => new ProdottoViewModel
              {
                  Id = reader.GetInt32(0),
                  Nome = reader.GetString(1),
                  Prezzo = reader.GetDouble(2),
-                 CategoriaNome = reader.IsDBNull(3) ? "Nessuna" : reader.GetString(3) //operatore ternario
+                 CategoriaNome = reader.IsDBNull(3) ? "Nessuna" : reader.GetString(3), //operatore ternario
+                 FornitoreNome = reader.IsDBNull(4) ? "Nessuno" : reader.GetString(4)
+
              }
              );
         }
@@ -54,13 +59,14 @@ public class DashboardModel : PageModel
 
         try
         {
-            ProdottoRecente = DbUtils.ExecuteReader("SELECT p.Id, p.Nome, p.Prezzo, c.Nome as CategoriaNome FROM Prodotti p LEFT JOIN Categorie c ON p.CategoriaId = c.Id ORDER BY p.Id DESC LIMIT 3",
+            ProdottoRecente = DbUtils.ExecuteReader("SELECT p.Id, p.Nome, p.Prezzo, c.Nome, f.Nome FROM Prodotti p LEFT JOIN Categorie c ON p.CategoriaId = c.Id LEFT JOIN Fornitori f ON p.FornitoreId= f.Id ORDER BY p.Id DESC LIMIT 3",
             reader => new ProdottoViewModel
             {
                 Id = reader.GetInt32(0),
                 Nome = reader.GetString(1),
                 Prezzo = reader.GetDouble(2),
-                CategoriaNome = reader.IsDBNull(3) ? "Nessuna" : reader.GetString(3)
+                CategoriaNome = reader.IsDBNull(3) ? "Nessuna" : reader.GetString(3),
+                FornitoreNome = reader.IsDBNull(4) ? "Nessuno" : reader.GetString(4)
             }
            );
         }
@@ -246,5 +252,23 @@ public class DashboardModel : PageModel
 
          //leggo i record restituiti dalla query finche ce ne sono
  */
+        try 
+        {
+            ProdottiPerFornitore=  DbUtils.ExecuteReader("SELECT p.Id, p.Nome, p.Prezzo, f.Nome FROM Prodotti p LEFT JOIN Fornitori f ON p.FornitoreId = f.Id WHERE f.Nome = 'Freez and Free' LIMIT 3",
+               reader => new ProdottoViewModel
+               {
+                   Id = reader.GetInt32(0),
+                   Nome = reader.GetString(1),
+                   Prezzo = reader.GetDouble(2),
+                   FornitoreNome = reader.IsDBNull(3) ? "Nessuna" : reader.GetString(3)
+               }
+            );
+        }
+        catch (Exception ex)
+        {
+             SimpleLogger.Log(ex);
+        }
+
     }
+
 }

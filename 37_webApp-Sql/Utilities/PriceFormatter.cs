@@ -1,5 +1,6 @@
 using System.Globalization;
-namespace _37_webApp_Sql.Utilities;
+
+namespace _37_WebApp_SQLite.Utilities;
 public static class PriceFormatter
 {
     ///<summary>
